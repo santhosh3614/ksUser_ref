@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">OlaSample</string>
+    <string name="user_name">User name</string>
+    <string name="password">Password</string>
+    <string name="forgot_password"> <u>forgot password ?</u> </string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="my_task">My Tasks</string>
+    <string name="my_profile">My Profile</string>
+    <string name="logout">Logout</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="today">Today</string>
+    <string name="yes">YES</string>
+    <string name="no">NO </string>
+    <string name="ok">OK</string>
+    <string name="are_you_sure">Are you sure you want \n to send an e-mail to \n  department@domain.com \n to inform that there is a \n  problem with this task?</string>
+    <string name="are_you_sure_want_to_complete_task">Are you sure you want to \n complete this task? </string>
+    <string name="are_you_sure_log_out">Are you sure want \n to logout from app? </string>
+    <string name="please_enter_user_name">Please enter user name.</string>
+    <string name="please_enter_password">Please enter password.</string>
+    <string name="please_enter_first_name">Please enter first name.</string>
+    <string name="please_enter_last_name">Please enter last name.</string>
+    <string name="please_enter_contact">Please enter contact.</string>
+    <string name="please_enter_department">Please enter department.</string>
+
+
 </resources>

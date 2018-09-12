@@ -23,6 +23,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/edtUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"
@@ -38,10 +39,12 @@
             android:inputType="text"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color" />
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
 
 
         <EditText
+            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"
@@ -57,7 +60,8 @@
             android:inputType="textPassword"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color" />
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
 
 
         <RelativeLayout
@@ -73,10 +77,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_yello_button"
                 android:fontFamily="@font/opensans_regular"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingLeft="@dimen/_22sdp"
-                android:paddingRight="@dimen/_22sdp"
-                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:paddingRight="@dimen/_30sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:text="Login"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -105,13 +109,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
             android:text="Not a member?"
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
             android:text="Sign up now."
             android:textColor="@color/colorPrimary" />
 

@@ -2,7 +2,7 @@
     <string name="app_name">OlaSample</string>
     <string name="user_name">User name</string>
     <string name="password">Password</string>
-    <string name="forgot_password"> <u>forgot password ?</u> </string>
+    <string name="forgot_password"> forgot password ? </string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,6 +27,7 @@
     <string name="please_enter_last_name">Please enter last name.</string>
     <string name="please_enter_contact">Please enter contact.</string>
     <string name="please_enter_department">Please enter department.</string>
+    <string name="email_id">Email Id</string>
 
 
 </resources>

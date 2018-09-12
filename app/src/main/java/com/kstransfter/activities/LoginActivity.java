@@ -13,7 +13,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         try {
             initial();
-        } catch (Exception e) {
+           } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -28,12 +28,12 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 if (sessionManager.isLoggedIn()) {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                  } else {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

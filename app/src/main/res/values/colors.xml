@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EB1C24</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#095E9F</color>
+    <color name="colorPrimaryDark">#095E9F</color>
     <color name="colorAccent">#EB1C24</color>
     <color name="white">#FFFFFF</color>
     <color name="green">#92BC2C</color>
@@ -20,4 +20,5 @@
     <color name="profile_hint_color">#BDBDBD</color>
     <color name="green_yes">#92BC2C</color>
     <color name="red_no">#F42A2A</color>
+    <color name="button_color">#F38C0B</color>
 </resources>

@@ -2,7 +2,6 @@ package com.kstransfter.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.kstransfter.R;
 
 public class SignUpActivity extends BaseActivity {

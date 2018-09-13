@@ -14,7 +14,7 @@
         <View
             android:id="@+id/view1"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_50sdp" />
+            android:layout_height="@dimen/_70sdp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         <View
             android:id="@+id/view2"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_50sdp" />
+            android:layout_height="@dimen/_70sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,7 +145,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"/>
+            android:layout_height="@dimen/_30sdp"/>
 
 
         <LinearLayout

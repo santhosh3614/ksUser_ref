@@ -28,6 +28,8 @@
     <string name="please_enter_contact">Please enter contact.</string>
     <string name="please_enter_department">Please enter department.</string>
     <string name="email_id">Email Id</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve"
+        translatable="false">AIzaSyDBR9T1iQc45n9HjiEpIs2mhpQRzeZQA-A</string>
 
 
 </resources>

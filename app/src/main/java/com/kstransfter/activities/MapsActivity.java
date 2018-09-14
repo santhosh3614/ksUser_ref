@@ -1,25 +1,24 @@
-package com.kstransfter.fragments;
+package com.kstransfter.activities;
 
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -43,6 +42,7 @@ import java.util.List;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -50,12 +50,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.google.android.gms.maps.model.JointType.ROUND;
 
-public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private ApiInterface apiInterface;
-    private static final String TAG = HomeFragment.class.getSimpleName();
+    private static final String TAG = MapsActivity.class.getSimpleName();
     SupportMapFragment mapFragment;
+    private GoogleMap mMap;
     private List<LatLng> polyLineList;
     private Marker marker;
     private float v;
@@ -64,58 +63,72 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private LatLng startPosition, endPosition;
     private int index, next;
     private LatLng sydney;
+    private Button button;
     private EditText destinationEditText;
-    private String source, destination;
+    private String destination;
     private LinearLayout linearLayout;
     private PolylineOptions polylineOptions, blackPolylineOptions;
     private Polyline blackPolyline, greyPolyLine;
+    private ApiInterface apiInterface;
     private Disposable disposable;
-    private Double latitude = 23.0225;
-    private Double longitude = 72.5714;
-    private TextView txtRideNow, txtRideLater;
-    private EditText edtPickUpLine, edtDropLine;
 
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        txtRideNow = view.findViewById(R.id.txtRideNow);
-        txtRideLater = view.findViewById(R.id.txtRideLater);
-        edtPickUpLine = view.findViewById(R.id.edtPickUpLine);
-        edtDropLine = view.findViewById(R.id.edtDropLine);
-        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        linearLayout = findViewById(R.id.linearLayout);
+        polyLineList = new ArrayList<>();
+        button = findViewById(R.id.destination_button);
+        destinationEditText = findViewById(R.id.edittext_place);
 
-        txtRideNow.setOnClickListener(v -> {
-            source = edtPickUpLine.getText().toString().trim();
-            destination = edtDropLine.getText().toString().trim();
-            try {
-                initital();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl("https://maps.googleapis.com/")
+                .build();
+        apiInterface = retrofit.create(ApiInterface.class);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                destination = destinationEditText.getText().toString();
+                destination = destination.replace(" ", "+");
+                Log.d(TAG, destination);
+                mapFragment.getMapAsync(MapsActivity.this);
             }
-
         });
-
-        txtRideLater.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "desigination", Toast.LENGTH_SHORT).show();
-        });
-
-
     }
 
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng sydney = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        final double latitude = 28.671246;
+        double longitude = 77.317654;
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setTrafficEnabled(false);
+        mMap.setIndoorEnabled(false);
+        mMap.setBuildingsEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setAllGesturesEnabled(true);
+        mMap.getUiSettings().setZoomGesturesEnabled(true);
+        // Add a marker in Home and move the camera
+        sydney = new LatLng(28.671246, 77.317654);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Home"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
                 .target(googleMap.getCameraPosition().target)
@@ -124,18 +137,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 .tilt(45)
                 .build()));
 
-    }
 
-    @Override
-    public void initital() {
-        polyLineList = new ArrayList<>();
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://maps.googleapis.com/")
-                .build();
-        apiInterface = retrofit.create(ApiInterface.class);
-        apiInterface.getDirections("driving",
+          apiInterface.getDirections("driving",
                 "less_driving",
                 latitude + "," + longitude, destination,
                 getResources().getString(R.string.google_directions_key))
@@ -165,6 +168,41 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //This is an event bus for receiving journey events this can be shifted anywhere
+        //in code.
+        //Do remember to dispose when not in use. For eg. its necessary to dispose it in
+        //onStop as activity is not visible.
+        disposable = JourneyEventBus.getInstance().getOnJourneyEvent()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        if (o instanceof BeginJourneyEvent) {
+                            Snackbar.make(linearLayout, "Journey has started",
+                                    Snackbar.LENGTH_SHORT).show();
+                        } else if (o instanceof EndJourneyEvent) {
+                            Snackbar.make(linearLayout, "Journey has ended",
+                                    Snackbar.LENGTH_SHORT).show();
+                        } else if(o instanceof CurrentJourneyEvent){
+                            /*
+                             * This can be used to receive the current location update of the car
+                             */
+                            //Log.d(TAG,"Current "+((CurrentJourneyEvent) o).getCurrentLatLng());
+                        }
+                    }
+                });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (!disposable.isDisposed()) {
+            disposable.dispose();
+        }
+    }
 
     private void drawPolyLineAndAnimateCar() {
         //Adjusting bounds
@@ -184,6 +222,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         polylineOptions.jointType(ROUND);
         polylineOptions.addAll(polyLineList);
         greyPolyLine = mMap.addPolyline(polylineOptions);
+
         blackPolylineOptions = new PolylineOptions();
         blackPolylineOptions.width(5);
         blackPolylineOptions.color(Color.BLACK);
@@ -191,6 +230,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         blackPolylineOptions.endCap(new SquareCap());
         blackPolylineOptions.jointType(ROUND);
         blackPolyline = mMap.addPolyline(blackPolylineOptions);
+
         mMap.addMarker(new MarkerOptions()
                 .position(polyLineList.get(polyLineList.size() - 1)));
 
@@ -209,8 +249,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             }
         });
         polylineAnimator.start();
-        marker = mMap.addMarker(new MarkerOptions());
-        handler = new android.os.Handler();
+        marker = mMap.addMarker(new MarkerOptions().position(sydney).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.address_icon)));
+        handler = new Handler();
         index = -1;
         next = 1;
         handler.postDelayed(new Runnable() {
@@ -267,22 +307,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     }
 
 
-    private float getBearing(LatLng begin, LatLng end) {
-        double lat = Math.abs(begin.latitude - end.latitude);
-        double lng = Math.abs(begin.longitude - end.longitude);
-
-        if (begin.latitude < end.latitude && begin.longitude < end.longitude)
-            return (float) (Math.toDegrees(Math.atan(lng / lat)));
-        else if (begin.latitude >= end.latitude && begin.longitude < end.longitude)
-            return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 90);
-        else if (begin.latitude >= end.latitude && begin.longitude >= end.longitude)
-            return (float) (Math.toDegrees(Math.atan(lng / lat)) + 180);
-        else if (begin.latitude < end.latitude && begin.longitude >= end.longitude)
-            return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 270);
-        return -1;
-    }
-
-
     private List<LatLng> decodePoly(String encoded) {
         List<LatLng> poly = new ArrayList<>();
         int index = 0, len = encoded.length();
@@ -316,5 +340,18 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         return poly;
     }
 
+    private float getBearing(LatLng begin, LatLng end) {
+        double lat = Math.abs(begin.latitude - end.latitude);
+        double lng = Math.abs(begin.longitude - end.longitude);
 
+        if (begin.latitude < end.latitude && begin.longitude < end.longitude)
+            return (float) (Math.toDegrees(Math.atan(lng / lat)));
+        else if (begin.latitude >= end.latitude && begin.longitude < end.longitude)
+            return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 90);
+        else if (begin.latitude >= end.latitude && begin.longitude >= end.longitude)
+            return (float) (Math.toDegrees(Math.atan(lng / lat)) + 180);
+        else if (begin.latitude < end.latitude && begin.longitude >= end.longitude)
+            return (float) ((90 - Math.toDegrees(Math.atan(lng / lat))) + 270);
+        return -1;
+    }
 }

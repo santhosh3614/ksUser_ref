@@ -16,5 +16,6 @@
     <color name="button_color">#F38C0B</color>
     <color name="border_color">#424242</color>
     <color name="gray_text_color">#545454</color>
+    <color name="color_upper_button">#3B82B8</color>
 
 </resources>

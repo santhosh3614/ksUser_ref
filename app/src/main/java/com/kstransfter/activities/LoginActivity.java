@@ -52,7 +52,7 @@ public class LoginActivity extends BaseActivity {
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(LoginActivity.this, "enter password", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }

@@ -32,5 +32,11 @@
     <string name="enter_drop_line">Enter Drop Line</string>
     <string name="enter_pickup_point">Enter Pickup Point</string>
     <string name="google_directions_key">AIzaSyCGs52wU9ak85xLXGDyKFBUTgsq14wuiNA</string>
+    <string name="book_diriver">Book Diriver</string>
+    <string name="booking_history">Booking History</string>
+    <string name="support">Support</string>
+    <string name="term_and_condition">Term And Condition</string>
+    <string name="register_your_car">Register Your car</string>
+    <string name="register_your_driver">Register Your Driver</string>
 
 </resources>

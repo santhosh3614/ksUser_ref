@@ -22,6 +22,10 @@
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_arrow_white_blac_24dp"
+            android:visibility="gone"
             />
 
 

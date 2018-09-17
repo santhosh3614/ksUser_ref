@@ -8,19 +8,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstransfter.R;
+import com.kstransfter.fragments.BookingHistoryFragment;
 import com.kstransfter.fragments.HomeFragment;
 import com.kstransfter.utils.PoupUtils;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout drawer;
-    private ImageView imgMenu;
     private NavigationView navigationView;
     private TextView txtDriver, txtBookingHistoy, txtSupport, txtTermAndCond, txtRegisterCar, txtRegisterDriver, txtLogOut;
+    public LinearLayout llCenterButton;
+    public ImageView imgBack;
+    public ImageView imgMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         imgMenu = findViewById(R.id.imgMenu);
-        //txtDriver,txtBookingHistoy,txtSupport,txtTermAndCond,txtRegisterCar,txtRegisterDriver,txtLogOut
+        imgBack = findViewById(R.id.imgBack);
+        llCenterButton = findViewById(R.id.llCenterButton);
         txtDriver = findViewById(R.id.txtDriver);
         txtBookingHistoy = findViewById(R.id.txtBookingHistoy);
         txtSupport = findViewById(R.id.txtSupport);
@@ -48,7 +54,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtLogOut.setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         imgMenu.setOnClickListener(this);
-
+        imgBack.setOnClickListener(this);
         try {
             initial();
         } catch (Exception e) {
@@ -103,7 +109,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //txtDriver,txtBookingHistoy,txtSupport,txtTermAndCond,txtRegisterCar,,txtLogOut
             case R.id.imgMenu:
                 openNavigation();
                 break;
@@ -112,6 +117,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case R.id.txtBookingHistoy:
                 closeNavigation();
+                BookingHistoryFragment bookingHistoryFragment = new BookingHistoryFragment();
+                replaceFragmenr(bookingHistoryFragment, bookingHistoryFragment.getTag(), false);
                 break;
             case R.id.txtSupport:
                 closeNavigation();
@@ -130,11 +137,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         }, no -> {
                             Toast.makeText(MainActivity.this, "click no", Toast.LENGTH_SHORT).show();
                         });
-
                 break;
             default:
                 break;
         }
     }
+
 
 }

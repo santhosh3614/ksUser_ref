@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.kstransfter.R;
 import com.kstransfter.fragments.BookingHistoryFragment;
 import com.kstransfter.fragments.HomeFragment;

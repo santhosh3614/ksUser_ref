@@ -136,7 +136,7 @@
                     android:paddingLeft="@dimen/_30sdp"
                     android:paddingRight="@dimen/_30sdp"
                     android:paddingTop="@dimen/_10sdp"
-                    android:text="Login"
+                    android:text="Sign Up"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -145,7 +145,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_30sdp" />
 
 
         <LinearLayout
@@ -161,18 +161,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
-                android:text="Not a member?"
-                android:textSize="16sp" />
+                android:text="Already registered!"
+                android:textSize="16sp"
+                android:fontFamily="@font/opensans_regular"
+                />
 
             <TextView
                 android:id="@+id/txtSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
-                android:text="Sign up now."
+                android:text="Login Me."
+                android:fontFamily="@font/opensans_semibold"
                 android:textColor="@color/colorPrimary" />
-
-
         </LinearLayout>
 
 

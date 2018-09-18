@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ public class LoginActivity extends BaseActivity {
 
     private TextView txtLogin, txtSignUp;
     private EditText edtUserName, edtPassword;
+    private Button btnFacebook, btnGooglePlus;
 
 
     @Override
@@ -33,6 +35,17 @@ public class LoginActivity extends BaseActivity {
         txtSignUp = findViewById(R.id.txtSignUp);
         edtUserName = findViewById(R.id.edtUserName);
         edtPassword = findViewById(R.id.edtPassword);
+        btnFacebook = findViewById(R.id.btnFacebook);
+        btnGooglePlus = findViewById(R.id.btnGooglePlus);
+
+        btnFacebook.setOnClickListener(v -> {
+            Toast.makeText(this, "click on login facebook", Toast.LENGTH_SHORT).show();
+        });
+
+        btnGooglePlus.setOnClickListener(v -> {
+            Toast.makeText(this, "click on login google plus", Toast.LENGTH_SHORT).show();
+
+        });
 
         txtLogin.setOnClickListener(v -> {
             clickLogin();

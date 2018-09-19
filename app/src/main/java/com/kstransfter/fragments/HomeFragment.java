@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
 import com.kstransfter.R;
 import com.kstransfter.activities.MapsActivity;
+import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.Route;
@@ -74,6 +77,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private ApiInterface apiInterface;
     private Disposable disposable;
     private TextView txtRideNow;
+    private RecyclerView rvCarList;
+    private ArrayList<String> cars = new ArrayList<>();
 
     @Nullable
     @Override
@@ -90,14 +95,15 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         polyLineList = new ArrayList<>();
         txtRideNow = view.findViewById(R.id.txtRideNow);
         destinationEditText = view.findViewById(R.id.edtDropLine);
-
+        rvCarList = view.findViewById(R.id.rvCarList);
+        rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
+        setCarAdapter();
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl("https://maps.googleapis.com/")
                 .build();
         apiInterface = retrofit.create(ApiInterface.class);
-
         txtRideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +113,15 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 mapFragment.getMapAsync(HomeFragment.this);
             }
         });
+    }
 
+    private void setCarAdapter() {
+        cars.clear();
+        for (int i = 0; i < 20; i++) {
+            cars.add("" + i);
+        }
+        CarListAdapter carListAdapter = new CarListAdapter(getContext(), cars);
+        rvCarList.setAdapter(carListAdapter);
     }
 
 
@@ -133,7 +147,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 .bearing(30)
                 .tilt(45)
                 .build()));
-
 
         apiInterface.getDirections("driving",
                 "less_driving",

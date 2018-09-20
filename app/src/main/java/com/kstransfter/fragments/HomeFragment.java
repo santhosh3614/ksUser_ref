@@ -84,8 +84,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private ArrayList<CarListModel> carListModels = new ArrayList<>();
     private CarListAdapter carListAdapter;
     private TextView txtCallDriver;
-    private RelativeLayout llRuning,rlcarAndDriver;
-    private LinearLayout llBottomAfterRide;
+    private RelativeLayout llRuning, rlcarAndDriver;
+    private LinearLayout llBottomAfterRide, llDrop, llPickUp, llBeforeRide;
 
     @Nullable
     @Override
@@ -102,9 +102,14 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         polyLineList = new ArrayList<>();
         txtRideNow = view.findViewById(R.id.txtRideNow);
         destinationEditText = view.findViewById(R.id.edtDropLine);
-        llRuning=view.findViewById(R.id.llRuning);
-        llBottomAfterRide=view.findViewById(R.id.llBottomAfterRide);
+        llRuning = view.findViewById(R.id.llRuning);
+        llBottomAfterRide = view.findViewById(R.id.llBottomAfterRide);
         rvCarList = view.findViewById(R.id.rvCarList);
+        llDrop = view.findViewById(R.id.llDrop);
+        llPickUp = view.findViewById(R.id.llPickUp);
+        llBeforeRide = view.findViewById(R.id.llBeforeRide);
+
+
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
 
@@ -129,7 +134,15 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                     }
                 }
                 if (isSelectedCar) {
-                    Toast.makeText(getContext(), "go next", Toast.LENGTH_SHORT).show();
+
+                    // Toast.makeText(getContext(), "go next", Toast.LENGTH_SHORT).show();
+                    llDrop.setVisibility(View.GONE);
+                    llPickUp.setVisibility(View.GONE);
+                    llBeforeRide.setVisibility(View.GONE);
+                    llRuning.setVisibility(View.VISIBLE);
+                    llBottomAfterRide.setVisibility(View.VISIBLE);
+
+
                 } else {
                     Toast.makeText(getContext(), "select at least one car", Toast.LENGTH_SHORT).show();
                 }

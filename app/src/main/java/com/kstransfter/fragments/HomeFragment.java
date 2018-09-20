@@ -17,6 +17,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,6 +39,7 @@ import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.Route;
+import com.kstransfter.models.app.CarListModel;
 import com.kstransfter.models.events.BeginJourneyEvent;
 import com.kstransfter.models.events.CurrentJourneyEvent;
 import com.kstransfter.models.events.EndJourneyEvent;
@@ -78,7 +80,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private Disposable disposable;
     private TextView txtRideNow;
     private RecyclerView rvCarList;
-    private ArrayList<String> cars = new ArrayList<>();
+    private ArrayList<CarListModel> carListModels = new ArrayList<>();
+    private CarListAdapter carListAdapter;
 
     @Nullable
     @Override
@@ -96,7 +99,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         txtRideNow = view.findViewById(R.id.txtRideNow);
         destinationEditText = view.findViewById(R.id.edtDropLine);
         rvCarList = view.findViewById(R.id.rvCarList);
-        rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
+        rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -107,23 +110,49 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         txtRideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                destination = destinationEditText.getText().toString();
-                destination = destination.replace(" ", "+");
-                Log.d(TAG, destination);
-                mapFragment.getMapAsync(HomeFragment.this);
+                boolean isSelectedCar = false;
+                for (int i = 0; i < carListModels.size(); i++) {
+                    CarListModel carListModel = carListModels.get(i);
+                    if (carListModel.isSelected()) {
+                        isSelectedCar = true;
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+                if (isSelectedCar) {
+                    Toast.makeText(getContext(), "go next", Toast.LENGTH_SHORT).show();
+                   } else {
+                    Toast.makeText(getContext(), "select at least one car", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    private void setCarAdapter() {
-        cars.clear();
-        for (int i = 0; i < 20; i++) {
-            cars.add("" + i);
-        }
-        CarListAdapter carListAdapter = new CarListAdapter(getContext(), cars);
-        rvCarList.setAdapter(carListAdapter);
+    //Will call later
+    private void carRouting() {
+        destination = destinationEditText.getText().toString();
+        destination = destination.replace(" ", "+");
+        Log.d(TAG, destination);
+        mapFragment.getMapAsync(HomeFragment.this);
     }
 
+    private void setCarAdapter() {
+        carListModels.clear();
+        for (int i = 0; i < 20; i++) {
+            CarListModel carListModel = new CarListModel();
+            carListModel.setCarName("car" + i);
+            carListModel.setSelected(false);
+            carListModels.add(carListModel);
+        }
+        carListAdapter = new CarListAdapter(
+                getContext(),
+                carListModels,
+                (view, pos) -> {
+
+                });
+        rvCarList.setAdapter(carListAdapter);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

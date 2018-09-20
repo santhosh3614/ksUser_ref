@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +83,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private RecyclerView rvCarList;
     private ArrayList<CarListModel> carListModels = new ArrayList<>();
     private CarListAdapter carListAdapter;
+    private TextView txtCallDriver;
+    private RelativeLayout llRuning,rlcarAndDriver;
+    private LinearLayout llBottomAfterRide;
 
     @Nullable
     @Override
@@ -98,15 +102,19 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         polyLineList = new ArrayList<>();
         txtRideNow = view.findViewById(R.id.txtRideNow);
         destinationEditText = view.findViewById(R.id.edtDropLine);
+        llRuning=view.findViewById(R.id.llRuning);
+        llBottomAfterRide=view.findViewById(R.id.llBottomAfterRide);
         rvCarList = view.findViewById(R.id.rvCarList);
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl("https://maps.googleapis.com/")
                 .build();
         apiInterface = retrofit.create(ApiInterface.class);
+
         txtRideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +130,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 }
                 if (isSelectedCar) {
                     Toast.makeText(getContext(), "go next", Toast.LENGTH_SHORT).show();
-                   } else {
+                } else {
                     Toast.makeText(getContext(), "select at least one car", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -24,10 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_arrow_white_blac_24dp"
-            android:visibility="gone"
-            />
-
+            android:src="@drawable/top_arrow"
+            android:visibility="gone" />
 
 
         <TextView
@@ -88,6 +86,14 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txtCenterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/opensans_regular"
+            android:text="asdasd"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

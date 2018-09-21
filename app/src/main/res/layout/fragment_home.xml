@@ -74,13 +74,14 @@
             android:layout_marginTop="@dimen/_2sdp"
             android:text="@string/enter_pickup_point" />
 
-        <EditText
+         <EditText
             android:id="@+id/edtPickUpLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edit_text_map_new"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
+             android:editable="false"
             android:textSize="10sp" />
 
     </LinearLayout>
@@ -110,6 +111,7 @@
             android:background="@drawable/bg_edit_text_map_new"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
+            android:editable="false"
             android:textSize="10sp" />
 
     </LinearLayout>
@@ -195,8 +197,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imgCar"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/imgCar"
                 android:orientation="vertical">
 
 
@@ -215,8 +217,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/imgDriver"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_toLeftOf="@id/imgDriver"
                 android:orientation="vertical">
 
 
@@ -299,10 +301,19 @@
                 android:paddingLeft="@dimen/_10sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:text="Cancel Ride" />
-
-
         </LinearLayout>
-
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imgCurrentLoaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/_150sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:src="@drawable/location_pin" />
+
 
 </RelativeLayout>

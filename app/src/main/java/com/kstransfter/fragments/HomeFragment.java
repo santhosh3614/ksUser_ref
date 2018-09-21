@@ -1,25 +1,39 @@
 package com.kstransfter.fragments;
 
+import android.Manifest;
 import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,12 +48,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.kstransfter.R;
 import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.interfaces.ApiInterface;
-import com.kstransfter.models.Result;
-import com.kstransfter.models.Route;
 import com.kstransfter.models.app.CarListModel;
 import com.kstransfter.models.events.BeginJourneyEvent;
 import com.kstransfter.models.events.CurrentJourneyEvent;
@@ -49,11 +62,9 @@ import com.kstransfter.utils.JourneyEventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -62,6 +73,7 @@ import static com.google.android.gms.maps.model.JointType.ROUND;
 
 public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private static final String TAG = MapsActivity.class.getSimpleName();
+    private static final int REQUEST_LOCATION = 1111;
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private List<LatLng> polyLineList;
@@ -86,6 +98,12 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private TextView txtCallDriver;
     private RelativeLayout llRuning, rlcarAndDriver;
     private LinearLayout llBottomAfterRide, llDrop, llPickUp, llBeforeRide;
+    private EditText edtPickUpLine, edtDropLine;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private ImageView imgCurrentLoaction;
+    private int PLACE_AUTOCOMPLETE_REQUEST_CODE1 = 1;
+    private int PLACE_AUTOCOMPLETE_REQUEST_CODE2 = 11;
+
 
     @Nullable
     @Override
@@ -108,10 +126,15 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         llDrop = view.findViewById(R.id.llDrop);
         llPickUp = view.findViewById(R.id.llPickUp);
         llBeforeRide = view.findViewById(R.id.llBeforeRide);
-
-
+        edtPickUpLine = view.findViewById(R.id.edtPickUpLine);
+        edtDropLine = view.findViewById(R.id.edtDropLine);
+        imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
+        //for current location
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
+        //Show Current location:
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -119,35 +142,123 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 .baseUrl("https://maps.googleapis.com/")
                 .build();
         apiInterface = retrofit.create(ApiInterface.class);
-
-        txtRideNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean isSelectedCar = false;
-                for (int i = 0; i < carListModels.size(); i++) {
-                    CarListModel carListModel = carListModels.get(i);
-                    if (carListModel.isSelected()) {
-                        isSelectedCar = true;
-                        break;
-                    } else {
-                        continue;
-                    }
-                }
-                if (isSelectedCar) {
-
-                    // Toast.makeText(getContext(), "go next", Toast.LENGTH_SHORT).show();
-                    llDrop.setVisibility(View.GONE);
-                    llPickUp.setVisibility(View.GONE);
-                    llBeforeRide.setVisibility(View.GONE);
-                    llRuning.setVisibility(View.VISIBLE);
-                    llBottomAfterRide.setVisibility(View.VISIBLE);
+        getCurrentLoction();
+        try {
+            initital();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-                } else {
-                    Toast.makeText(getContext(), "select at least one car", Toast.LENGTH_SHORT).show();
-                }
+        edtPickUpLine.setOnClickListener(v -> {
+            try {
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(getActivity());
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
+            } catch (GooglePlayServicesRepairableException e) {
+                // TODO: Handle the error.
+            } catch (GooglePlayServicesNotAvailableException e) {
+                // TODO: Handle the error.
             }
         });
+
+
+        edtDropLine.setOnClickListener(v -> {
+            try {
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(getActivity());
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE2);
+            } catch (GooglePlayServicesRepairableException e) {
+                // TODO: Handle the error.
+            } catch (GooglePlayServicesNotAvailableException e) {
+                // TODO: Handle the error.
+            }
+
+        });
+
+
+        imgCurrentLoaction.setOnClickListener(v -> {
+            getCurrentLoction();
+        });
+
+        txtRideNow.setOnClickListener(v -> {
+            String pickupAddress = edtPickUpLine.getText().toString().trim();
+            String dropAddress = edtDropLine.getText().toString().trim();
+            boolean isSelectedCar = false;
+            for (int i = 0; i < carListModels.size(); i++) {
+                CarListModel carListModel = carListModels.get(i);
+                if (carListModel.isSelected()) {
+                    isSelectedCar = true;
+                    break;
+                } else {
+                    continue;
+                }
+            }
+
+            if (TextUtils.isEmpty(pickupAddress)) {
+                Toast.makeText(getContext(), "Add pickup address", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(dropAddress)) {
+                Toast.makeText(getContext(), "Add drop address", Toast.LENGTH_SHORT).show();
+            } else if (!isSelectedCar) {
+                Toast.makeText(getContext(), "Pelase select at least a car", Toast.LENGTH_SHORT).show();
+            } else {
+                llDrop.setVisibility(View.GONE);
+                llPickUp.setVisibility(View.GONE);
+                llBeforeRide.setVisibility(View.GONE);
+                llRuning.setVisibility(View.VISIBLE);
+                llBottomAfterRide.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+
+    private void getCurrentLoction() {
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION
+                    },
+                    REQUEST_LOCATION);
+        } else {
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                double currentLat = location.getLatitude();
+                                double currentLont = location.getLongitude();
+                                LatLng latLng = new LatLng(currentLat, currentLont);
+                                addMarkerOnCurrentLocation(latLng);
+                            }
+                        }
+                    });
+        }
+    }
+
+
+    private void addMarkerOnCurrentLocation(LatLng currentlatLng) {
+        mMap.addMarker(new MarkerOptions().position(currentlatLng).
+                icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentlatLng));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+                .target(mMap.getCameraPosition().target)
+                .zoom(12)
+                .bearing(30)
+                .tilt(45)
+                .build()));
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_LOCATION) {
+            if (permissions[0].equals(Manifest.permission.ACCESS_COARSE_LOCATION)
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLoction();
+
+            }
+        }
     }
 
     //Will call later
@@ -178,8 +289,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        final double latitude = 28.671246;
-        double longitude = 77.317654;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setTrafficEnabled(false);
         mMap.setIndoorEnabled(false);
@@ -188,7 +297,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mMap.getUiSettings().setAllGesturesEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         // Add a marker in Home and move the camera
-        sydney = new LatLng(28.671246, 77.317654);
+       /* sydney = new LatLng(28.671246, 77.317654);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Home"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
@@ -197,6 +306,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 .bearing(30)
                 .tilt(45)
                 .build()));
+*/
+/*
 
         apiInterface.getDirections("driving",
                 "less_driving",
@@ -226,6 +337,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                                 e.printStackTrace();
                             }
                         });
+*/
+
 
     }
 
@@ -381,7 +494,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         return -1;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -418,12 +530,38 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         }
     }
 
-
     @Override
     public void initital() {
+        mapFragment.getMapAsync(HomeFragment.this);
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE1) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getContext(), data);
+                edtPickUpLine.setText(place.getAddress());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getContext(), data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == getActivity().RESULT_CANCELED) {
+                // The user canceled the operation.
+                Toast.makeText(getContext(), "Canceled:", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE2) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getContext(), data);
+                edtDropLine.setText(place.getAddress());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getContext(), data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == getActivity().RESULT_CANCELED) {
+                // The user canceled the operation.
+                Toast.makeText(getContext(), "Canceled:", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 }
 

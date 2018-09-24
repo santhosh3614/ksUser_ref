@@ -218,8 +218,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 .baseUrl("https://maps.googleapis.com/")
                 .build();
         apiInterface = retrofit.create(ApiInterface.class);
-
         sydney = new LatLng(latitude, longitude);
+
         apiInterface.getDirections("driving",
                 "less_driving",
                 latitude + "," + longitude, dropAddress,

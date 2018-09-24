@@ -1,4 +1,4 @@
-package com.ims.ui.view;
+package view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -21,7 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ims.R;
+
+import com.kstransfter.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,7 +159,8 @@ public class CountryCodePicker extends RelativeLayout {
     applyCustomProperty(attrs);
 
     mCountryCodeHolderClickListener = new OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         if (isClickable()) {
           if (mCountryCodeDialog == null) {
             mCountryCodeDialog = new CountryCodeDialog(CountryCodePicker.this);
@@ -548,7 +550,8 @@ public class CountryCodePicker extends RelativeLayout {
    * if you want to set IN +91(India) as default country, mDefaultCountryCode =  91
    * if you want to set JP +81(Japan) as default country, mDefaultCountryCode =  81
    */
-  @Deprecated public void setDefaultCountryUsingPhoneCode(int defaultCountryCode) {
+  @Deprecated
+  public void setDefaultCountryUsingPhoneCode(int defaultCountryCode) {
     Country defaultCountry = CountryUtils.getByCode(getContext(), mPreferredCountries, defaultCountryCode);
     //if correct country is found, set the country
     if (defaultCountry != null) {
@@ -1026,7 +1029,8 @@ public class CountryCodePicker extends RelativeLayout {
     this.mSelectionDialogShowSearch = selectionDialogShowSearch;
   }
 
-  @Override public boolean isClickable() {
+  @Override
+  public boolean isClickable() {
     return mIsClickable;
   }
 
@@ -1139,7 +1143,8 @@ public class CountryCodePicker extends RelativeLayout {
       previousCountryCode = countryCode;
     }
 
-    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
       super.onTextChanged(s, start, before, count);
       try {
         String iso = null;

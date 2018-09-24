@@ -1,4 +1,4 @@
-package com.ims.ui.view;
+package view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,7 +16,8 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
-import com.ims.R;
+
+import com.kstransfter.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ class CountryCodeDialog extends Dialog {
     this.mCountryCodePicker = countryCodePicker;
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.layout_picker_dialog);
@@ -126,13 +128,16 @@ class CountryCodeDialog extends Dialog {
     if (mEdtSearch != null) {
       mEdtSearch.addTextChangedListener(new TextWatcher() {
 
-        @Override public void afterTextChanged(Editable s) {
+        @Override
+        public void afterTextChanged(Editable s) {
         }
 
-        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
-        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
           applyQuery(s.toString());
         }
       });
@@ -202,7 +207,8 @@ class CountryCodeDialog extends Dialog {
   }
 
   public class ItemRecyclerViewClickListener implements View.OnClickListener {
-    @Override public void onClick(View view) {
+    @Override
+    public void onClick(View view) {
       int itemPosition = mRvCountryDialog.getChildLayoutPosition(view);
       mCountryCodePicker.setSelectedCountry(mFilteredCountries.get(itemPosition));
       //if (view != null && mCountries.get(position) != null) {

@@ -1,4 +1,4 @@
-package com.ims.ui.view;
+package view;
 
 /**
  * Created by hbb20 on 11/1/16.

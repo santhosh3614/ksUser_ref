@@ -17,5 +17,9 @@
     <color name="border_color">#424242</color>
     <color name="gray_text_color">#545454</color>
     <color name="color_upper_button">#3B82B8</color>
+    <color name="red_circle">#F01130</color>
+    <color name="green_circle">#5BB225</color>
+    <color name="defaultTextColor">@android:color/black</color>
+
 
 </resources>

@@ -5,26 +5,30 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_5sdp"
     android:background="@drawable/select_unselect_car"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/_10sdp"
+    android:paddingRight="@dimen/_10sdp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/opensans_regular"
         android:padding="@dimen/_5sdp"
         android:text="time" />
 
 
     <ImageView
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="34dp"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/car" />
+        android:src="@drawable/indica" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="car name" />
+        android:fontFamily="@font/opensans_regular"
+        android:text="Indica" />
 
 </LinearLayout>

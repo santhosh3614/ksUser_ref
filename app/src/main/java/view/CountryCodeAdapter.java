@@ -1,4 +1,4 @@
-package com.ims.ui.view;
+package view;
 
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.ims.R;
+import com.kstransfter.R;
 
 import java.util.List;
 
@@ -32,19 +32,22 @@ class CountryCodeAdapter extends RecyclerView.Adapter<CountryCodeAdapter.Country
     this.mListener = listener;
   }
 
-  @Override public CountryCodeViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+  @Override
+  public CountryCodeViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
     LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
     View rootView = inflater.inflate(R.layout.layout_recycler_country_tile, viewGroup, false);
     return new CountryCodeViewHolder(rootView);
   }
 
-  @Override public void onBindViewHolder(CountryCodeViewHolder viewHolder, final int i) {
+  @Override
+  public void onBindViewHolder(CountryCodeViewHolder viewHolder, final int i) {
     final int position = viewHolder.getAdapterPosition();
     viewHolder.setCountry(mCountries.get(position));
     viewHolder.rlyMain.setOnClickListener(mListener);
   }
 
-  @Override public int getItemCount() {
+  @Override
+  public int getItemCount() {
     return mCountries.size();
   }
 

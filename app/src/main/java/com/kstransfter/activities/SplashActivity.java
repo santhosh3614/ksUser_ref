@@ -33,7 +33,7 @@ public class SplashActivity extends BaseActivity {
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                   } else {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, TutorialActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

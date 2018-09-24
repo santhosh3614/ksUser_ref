@@ -1,9 +1,10 @@
-package com.ims.ui.view;
+package view;
 
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 
-import com.ims.R;
+
+import com.kstransfter.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1437,7 +1438,8 @@ class CountryUtils {
 
 
     Collections.sort(countries, new Comparator<Country>() {
-      @Override public int compare(Country country1, Country country2) {
+      @Override
+      public int compare(Country country1, Country country2) {
         return country1.getName().compareToIgnoreCase(country2.getName());
       }
     });

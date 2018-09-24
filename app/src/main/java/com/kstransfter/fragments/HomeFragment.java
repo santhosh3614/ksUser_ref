@@ -53,6 +53,8 @@ import com.kstransfter.R;
 import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.interfaces.ApiInterface;
+import com.kstransfter.models.Result;
+import com.kstransfter.models.Route;
 import com.kstransfter.models.app.CarListModel;
 import com.kstransfter.models.events.BeginJourneyEvent;
 import com.kstransfter.models.events.CurrentJourneyEvent;
@@ -62,9 +64,11 @@ import com.kstransfter.utils.JourneyEventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -103,6 +107,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private ImageView imgCurrentLoaction;
     private int PLACE_AUTOCOMPLETE_REQUEST_CODE1 = 1;
     private int PLACE_AUTOCOMPLETE_REQUEST_CODE2 = 11;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+    private String pickupAddress;
+    private String dropAddress;
 
 
     @Nullable
@@ -134,14 +142,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
         //Show Current location:
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://maps.googleapis.com/")
-                .build();
-        apiInterface = retrofit.create(ApiInterface.class);
         getCurrentLoction();
         try {
             initital();
@@ -180,8 +180,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         });
 
         txtRideNow.setOnClickListener(v -> {
-            String pickupAddress = edtPickUpLine.getText().toString().trim();
-            String dropAddress = edtDropLine.getText().toString().trim();
+            pickupAddress = edtPickUpLine.getText().toString().trim();
+            dropAddress = edtDropLine.getText().toString().trim();
             boolean isSelectedCar = false;
             for (int i = 0; i < carListModels.size(); i++) {
                 CarListModel carListModel = carListModels.get(i);
@@ -200,6 +200,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             } else if (!isSelectedCar) {
                 Toast.makeText(getContext(), "Pelase select at least a car", Toast.LENGTH_SHORT).show();
             } else {
+                movecarSourcetoDesignation();
                 llDrop.setVisibility(View.GONE);
                 llPickUp.setVisibility(View.GONE);
                 llBeforeRide.setVisibility(View.GONE);
@@ -207,6 +208,46 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 llBottomAfterRide.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void movecarSourcetoDesignation() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl("https://maps.googleapis.com/")
+                .build();
+        apiInterface = retrofit.create(ApiInterface.class);
+
+        sydney = new LatLng(latitude, longitude);
+        apiInterface.getDirections("driving",
+                "less_driving",
+                latitude + "," + longitude, dropAddress,
+                getResources().getString(R.string.google_directions_key))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new SingleObserver<Result>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(Result result) {
+                                List<Route> routeList = result.getRoutes();
+                                for (Route route : routeList) {
+                                    String polyLine = route.getOverviewPolyline().getPoints();
+                                    polyLineList = decodePoly(polyLine);
+                                    drawPolyLineAndAnimateCar();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+                            }
+                        });
 
     }
 
@@ -297,49 +338,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mMap.getUiSettings().setAllGesturesEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         // Add a marker in Home and move the camera
-       /* sydney = new LatLng(28.671246, 77.317654);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Home"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-                .target(googleMap.getCameraPosition().target)
-                .zoom(17)
-                .bearing(30)
-                .tilt(45)
-                .build()));
-*/
-/*
-
-        apiInterface.getDirections("driving",
-                "less_driving",
-                latitude + "," + longitude, destination,
-                getResources().getString(R.string.google_directions_key))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        new SingleObserver<Result>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-
-                            }
-
-                            @Override
-                            public void onSuccess(Result result) {
-                                List<Route> routeList = result.getRoutes();
-                                for (Route route : routeList) {
-                                    String polyLine = route.getOverviewPolyline().getPoints();
-                                    polyLineList = decodePoly(polyLine);
-                                    drawPolyLineAndAnimateCar();
-                                }
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                e.printStackTrace();
-                            }
-                        });
-*/
-
-
     }
 
 
@@ -533,7 +531,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     @Override
     public void initital() {
         mapFragment.getMapAsync(HomeFragment.this);
-
     }
 
     @Override
@@ -542,6 +539,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             if (resultCode == getActivity().RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(getContext(), data);
                 edtPickUpLine.setText(place.getAddress());
+                this.latitude = place.getLatLng().latitude;
+                this.longitude = place.getLatLng().longitude;
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getContext(), data);
                 Log.i(TAG, status.getStatusMessage());
@@ -549,6 +548,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 // The user canceled the operation.
                 Toast.makeText(getContext(), "Canceled:", Toast.LENGTH_SHORT).show();
             }
+
+
         } else if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE2) {
             if (resultCode == getActivity().RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(getContext(), data);

@@ -27,7 +27,7 @@ public class SignUpActivity extends BaseActivity {
     public void initial() {
         txtLogin = findViewById(R.id.txtLogin);
         txtLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

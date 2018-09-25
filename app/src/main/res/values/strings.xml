@@ -48,6 +48,9 @@
     <string name="country_code_and_phone_code">(%1$s) +%2$s</string>
     <string name="country_full_name_and_phone_code">%1$s +%2$s</string>
     <string name="error_unregister_carrier_number">EditText for carrier number is not registered. Register it using registerPhoneNumberTextView() before getFullNumber() or setFullNumber().</string>
+    <string name="plase_enter_your_mobile_number_to_proced">Plase enter your mobile \n number to proced</string>
+    <string name="your_mobile">Your Mobile</string>
+    <string name="full_name">Full Name</string>
 
     <string-array name="Qnty">
         <item>1</item>

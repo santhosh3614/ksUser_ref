@@ -11,6 +11,8 @@ import com.kstransfter.R;
 
 public class HomeActivity extends BaseActivity {
 
+    //Change home..
+
     private LinearLayout llCenterButton;
     private ImageView imgNotification, imgMenu, imgBack;
     private TextView txtCenterTitle;

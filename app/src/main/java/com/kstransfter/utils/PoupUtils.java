@@ -1,12 +1,20 @@
 package com.kstransfter.utils;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstransfter.R;
+
+import java.util.Calendar;
 
 
 public class PoupUtils {
@@ -50,6 +58,53 @@ public class PoupUtils {
         });
 
         dialog.show();
+    }
+
+
+    public static void showDatePicker(Context context) {
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                    }
+                }, mYear, mMonth, mDay);
+
+        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel", (v, which) -> {
+            Toast.makeText(context, "click on cancel", Toast.LENGTH_SHORT).show();
+        });
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (v, which) -> {
+            showTimePicker(context);
+
+        });
+        datePickerDialog.show();
+    }
+
+    public static void showTimePicker(Context context) {
+        final Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR_OF_DAY);
+        int mMinute = c.get(Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(context,
+                (view, hourOfDay, minute) -> {
+//                        txtTime.setText(hourOfDay + ":" + minute);
+                }, mHour, mMinute, false);
+
+          timePickerDialog.show();
+
+           timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
+                (view, which) -> {
+
+                });
+
+        timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "cancel",
+                (view, which) -> {
+
+                });
 
 
     }

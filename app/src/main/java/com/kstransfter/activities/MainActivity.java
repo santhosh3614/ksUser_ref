@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.kstransfter.R;
 import com.kstransfter.fragments.BookingHistoryFragment;
 import com.kstransfter.fragments.HomeFragment;
@@ -24,6 +25,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public LinearLayout llCenterButton;
     public ImageView imgBack;
     public ImageView imgMenu;
+    public TextView txtLocalRides, txtOutSideRide;
 
 
     @Override
@@ -44,6 +46,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtRegisterCar = findViewById(R.id.txtRegisterCar);
         txtRegisterDriver = findViewById(R.id.txtRegisterDriver);
         txtLogOut = findViewById(R.id.txtLogOut);
+        txtLocalRides = findViewById(R.id.txtLocalRides);
+        txtOutSideRide = findViewById(R.id.txtOutSideRide);
+
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);
         txtSupport.setOnClickListener(this);
@@ -54,6 +59,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
         imgMenu.setOnClickListener(this);
         imgBack.setOnClickListener(this);
+
+        txtLocalRides.setOnClickListener(v -> {
+            Toast.makeText(this, "local ride", Toast.LENGTH_SHORT).show();
+        });
+
+        txtOutSideRide.setOnClickListener(v -> {
+            Toast.makeText(this, "outside ride", Toast.LENGTH_SHORT).show();
+        });
+
+
         try {
             initial();
         } catch (Exception e) {

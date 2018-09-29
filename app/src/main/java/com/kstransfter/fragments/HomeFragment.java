@@ -60,6 +60,7 @@ import com.kstransfter.models.events.BeginJourneyEvent;
 import com.kstransfter.models.events.CurrentJourneyEvent;
 import com.kstransfter.models.events.EndJourneyEvent;
 import com.kstransfter.utils.JourneyEventBus;
+import com.kstransfter.utils.PoupUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private double longitude = 0.0;
     private String pickupAddress;
     private String dropAddress;
+    private TextView txtRideLater;
 
 
     @Nullable
@@ -137,6 +139,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         edtPickUpLine = view.findViewById(R.id.edtPickUpLine);
         edtDropLine = view.findViewById(R.id.edtDropLine);
         imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
+        txtRideLater = view.findViewById(R.id.txtRideLater);
         //for current location
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -208,6 +211,11 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 llBottomAfterRide.setVisibility(View.VISIBLE);
             }
         });
+
+        txtRideLater.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext());
+        });
+
     }
 
     private void movecarSourcetoDesignation() {

@@ -1,5 +1,6 @@
 package com.kstransfter.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -14,8 +15,9 @@ public class HomeActivity extends BaseActivity {
     //Change home..
 
     private LinearLayout llCenterButton;
-    private ImageView imgNotification, imgMenu, imgBack;
+    private ImageView imgNotification, imgMenu, imgBack, imgCar;
     private TextView txtCenterTitle;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,13 +36,19 @@ public class HomeActivity extends BaseActivity {
         imgNotification = findViewById(R.id.imgNotification);
         imgBack = findViewById(R.id.imgBack);
         txtCenterTitle = findViewById(R.id.txtCenterTitle);
+        imgCar = findViewById(R.id.imgCar);
         imgMenu = findViewById(R.id.imgMenu);
         llCenterButton.setVisibility(View.GONE);
         imgNotification.setVisibility(View.GONE);
         imgMenu.setVisibility(View.VISIBLE);
         txtCenterTitle.setVisibility(View.VISIBLE);
         imgBack.setVisibility(View.VISIBLE);
-
+        imgCar.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
     }
 
 }

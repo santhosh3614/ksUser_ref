@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -27,22 +26,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
-
         </activity>
+
+
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
+            <!--  <intent-filter>
+                  <action android:name="android.intent.action.MAIN" />
+                  <category android:name="android.intent.category.LAUNCHER" />
+              </intent-filter>
+           -->
         </activity>
-
 
         <activity
             android:name=".activities.EnterMobilNumberActivity"
@@ -77,5 +77,12 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
+        <activity
+            android:name=".activities.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
     </application>
+
 </manifest>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txtNameTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNameTitle"
+            android:text="Rahul Kumar" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/txtName"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/black" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txtMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="phone" />
+
+        <TextView
+            android:id="@+id/txtMobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtMobile"
+            android:text="+91 9584288185" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/txtMobileNo"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/black" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Email id" />
+
+        <TextView
+            android:id="@+id/txtEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtEmail"
+            android:text="Rahul Kumar"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/txtEmailAddress"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/black" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txtSetPasword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Password" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSetPasword"
+            android:text="Rahul Kumar"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@+id/txtSetPasword"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/black" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

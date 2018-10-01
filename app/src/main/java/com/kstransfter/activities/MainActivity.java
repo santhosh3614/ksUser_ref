@@ -9,12 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.fragments.BookingHistoryFragment;
 import com.kstransfter.fragments.HomeFragment;
+import com.kstransfter.fragments.UpadateProfileFragment;
 import com.kstransfter.utils.PoupUtils;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -26,6 +28,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public ImageView imgBack;
     public ImageView imgMenu;
     public TextView txtLocalRides, txtOutSideRide;
+    private RelativeLayout rlGoForUpdate;
 
 
     @Override
@@ -48,6 +51,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtLogOut = findViewById(R.id.txtLogOut);
         txtLocalRides = findViewById(R.id.txtLocalRides);
         txtOutSideRide = findViewById(R.id.txtOutSideRide);
+        rlGoForUpdate = findViewById(R.id.rlGoForUpdate);
 
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);
@@ -66,6 +70,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         txtOutSideRide.setOnClickListener(v -> {
             Toast.makeText(this, "outside ride", Toast.LENGTH_SHORT).show();
+        });
+
+        rlGoForUpdate.setOnClickListener(v -> {
+            UpadateProfileFragment upadateProfileFragment = new UpadateProfileFragment();
+            replaceFragmenr(upadateProfileFragment, upadateProfileFragment.getTag(), false);
+
         });
 
 

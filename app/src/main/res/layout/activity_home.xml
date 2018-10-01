@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-     <include
+    <include
         android:id="@+id/toolbar"
-        layout="@layout/layout_custom_toobar" />
+        layout="@layout/layout_custom_toobar_new" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -22,11 +22,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_30sdp">
 
-        <ImageView
-            android:id="@+id/imgCar"
+
+        <LinearLayout
+            android:id="@+id/llCar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/car" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgCar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/car" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_bold"
+                android:gravity="center"
+                android:text="Book Car"
+                android:textColor="@color/blue_text"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
@@ -34,15 +53,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_50sdp">
 
-        <ImageView
-            android:id="@+id/imgDriver"
+
+        <LinearLayout
+            android:id="@+id/llBookDriver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/_50sdp"
-            android:src="@drawable/driver" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/driver" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_bold"
+                android:gravity="center"
+                android:text="Book Driver"
+                android:textColor="@color/red_circle"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

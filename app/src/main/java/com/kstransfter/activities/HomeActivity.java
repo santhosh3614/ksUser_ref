@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstransfter.R;
 
@@ -14,9 +15,7 @@ public class HomeActivity extends BaseActivity {
 
     //Change home..
 
-    private LinearLayout llCenterButton;
-    private ImageView imgNotification, imgMenu, imgBack, imgCar;
-    private TextView txtCenterTitle;
+    private LinearLayout llCar, llBookDriver;
 
 
     @Override
@@ -32,23 +31,23 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initial() {
-        llCenterButton = findViewById(R.id.llCenterButton);
-        imgNotification = findViewById(R.id.imgNotification);
-        imgBack = findViewById(R.id.imgBack);
-        txtCenterTitle = findViewById(R.id.txtCenterTitle);
-        imgCar = findViewById(R.id.imgCar);
-        imgMenu = findViewById(R.id.imgMenu);
-        llCenterButton.setVisibility(View.GONE);
-        imgNotification.setVisibility(View.GONE);
-        imgMenu.setVisibility(View.VISIBLE);
-        txtCenterTitle.setVisibility(View.VISIBLE);
-        imgBack.setVisibility(View.VISIBLE);
-        imgCar.setOnClickListener(v -> {
+        llCar = findViewById(R.id.llCar);
+        llBookDriver = findViewById(R.id.llBookDriver);
+
+        llCar.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         });
+
+        llBookDriver.setOnClickListener(v -> {
+
+            Toast.makeText(this, "not implemenented", Toast.LENGTH_SHORT).show();
+
+        });
+
     }
 
 }

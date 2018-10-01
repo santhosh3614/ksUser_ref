@@ -11,14 +11,21 @@ import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.kstransfter.R;
+import com.kstransfter.fragments.TutorialFour;
+import com.kstransfter.fragments.TutorialOne;
+import com.kstransfter.fragments.TutorialThree;
+import com.kstransfter.fragments.TutorialTwo;
 
 import java.util.ArrayList;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class TutorialActivity extends BaseActivity {
 
     private TextView txtNext;
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private ViewPager viewpager;
+    private CircleIndicator indicator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +42,7 @@ public class TutorialActivity extends BaseActivity {
     public void initial() {
         txtNext = findViewById(R.id.txtNext);
         viewpager = findViewById(R.id.viewpager);
+        indicator = findViewById(R.id.indicator);
 
         txtNext.setOnClickListener(v -> {
             Intent intent = new Intent(TutorialActivity.this, EnterMobilNumberActivity.class);
@@ -42,9 +50,16 @@ public class TutorialActivity extends BaseActivity {
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
+
+        fragments.add(new TutorialOne());
+        fragments.add(new TutorialTwo());
+        fragments.add(new TutorialThree());
+        fragments.add(new TutorialFour());
+
         ScreenSlidePagerAdapter screenSlidePagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), this, fragments);
         viewpager.setAdapter(screenSlidePagerAdapter);
-      }
+        indicator.setViewPager(viewpager);
+    }
 }
 
 
@@ -63,6 +78,7 @@ class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         return fragments.get(position);
     }
+
     @Override
     public int getCount() {
         return fragments.size();

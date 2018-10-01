@@ -370,7 +370,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
         blackPolylineOptions = new PolylineOptions();
         blackPolylineOptions.width(5);
-        blackPolylineOptions.color(Color.BLACK);
+        blackPolylineOptions.color(Color.YELLOW);
         blackPolylineOptions.startCap(new SquareCap());
         blackPolylineOptions.endCap(new SquareCap());
         blackPolylineOptions.jointType(ROUND);

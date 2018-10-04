@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.kstransfter.R;
+import com.kstransfter.activities.MainActivity;
 
 public class UpadateProfileFragment extends BaseFragment {
 
@@ -28,18 +28,51 @@ public class UpadateProfileFragment extends BaseFragment {
         rlMobile = view.findViewById(R.id.rlMobile);
         rlEmail = view.findViewById(R.id.rlEmail);
         rlPassword = view.findViewById(R.id.rlPassword);
-        //rlName, rlMobile, rlEmail, rlPassword;
         rlName = view.findViewById(R.id.rlName);
         rlMobile = view.findViewById(R.id.rlMobile);
         rlEmail = view.findViewById(R.id.rlEmail);
         rlPassword = view.findViewById(R.id.rlPassword);
-
+        try {
+            initital();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void initital() {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        rlName.setOnClickListener(v -> {
+            UpadateFieldName upadateFieldName = new UpadateFieldName();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", "Update Name");
+            upadateFieldName.setArguments(bundle);
+            mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
+        });
 
+        rlMobile.setOnClickListener(v -> {
+            UpadateFieldName upadateFieldName = new UpadateFieldName();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", "Update Phone");
+            upadateFieldName.setArguments(bundle);
+            mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
+        });
+
+        rlEmail.setOnClickListener(v -> {
+            UpadateFieldName upadateFieldName = new UpadateFieldName();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", "Update Emai Id");
+            upadateFieldName.setArguments(bundle);
+            mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
+        });
+
+        rlPassword.setOnClickListener(v -> {
+            UpadateFieldName upadateFieldName = new UpadateFieldName();
+            Bundle bundle = new Bundle();
+            bundle.putString("name", "Set Password");
+            upadateFieldName.setArguments(bundle);
+            mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
+        });
     }
-
 
 }

@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 
 public class UpadateProfileFragment extends BaseFragment {
 
     private RelativeLayout rlName, rlMobile, rlEmail, rlPassword;
+
 
     @Nullable
     @Override
@@ -45,7 +47,7 @@ public class UpadateProfileFragment extends BaseFragment {
         rlName.setOnClickListener(v -> {
             UpadateFieldName upadateFieldName = new UpadateFieldName();
             Bundle bundle = new Bundle();
-            bundle.putString("name", "Update Name");
+            bundle.putString("update field", "Update Name");
             upadateFieldName.setArguments(bundle);
             mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
         });
@@ -53,7 +55,7 @@ public class UpadateProfileFragment extends BaseFragment {
         rlMobile.setOnClickListener(v -> {
             UpadateFieldName upadateFieldName = new UpadateFieldName();
             Bundle bundle = new Bundle();
-            bundle.putString("name", "Update Phone");
+            bundle.putString("update field", "Update Phone");
             upadateFieldName.setArguments(bundle);
             mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
         });
@@ -61,7 +63,7 @@ public class UpadateProfileFragment extends BaseFragment {
         rlEmail.setOnClickListener(v -> {
             UpadateFieldName upadateFieldName = new UpadateFieldName();
             Bundle bundle = new Bundle();
-            bundle.putString("name", "Update Emai Id");
+            bundle.putString("update field", "Update Emai Id");
             upadateFieldName.setArguments(bundle);
             mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
         });
@@ -69,7 +71,7 @@ public class UpadateProfileFragment extends BaseFragment {
         rlPassword.setOnClickListener(v -> {
             UpadateFieldName upadateFieldName = new UpadateFieldName();
             Bundle bundle = new Bundle();
-            bundle.putString("name", "Set Password");
+            bundle.putString("update field", "Set Password");
             upadateFieldName.setArguments(bundle);
             mainActivity.replaceFragmenr(upadateFieldName, upadateFieldName.getTag(), false);
         });

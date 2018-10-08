@@ -3,7 +3,6 @@ package com.kstransfter.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.kstransfter.R;
 import com.kstransfter.utils.SessionManager;
 

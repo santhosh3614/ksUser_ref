@@ -50,6 +50,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.kstransfter.R;
+import com.kstransfter.activities.MainActivity;
 import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.interfaces.ApiInterface;
@@ -113,6 +114,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private String pickupAddress;
     private String dropAddress;
     private TextView txtRideLater;
+    private MainActivity mainActivity;
 
 
     @Nullable
@@ -140,7 +142,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         edtDropLine = view.findViewById(R.id.edtDropLine);
         imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
         txtRideLater = view.findViewById(R.id.txtRideLater);
-        //for current location
+        mainActivity = (MainActivity) getActivity();
+        setVisibleAndGone();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
@@ -215,8 +218,16 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         txtRideLater.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext());
         });
-
     }
+
+    private void setVisibleAndGone() {
+        mainActivity.txtLocalRides.setVisibility(View.VISIBLE);
+        mainActivity.txtOutSideRide.setVisibility(View.VISIBLE);
+        mainActivity.imgMenu.setVisibility(View.VISIBLE);
+        mainActivity.imgBack.setVisibility(View.GONE);
+        mainActivity.txtTitle.setVisibility(View.GONE);
+    }
+
 
     private void movecarSourcetoDesignation() {
 

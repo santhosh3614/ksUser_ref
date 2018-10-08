@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public LinearLayout llCenterButton;
     public ImageView imgBack;
     public ImageView imgMenu;
-    public TextView txtLocalRides, txtOutSideRide;
+    public TextView txtLocalRides, txtOutSideRide, txtTitle;
     private RelativeLayout rlGoForUpdate;
 
 
@@ -53,6 +53,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtLocalRides = findViewById(R.id.txtLocalRides);
         txtOutSideRide = findViewById(R.id.txtOutSideRide);
         rlGoForUpdate = findViewById(R.id.rlGoForUpdate);
+        txtTitle = findViewById(R.id.txtTitle);
 
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);
@@ -79,7 +80,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             replaceFragmenr(upadateProfileFragment, upadateProfileFragment.getTag(), false);
 
         });
-
 
         try {
             initial();
@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int count = fragmentManager.getBackStackEntryCount();
         if (count > 1) {
             fragmentManager.popBackStackImmediate();
-          } else {
+        } else {
             /*PopUtils.showDailog(this, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

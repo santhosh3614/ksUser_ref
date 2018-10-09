@@ -18,7 +18,6 @@
         android:layout_above="@+id/txtNext"
         android:layout_centerHorizontal="true"
         app:ci_drawable="@drawable/yello_circular"
-
         />
 
     <TextView

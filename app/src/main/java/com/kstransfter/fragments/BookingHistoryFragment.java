@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.adapters.BookHistoryAdapter;
+
 import java.util.ArrayList;
 
 public class BookingHistoryFragment extends BaseFragment {
@@ -31,22 +33,26 @@ public class BookingHistoryFragment extends BaseFragment {
         rvBookingHistory = view.findViewById(R.id.rvBookingHistory);
         rvBookingHistory.setLayoutManager(new LinearLayoutManager(getContext()));
         try {
-             initital();
-            } catch (Exception e) {
-             e.printStackTrace();
+            initital();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void initital() {
         mainActivity = (MainActivity) getActivity();
+        mainActivity.imgBack.setOnClickListener(v -> {
+            mainActivity.onBackPressed();
+        });
+
         for (int i = 0; i < 20; i++) {
             bookings.add("one");
-             }
+        }
         BookHistoryAdapter bookHistoryAdapter = new BookHistoryAdapter(getContext(), bookings);
         rvBookingHistory.setAdapter(bookHistoryAdapter);
         setVisibleAndGone();
-     }
+    }
 
     private void setVisibleAndGone() {
         mainActivity.txtLocalRides.setVisibility(View.GONE);
@@ -55,6 +61,6 @@ public class BookingHistoryFragment extends BaseFragment {
         mainActivity.imgBack.setVisibility(View.VISIBLE);
         mainActivity.txtTitle.setVisibility(View.VISIBLE);
         mainActivity.txtTitle.setText("Booking History");
-     }
+    }
 
 }

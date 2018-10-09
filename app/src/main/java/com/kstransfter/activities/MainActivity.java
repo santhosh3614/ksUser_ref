@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtLogOut.setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         imgMenu.setOnClickListener(this);
-        imgBack.setOnClickListener(this);
+            imgBack.setOnClickListener(this);
 
         txtLocalRides.setOnClickListener(v -> {
             Toast.makeText(this, "local ride", Toast.LENGTH_SHORT).show();

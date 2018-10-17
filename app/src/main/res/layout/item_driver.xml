@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlDriver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/imgDriverProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/flag_ghana" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/txtDriver"
+            android:layout_toRightOf="@+id/imgDriverProfile"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/txtDriverName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avdesh srivastav" />
+
+            <TextView
+                android:id="@+id/txtExprence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exp : 6 years" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:text="Book" />
+
+    </RelativeLayout>
+</LinearLayout>

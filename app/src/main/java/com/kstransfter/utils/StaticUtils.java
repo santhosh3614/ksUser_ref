@@ -24,7 +24,9 @@ public class StaticUtils {
     public static final int NOTIFICATION_ID = 100;
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
     public static final String SHARED_PREF = "ah_firebase";
-    public static  final int REQUEST_FOR_MOVIE_RESPONSE=5555;
+    public static final int REQUEST_FOR_MOVIE_RESPONSE = 5001;
+    public static final int REQUEST_FOR_AUOTOCOMPLETE_ADDRESS = 5002;
+
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {

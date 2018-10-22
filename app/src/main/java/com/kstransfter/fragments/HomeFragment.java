@@ -49,6 +49,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.JsonObject;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.activities.MapsActivity;
@@ -62,6 +63,10 @@ import com.kstransfter.models.events.CurrentJourneyEvent;
 import com.kstransfter.models.events.EndJourneyEvent;
 import com.kstransfter.utils.JourneyEventBus;
 import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.StaticUtils;
+import com.kstransfter.webservice.WsFactory;
+import com.kstransfter.webservice.WsResponse;
+import com.kstransfter.webservice.WsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +76,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -157,14 +163,15 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
 
         edtPickUpLine.setOnClickListener(v -> {
-            try {
+          /*  try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
-            } catch (GooglePlayServicesRepairableException e) {
+              } catch (GooglePlayServicesRepairableException e) {
                 // TODO: Handle the error.
-            } catch (GooglePlayServicesNotAvailableException e) {
+              } catch (GooglePlayServicesNotAvailableException e) {
                 // TODO: Handle the error.
-            }
+            }*/
+            wsCallingHere();
         });
 
 
@@ -220,6 +227,25 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         });
     }
 
+    private void wsCallingHere() {
+//        progressDialog.show();
+
+        Call loginWsCall = WsFactory.getAutoCompleteAddress(WsUtils.API_Key, "delhi");
+        WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_FOR_AUOTOCOMPLETE_ADDRESS, new WsResponse() {
+            @Override
+            public void successResponse(Object response, int code) {
+                JsonObject jsonObject = (JsonObject) response;
+//                Log.e("Response: ", "" + jsonObject);
+            }
+
+            @Override
+            public void failureRespons(Throwable error, int code) {
+//                Log.e("Error: ", "" + error);
+
+            }
+        });
+    }
+
     private void setVisibleAndGone() {
         mainActivity.txtLocalRides.setVisibility(View.VISIBLE);
         mainActivity.txtOutSideRide.setVisibility(View.VISIBLE);
@@ -227,7 +253,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mainActivity.imgBack.setVisibility(View.GONE);
         mainActivity.txtTitle.setVisibility(View.GONE);
     }
-
 
     private void movecarSourcetoDesignation() {
 
@@ -251,6 +276,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                             public void onSubscribe(Disposable d) {
 
                             }
+
                             @Override
                             public void onSuccess(Result result) {
                                 List<Route> routeList = result.getRoutes();
@@ -258,7 +284,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                                     String polyLine = route.getOverviewPolyline().getPoints();
                                     polyLineList = decodePoly(polyLine);
                                     drawPolyLineAndAnimateCar();
-                                 }
+                                }
                             }
 
                             @Override

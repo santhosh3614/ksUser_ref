@@ -11,7 +11,7 @@ public class ApiClient {
     public static final String BASE_URL_LOGIN = "http://192.168.137.1/Test/";
     public static String BASE_URL_GOOGLE_API = "https://maps.googleapis.com/";
 /*
-             key=AIzaSyCmcJ6hsgOceI-icnBoJ8W7L4zZaTJPefQ&input=delhi";
+             key=&input=delhi";
 */
 
     private static Retrofit retrofit = null;

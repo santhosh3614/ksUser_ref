@@ -5,6 +5,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public abstract class WsUtils {
+    public static final String API_Key = "AIzaSyCmcJ6hsgOceI-icnBoJ8W7L4zZaTJPefQ";
 
     public abstract void init();
 

@@ -3,6 +3,7 @@ package com.kstransfter.webservice;
 import com.google.gson.JsonObject;
 import com.kstransfter.interfaces.ApiClient;
 import com.kstransfter.interfaces.ApiInterface;
+import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.UploadImage;
@@ -44,7 +45,7 @@ public class WsFactory {
 
     public static Call getAutoCompleteAddress(String key, String address) {
         ApiInterface apiService = ApiClient.getClientForGoogleApi().create(ApiInterface.class);
-        Call<JsonObject> getAutoCompleteAddress = apiService.getAutocompleteAddress(key, address);
+        Call<AutocompleteAddrees> getAutoCompleteAddress = apiService.getAutocompleteAddress(key, address);
         return getAutoCompleteAddress;
     }
 

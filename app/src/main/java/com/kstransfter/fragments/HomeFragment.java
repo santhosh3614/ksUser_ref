@@ -55,6 +55,7 @@ import com.kstransfter.activities.MainActivity;
 import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.interfaces.ApiInterface;
+import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.Route;
 import com.kstransfter.models.app.CarListModel;
@@ -234,8 +235,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_FOR_AUOTOCOMPLETE_ADDRESS, new WsResponse() {
             @Override
             public void successResponse(Object response, int code) {
-                JsonObject jsonObject = (JsonObject) response;
-//                Log.e("Response: ", "" + jsonObject);
+                AutocompleteAddrees autocompleteAddrees = (AutocompleteAddrees) response;
+                Log.e("Response: ", "" + autocompleteAddrees);
             }
 
             @Override

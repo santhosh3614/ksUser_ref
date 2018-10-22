@@ -1,7 +1,10 @@
 package com.kstransfter.interfaces;
 
 
+import android.widget.AutoCompleteTextView;
+
 import com.google.gson.JsonObject;
+import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
@@ -72,7 +75,7 @@ public interface ApiInterface {
     Call<ResponseBody> postImage(@Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);*/
 
     @GET("maps/api/place/autocomplete/json")
-    Call<JsonObject> getAutocompleteAddress
+    Call<AutocompleteAddrees> getAutocompleteAddress
             (@Query("key") String apiKey,
              @Query("input") String address);
 

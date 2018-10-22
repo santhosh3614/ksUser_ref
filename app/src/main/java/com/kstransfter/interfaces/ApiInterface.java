@@ -38,7 +38,6 @@ public interface ApiInterface {
                                  @Query("key") String apiKey);
 
 
-
     @GET("movie/top_rated")
     Call<MoviesResponse> getTopRatedMovies(@Query("api_key") String apiKey);
 
@@ -72,5 +71,10 @@ public interface ApiInterface {
     @POST("uploadNew.php")
     Call<ResponseBody> postImage(@Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);*/
 
+    @GET("maps/api/place/autocomplete/json")
+    Call<JsonObject> getAutocompleteAddress
+            (@Query("key") String apiKey,
+             @Query("input") String address);
 
-   }
+
+}

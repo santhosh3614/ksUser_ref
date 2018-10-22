@@ -158,7 +158,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
         edtPickUpLine.setOnClickListener(v -> {
             try {
-                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(getActivity());
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
             } catch (GooglePlayServicesRepairableException e) {
                 // TODO: Handle the error.
@@ -251,7 +251,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                             public void onSubscribe(Disposable d) {
 
                             }
-
                             @Override
                             public void onSuccess(Result result) {
                                 List<Route> routeList = result.getRoutes();
@@ -259,7 +258,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                                     String polyLine = route.getOverviewPolyline().getPoints();
                                     polyLineList = decodePoly(polyLine);
                                     drawPolyLineAndAnimateCar();
-                                }
+                                 }
                             }
 
                             @Override

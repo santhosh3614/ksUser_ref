@@ -15,7 +15,7 @@ import retrofit2.Call;
 
 public class WsFactory {
 
-    public static  Call getTopRattedMovie(String key){
+    public static Call getTopRattedMovie(String key) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<MoviesResponse> moviesResponseCall = apiService.getTopRatedMovies(key);
         return moviesResponseCall;
@@ -42,5 +42,10 @@ public class WsFactory {
 
     }
 
+    public static Call getAutoCompleteAddress(String key, String address) {
+        ApiInterface apiService = ApiClient.getClientForGoogleApi().create(ApiInterface.class);
+        Call<JsonObject> getAutoCompleteAddress = apiService.getAutocompleteAddress(key, address);
+        return getAutoCompleteAddress;
+    }
 
 }

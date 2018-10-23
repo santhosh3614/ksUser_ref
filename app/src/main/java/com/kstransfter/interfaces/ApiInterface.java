@@ -1,8 +1,6 @@
 package com.kstransfter.interfaces;
 
 
-import android.widget.AutoCompleteTextView;
-
 import com.google.gson.JsonObject;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
@@ -10,9 +8,7 @@ import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.UploadImage;
 import com.kstransfter.models.app.User;
-
 import java.util.Map;
-
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

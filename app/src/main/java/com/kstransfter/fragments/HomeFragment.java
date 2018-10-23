@@ -49,11 +49,11 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.JsonObject;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
+import com.kstransfter.adapters.GooglePlacesAutocompleteAdapter;
 import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
@@ -122,6 +122,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private String dropAddress;
     private TextView txtRideLater;
     private MainActivity mainActivity;
+    private GooglePlacesAutocompleteAdapter dataAdapter;
 
 
     @Nullable
@@ -154,31 +155,27 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         setCarAdapter();
-        //Show Current location:
         getCurrentLoction();
         try {
             initital();
-        } catch (Exception e) {
+           } catch (Exception e) {
             e.printStackTrace();
-        }
+         }
 
-
-        edtPickUpLine.setOnClickListener(v -> {
-          /*  try {
+        edtPickUpLine.setOnClickListener(v-> {
+            try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
               } catch (GooglePlayServicesRepairableException e) {
                 // TODO: Handle the error.
               } catch (GooglePlayServicesNotAvailableException e) {
                 // TODO: Handle the error.
-            }*/
-            wsCallingHere();
+             }
         });
-
 
         edtDropLine.setOnClickListener(v -> {
             try {
-                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(getActivity());
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE2);
             } catch (GooglePlayServicesRepairableException e) {
                 // TODO: Handle the error.
@@ -187,7 +184,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             }
 
         });
-
 
         imgCurrentLoaction.setOnClickListener(v -> {
             getCurrentLoction();
@@ -202,9 +198,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 if (carListModel.isSelected()) {
                     isSelectedCar = true;
                     break;
-                } else {
+                 } else {
                     continue;
-                }
+                 }
             }
 
             if (TextUtils.isEmpty(pickupAddress)) {
@@ -220,31 +216,34 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 llBeforeRide.setVisibility(View.GONE);
                 llRuning.setVisibility(View.VISIBLE);
                 llBottomAfterRide.setVisibility(View.VISIBLE);
-            }
+             }
         });
 
         txtRideLater.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext());
-        });
+          });
     }
 
     private void wsCallingHere() {
 //        progressDialog.show();
-
         Call loginWsCall = WsFactory.getAutoCompleteAddress(WsUtils.API_Key, "delhi");
         WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_FOR_AUOTOCOMPLETE_ADDRESS, new WsResponse() {
             @Override
             public void successResponse(Object response, int code) {
                 AutocompleteAddrees autocompleteAddrees = (AutocompleteAddrees) response;
-                Log.e("Response: ", "" + autocompleteAddrees);
+                ArrayList<String> descriptions = new ArrayList<>();
+                for (int i = 0; i < autocompleteAddrees.getPredictions().size(); i++) {
+                    descriptions.add(autocompleteAddrees.getPredictions().get(i).getDescription());
+                }
+//                edtPickUpLine.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, descriptions));
             }
 
             @Override
             public void failureRespons(Throwable error, int code) {
 //                Log.e("Error: ", "" + error);
-
             }
         });
+
     }
 
     private void setVisibleAndGone() {
@@ -294,7 +293,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                             }
                         });
 
-    }
+     }
 
     private void getCurrentLoction() {
         if (ActivityCompat.checkSelfPermission(getContext(),
@@ -576,6 +575,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     @Override
     public void initital() {
         mapFragment.getMapAsync(HomeFragment.this);
+        dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
     }
 
     @Override
@@ -593,7 +593,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 // The user canceled the operation.
                 Toast.makeText(getContext(), "Canceled:", Toast.LENGTH_SHORT).show();
             }
-
 
         } else if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE2) {
             if (resultCode == getActivity().RESULT_OK) {

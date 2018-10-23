@@ -3,12 +3,15 @@ package com.kstransfter.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.LinearLayout;
+
 import com.kstransfter.R;
 import com.kstransfter.utils.SessionManager;
 
 public class SplashActivity extends BaseActivity {
 
     private SessionManager sessionManager;
+    private LinearLayout llResendOtp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

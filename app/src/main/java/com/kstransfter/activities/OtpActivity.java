@@ -17,9 +17,9 @@ public class OtpActivity extends BaseActivity {
         setContentView(R.layout.activity_otp);
         try {
             initial();
-        } catch (Exception e) {
+         } catch (Exception e) {
             e.printStackTrace();
-        }
+         }
     }
 
     @Override
@@ -30,7 +30,7 @@ public class OtpActivity extends BaseActivity {
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        });
+         });
     }
 
 }

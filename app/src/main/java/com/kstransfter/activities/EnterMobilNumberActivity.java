@@ -2,9 +2,7 @@ package com.kstransfter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.kstransfter.R;
@@ -17,14 +15,13 @@ public class EnterMobilNumberActivity extends BaseActivity {
 
     private TextView txtNext;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_mobile_number);
         try {
             initial();
-        } catch (Exception e) {
+          } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -37,7 +34,7 @@ public class EnterMobilNumberActivity extends BaseActivity {
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        });
+         });
 
     }
 }

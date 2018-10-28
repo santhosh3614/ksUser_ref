@@ -85,7 +85,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.google.android.gms.maps.model.JointType.ROUND;
 
 public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
-    private static final String TAG = MapsActivity.class.getSimpleName();
+
+    private static final String TAG = HomeFragment.class.getSimpleName();
+
     private static final int REQUEST_LOCATION = 1111;
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
@@ -202,7 +204,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 if (carListModel.isSelected()) {
                     isSelectedCar = true;
                     break;
-                } else {
+                 } else {
                     continue;
                 }
             }

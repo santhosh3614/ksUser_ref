@@ -6,6 +6,7 @@ import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
+import com.kstransfter.models.app.SignUpModel;
 import com.kstransfter.models.app.UploadImage;
 
 import java.util.Map;
@@ -25,9 +26,16 @@ public class WsFactory {
 
     public static Call loginWsCall(Map<String, String> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<Login> loginCall = apiService.Login(map);
+        Call<Login> loginCall = apiService.login(map);
         return loginCall;
     }
+
+    public static Call signUp(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<SignUpModel> signUpModelCall = apiService.signUp(map);
+        return signUpModelCall;
+    }
+
 
     public static Call uplaodImage(MultipartBody.Part image, Map<String, RequestBody> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

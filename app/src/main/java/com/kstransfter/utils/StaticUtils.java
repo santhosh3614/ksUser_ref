@@ -26,7 +26,7 @@ public class StaticUtils {
     public static final String SHARED_PREF = "ah_firebase";
     public static final int REQUEST_FOR_MOVIE_RESPONSE = 5001;
     public static final int REQUEST_FOR_AUOTOCOMPLETE_ADDRESS = 5002;
-
+    public static final int REQUEST_SIGN_UP = 5003;
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {

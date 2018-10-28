@@ -8,6 +8,7 @@ import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
+import com.kstransfter.models.app.SignUpModel;
 import com.kstransfter.models.app.UploadImage;
 import com.kstransfter.models.app.User;
 
@@ -54,7 +55,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("LoginNew.php/")
-    Call<Login> Login(@FieldMap Map<String, String> fields);
+    Call<Login> login(@FieldMap Map<String, String> fields);
 
 
     @Headers("Content-type: application/json")
@@ -78,6 +79,11 @@ public interface ApiInterface {
     Call<AutocompleteAddrees> getAutocompleteAddress
             (@Query("key") String apiKey,
              @Query("input") String address);
+
+
+    @FormUrlEncoded
+    @POST("oauth/signup")
+    Call<SignUpModel> signUp(@FieldMap Map<String, String> fields);
 
 
 }

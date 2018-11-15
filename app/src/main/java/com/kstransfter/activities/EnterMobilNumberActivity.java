@@ -34,7 +34,7 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
         setContentView(R.layout.activity_enter_mobile_number);
         try {
             initial();
-           } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -58,15 +58,18 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
     @Override
     public void successResponse(Object response, int code) {
         progressDialog.cancel();
-        SignUpModel signUpModel = (SignUpModel) response;
-        if (signUpModel.getResponseCode() == 1) {
-            Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-          } else {
+        switch (code) {
+            case StaticUtils.REQUEST_SIGN_UP:
+                SignUpModel signUpModel = (SignUpModel) response;
+                if (signUpModel.getResponseCode() == 1) {
+                    Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else {
 
-         }
+                }
+        }
     }
 
     @Override

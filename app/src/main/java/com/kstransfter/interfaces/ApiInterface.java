@@ -1,13 +1,12 @@
 package com.kstransfter.interfaces;
 
 
-import android.widget.AutoCompleteTextView;
-
 import com.google.gson.JsonObject;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
+import com.kstransfter.models.app.ResendOtp;
 import com.kstransfter.models.app.SignUpModel;
 import com.kstransfter.models.app.UploadImage;
 import com.kstransfter.models.app.User;
@@ -84,6 +83,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("oauth/signup")
     Call<SignUpModel> signUp(@FieldMap Map<String, String> fields);
+
+    @FormUrlEncoded
+    @POST("oauth/resendotp")
+    Call<ResendOtp> resendOtp(@FieldMap Map<String, String> fields);
 
 
 }

@@ -23,17 +23,10 @@ public class WsFactory {
         return moviesResponseCall;
     }
 
-
     public static Call loginWsCall(Map<String, String> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<Login> loginCall = apiService.login(map);
         return loginCall;
-    }
-
-    public static Call signUp(Map<String, String> map) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<SignUpModel> signUpModelCall = apiService.signUp(map);
-        return signUpModelCall;
     }
 
 
@@ -56,5 +49,12 @@ public class WsFactory {
         Call<AutocompleteAddrees> getAutoCompleteAddress = apiService.getAutocompleteAddress(key, address);
         return getAutoCompleteAddress;
     }
+
+    public static Call signUp(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<SignUpModel> signUpModelCall = apiService.signUp(map);
+        return signUpModelCall;
+    }
+
 
 }

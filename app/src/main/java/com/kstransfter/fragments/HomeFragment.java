@@ -125,7 +125,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private TextView txtRideLater;
     private MainActivity mainActivity;
     private GooglePlacesAutocompleteAdapter dataAdapter;
-
+    private TextView txtContinue;
 
     @Nullable
     @Override
@@ -152,6 +152,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         edtDropLine = view.findViewById(R.id.edtDropLine);
         imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
         txtRideLater = view.findViewById(R.id.txtRideLater);
+        txtContinue = view.findViewById(R.id.txtContinue);
         mainActivity = (MainActivity) getActivity();
         setVisibleAndGone();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -160,19 +161,19 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         getCurrentLoction();
         try {
             initital();
-           } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-         }
+        }
 
-        edtPickUpLine.setOnClickListener(v-> {
+        edtPickUpLine.setOnClickListener(v -> {
             try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
-              } catch (GooglePlayServicesRepairableException e) {
+            } catch (GooglePlayServicesRepairableException e) {
                 // TODO: Handle the error.
-              } catch (GooglePlayServicesNotAvailableException e) {
+            } catch (GooglePlayServicesNotAvailableException e) {
                 // TODO: Handle the error.
-             }
+            }
         });
 
         edtDropLine.setOnClickListener(v -> {
@@ -200,9 +201,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 if (carListModel.isSelected()) {
                     isSelectedCar = true;
                     break;
-                 } else {
+                } else {
                     continue;
-                 }
+                }
             }
 
             if (TextUtils.isEmpty(pickupAddress)) {
@@ -218,12 +219,12 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 llBeforeRide.setVisibility(View.GONE);
                 llRuning.setVisibility(View.VISIBLE);
                 llBottomAfterRide.setVisibility(View.VISIBLE);
-             }
+            }
         });
 
         txtRideLater.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext());
-          });
+        });
     }
 
     private void wsCallingHere() {
@@ -295,7 +296,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                             }
                         });
 
-     }
+    }
 
     private void getCurrentLoction() {
         if (ActivityCompat.checkSelfPermission(getContext(),
@@ -576,6 +577,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
     @Override
     public void initital() {
+        txtContinue.setOnClickListener(v -> {
+            BookYourOutstationRide outstationRide = new BookYourOutstationRide();
+            mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRide.TAG, false);
+        });
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
     }

@@ -78,8 +78,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             closeNavigation();
             UpadateProfileFragment upadateProfileFragment = new UpadateProfileFragment();
             replaceFragmenr(upadateProfileFragment, upadateProfileFragment.getTag(), false);
-
-        });
+         });
 
         try {
             initial();

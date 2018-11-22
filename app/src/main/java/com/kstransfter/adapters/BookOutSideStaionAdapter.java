@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import com.kstransfter.R;
 import java.util.ArrayList;
 
-public class BookHistoryAdapter extends RecyclerView.Adapter<BookHistoryAdapter.BookHolder> {
+public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideStaionAdapter.BookHolder> {
 
     private Context context;
     private ArrayList<String> bookingHistory;
     private LayoutInflater layoutInflater;
 
-    public BookHistoryAdapter(Context context, ArrayList<String> bookingHistory) {
+    public BookOutSideStaionAdapter(Context context, ArrayList<String> bookingHistory) {
         this.context = context;
         this.bookingHistory = bookingHistory;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -24,7 +24,7 @@ public class BookHistoryAdapter extends RecyclerView.Adapter<BookHistoryAdapter.
     @NonNull
     @Override
     public BookHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new BookHolder(layoutInflater.inflate(R.layout.item_book_hostory,parent,false));
+        return new BookHolder(layoutInflater.inflate(R.layout.item_book_out_station,parent,false));
     }
 
     @Override

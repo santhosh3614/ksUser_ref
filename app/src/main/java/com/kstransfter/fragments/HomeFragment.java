@@ -51,7 +51,6 @@ import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
-import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.adapters.GooglePlacesAutocompleteAdapter;
 import com.kstransfter.interfaces.ApiInterface;
@@ -578,8 +577,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     @Override
     public void initital() {
         txtContinue.setOnClickListener(v -> {
-            BookYourOutstationRide outstationRide = new BookYourOutstationRide();
-            mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRide.TAG, false);
+            BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
+            mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
         });
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);

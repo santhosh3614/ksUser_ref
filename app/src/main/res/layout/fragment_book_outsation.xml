@@ -2,34 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/txtFrom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
         android:text="From Location" />
 
     <TextView
         android:id="@+id/txtTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
         android:text="To Location" />
 
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selsect Date and Time" />
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/txtStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="Selsect Start Date" />
+
+
+        <TextView
+            android:id="@+id/txtEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/_5sdp"
+            android:text="Selsect End Date" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/llOneTrip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,15 +66,17 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llRound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="one way" />
+                android:text="Round trip" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,14 +88,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
         android:text="Select vechile type" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp" />
 
 </LinearLayout>

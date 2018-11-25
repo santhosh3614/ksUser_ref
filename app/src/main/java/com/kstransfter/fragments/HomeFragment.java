@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
@@ -71,6 +72,7 @@ import com.kstransfter.webservice.WsUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -130,6 +132,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        Fabric.with(getContext(), new Crashlytics());
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -151,7 +154,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         edtDropLine = view.findViewById(R.id.edtDropLine);
         imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
         txtRideLater = view.findViewById(R.id.txtRideLater);
-        txtContinue = view.findViewById(R.id.txtContinue);
         mainActivity = (MainActivity) getActivity();
         setVisibleAndGone();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());

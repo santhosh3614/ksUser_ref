@@ -71,7 +71,8 @@
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:text="Local Rides"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txtOutSideRide"
@@ -83,7 +84,8 @@
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:text="Outside Rides"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
         </LinearLayout>
 

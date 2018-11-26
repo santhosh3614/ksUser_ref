@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
@@ -51,7 +52,6 @@ import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
-import com.kstransfter.activities.MapsActivity;
 import com.kstransfter.adapters.CarListAdapter;
 import com.kstransfter.adapters.GooglePlacesAutocompleteAdapter;
 import com.kstransfter.interfaces.ApiInterface;
@@ -72,6 +72,7 @@ import com.kstransfter.webservice.WsUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -125,12 +126,13 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private TextView txtRideLater;
     private MainActivity mainActivity;
     private GooglePlacesAutocompleteAdapter dataAdapter;
-
+    private TextView txtContinue;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        Fabric.with(getContext(), new Crashlytics());
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -160,19 +162,19 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         getCurrentLoction();
         try {
             initital();
-           } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-         }
+        }
 
-        edtPickUpLine.setOnClickListener(v-> {
+        edtPickUpLine.setOnClickListener(v -> {
             try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
-              } catch (GooglePlayServicesRepairableException e) {
+            } catch (GooglePlayServicesRepairableException e) {
                 // TODO: Handle the error.
-              } catch (GooglePlayServicesNotAvailableException e) {
+            } catch (GooglePlayServicesNotAvailableException e) {
                 // TODO: Handle the error.
-             }
+            }
         });
 
         edtDropLine.setOnClickListener(v -> {
@@ -200,9 +202,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 if (carListModel.isSelected()) {
                     isSelectedCar = true;
                     break;
-                 } else {
+                } else {
                     continue;
-                 }
+                }
             }
 
             if (TextUtils.isEmpty(pickupAddress)) {
@@ -218,12 +220,12 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 llBeforeRide.setVisibility(View.GONE);
                 llRuning.setVisibility(View.VISIBLE);
                 llBottomAfterRide.setVisibility(View.VISIBLE);
-             }
+            }
         });
 
         txtRideLater.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext());
-          });
+        });
     }
 
     private void wsCallingHere() {
@@ -295,7 +297,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                             }
                         });
 
-     }
+    }
 
     private void getCurrentLoction() {
         if (ActivityCompat.checkSelfPermission(getContext(),
@@ -576,6 +578,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
     @Override
     public void initital() {
+        txtContinue.setOnClickListener(v -> {
+            BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
+            mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
+        });
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
     }

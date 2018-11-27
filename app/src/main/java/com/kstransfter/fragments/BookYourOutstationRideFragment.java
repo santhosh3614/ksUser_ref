@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.adapters.BookOutSideStaionAdapter;
+import com.kstransfter.utils.PoupUtils;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class BookYourOutstationRideFragment extends BaseFragment {
 
     public static String TAG = BookYourOutstationRideFragment.class.getSimpleName();
     private RecyclerView rvItem;
-    private TextView txtFrom, txtTo, txtStart, txtEnd;
+    private TextView txtFrom, txtTo, txtStart, txtEnd, txtSelectLeave, txtReturnBy;
     private LinearLayout llOneTrip, llRound;
 
     @Nullable
@@ -41,10 +42,10 @@ public class BookYourOutstationRideFragment extends BaseFragment {
         rvItem = view.findViewById(R.id.rvItem);
         txtFrom = view.findViewById(R.id.txtFrom);
         txtTo = view.findViewById(R.id.txtTo);
-        txtStart = view.findViewById(R.id.txtStart);
-        txtEnd = view.findViewById(R.id.txtEnd);
         llOneTrip = view.findViewById(R.id.llOneTrip);
         llRound = view.findViewById(R.id.llRound);
+        txtSelectLeave = view.findViewById(R.id.txtSelectLeave);
+        txtReturnBy = view.findViewById(R.id.txtReturnBy);
         rvItem.setLayoutManager(new LinearLayoutManager(getContext()));
         try {
             initital();
@@ -55,6 +56,15 @@ public class BookYourOutstationRideFragment extends BaseFragment {
 
     @Override
     public void initital() {
+
+        txtSelectLeave.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext());
+        });
+
+        txtSelectLeave.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext());
+        });
+
 
         llOneTrip.setOnClickListener(v -> {
             Toast.makeText(getContext(), "One trip", Toast.LENGTH_SHORT).show();

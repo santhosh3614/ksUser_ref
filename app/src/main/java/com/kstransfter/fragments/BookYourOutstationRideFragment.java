@@ -1,32 +1,53 @@
 package com.kstransfter.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstransfter.R;
+import com.kstransfter.activities.MainActivity;
 import com.kstransfter.adapters.BookOutSideStaionAdapter;
+import com.kstransfter.models.app.CarListModel;
+import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.StaticUtils;
+import com.kstransfter.webservice.WsFactory;
+import com.kstransfter.webservice.WsResponse;
+import com.kstransfter.webservice.WsUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
 
 /**
  * Created by SONI on 11/18/2018.
  */
 
-public class BookYourOutstationRideFragment extends BaseFragment {
+public class BookYourOutstationRideFragment extends BaseFragment implements WsResponse {
 
     public static String TAG = BookYourOutstationRideFragment.class.getSimpleName();
     private RecyclerView rvItem;
-    private TextView txtFrom, txtTo, txtStart, txtEnd;
+    private TextView txtFrom, txtTo, txtStart, txtEnd, txtGetCar, txtLeaveDate, txtReturn;
     private LinearLayout llOneTrip, llRound;
+    private RecyclerView rvCarList;
+    private ImageView imgOneWay, imgRoundWay;
+    private CardView cardLeave, cardReturn;
+    private AlertDialog progressDialog;
+    private MainActivity mainActivity;
+
 
     @Nullable
     @Override
@@ -38,14 +59,25 @@ public class BookYourOutstationRideFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvItem = view.findViewById(R.id.rvItem);
         txtFrom = view.findViewById(R.id.txtFrom);
         txtTo = view.findViewById(R.id.txtTo);
         txtStart = view.findViewById(R.id.txtStart);
         txtEnd = view.findViewById(R.id.txtEnd);
         llOneTrip = view.findViewById(R.id.llOneTrip);
-        llRound = view.findViewById(R.id.llRound);
-        rvItem.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvCarList = view.findViewById(R.id.rvCarList);
+        llRound = view.findViewById(R.id.llRownd);
+        imgOneWay = view.findViewById(R.id.imgOneWay);
+        imgRoundWay = view.findViewById(R.id.imgRoundWay);
+        txtGetCar = view.findViewById(R.id.txtGetCar);
+        cardLeave = view.findViewById(R.id.cardLeave);
+        cardReturn = view.findViewById(R.id.cardReturn);
+        txtLeaveDate = view.findViewById(R.id.txtLeaveDate);
+        txtReturn = view.findViewById(R.id.txtReturn);
+        progressDialog = new SpotsDialog(getContext(), R.style.Custom);
+        mainActivity = (MainActivity) getActivity();
+        imgOneWay.setSelected(true);
+        cardReturn.setVisibility(View.GONE);
+        rvCarList.setLayoutManager(new LinearLayoutManager(getContext()));
         try {
             initital();
         } catch (Exception e) {
@@ -55,21 +87,66 @@ public class BookYourOutstationRideFragment extends BaseFragment {
 
     @Override
     public void initital() {
+        String strat = getArguments().getString("start");
+        String end = getArguments().getString("end");
+
+        cardLeave.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext(), txtLeaveDate);
+
+        });
+
+        cardReturn.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext(), txtReturn);
+        });
+
 
         llOneTrip.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "One trip", Toast.LENGTH_SHORT).show();
+            imgOneWay.setSelected(true);
+            imgRoundWay.setSelected(false);
+            cardReturn.setVisibility(View.GONE);
         });
+
         llRound.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Round trip", Toast.LENGTH_SHORT).show();
+            imgOneWay.setSelected(false);
+            imgRoundWay.setSelected(true);
+            cardReturn.setVisibility(View.VISIBLE);
         });
 
-        ArrayList<String> names = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            names.add("test");
+        txtGetCar.setOnClickListener(v -> {
+            progressDialog.show();
+            Map<String, String> map = new HashMap<>();
+            map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
+            map.put("dtReturningDateTime", "2018-11-24 11:11:00");
+            map.put("distance", "1234");
+            Call signUpWsCall = WsFactory.carList(map);
+            WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
+        });
+
+    }
+
+    @Override
+    public void successResponse(Object response, int code) {
+        progressDialog.cancel();
+        switch (code) {
+            case StaticUtils.REQUEST_CAR_LIST:
+                CarListModel carListModel = (CarListModel) response;
+                BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
+                    CarListModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
+                    ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
+                    mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
+                });
+                rvCarList.setAdapter(bookOutSideStaionAdapter);
+                break;
+            default:
+                break;
+
         }
-        BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), names, (v, pos) -> {
 
-        });
-        rvItem.setAdapter(bookOutSideStaionAdapter);
+    }
+
+    @Override
+    public void failureRespons(Throwable error, int code) {
+        progressDialog.cancel();
+
     }
 }

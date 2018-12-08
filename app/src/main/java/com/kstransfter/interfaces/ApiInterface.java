@@ -4,6 +4,7 @@ package com.kstransfter.interfaces;
 import com.google.gson.JsonObject;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
+import com.kstransfter.models.app.CarListModel;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.ResendOtp;
@@ -40,7 +41,6 @@ public interface ApiInterface {
                                  @Query("destination") String destination,
                                  @Query("key") String apiKey);
 
-
     @GET("movie/top_rated")
     Call<MoviesResponse> getTopRatedMovies(@Query("api_key") String apiKey);
 
@@ -74,6 +74,11 @@ public interface ApiInterface {
     @POST("uploadNew.php")
     Call<ResponseBody> postImage(@Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);*/
 
+
+   /*  @Multipart
+    @POST(WebServices.UPLOAD_SURVEY)
+    Call<UploadSurveyResponseModel> uploadSurvey(@Part MultipartBody.Part[] surveyImage, @Part MultipartBody.Part propertyImage, @Part("DRA") RequestBody dra)*/
+
     @GET("maps/api/place/autocomplete/json")
     Call<AutocompleteAddrees> getAutocompleteAddress
             (@Query("key") String apiKey,
@@ -87,6 +92,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("oauth/resendotp")
     Call<ResendOtp> resendOtp(@FieldMap Map<String, String> fields);
+
+
+    @FormUrlEncoded
+    @POST("oauth/getbookingcarlist")
+    Call<CarListModel> getCarList(@FieldMap Map<String, String> fields);
 
 
 }

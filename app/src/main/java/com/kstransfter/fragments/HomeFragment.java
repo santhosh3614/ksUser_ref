@@ -136,6 +136,13 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+
+    @Override
+    public void initital() {
+        mapFragment.getMapAsync(HomeFragment.this);
+        dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -154,6 +161,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         edtDropLine = view.findViewById(R.id.edtDropLine);
         imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
         txtRideLater = view.findViewById(R.id.txtRideLater);
+        txtContinue = view.findViewById(R.id.txtContinue);
         mainActivity = (MainActivity) getActivity();
         setVisibleAndGone();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -189,42 +197,31 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
         });
 
+        mainActivity.txtCenterTitle.setText("Select you location");
+        txtContinue.setOnClickListener(v -> {
+            String pickupPoint = edtPickUpLine.getText().toString().trim();
+            String endPoint = edtDropLine.getText().toString().trim();
+            if (TextUtils.isEmpty(pickupPoint)) {
+                PoupUtils.showAlertDailog(getActivity(), "Please select pickup point");
+            } else if (TextUtils.isEmpty(endPoint)) {
+                PoupUtils.showAlertDailog(getActivity(), "Please select end point");
+            } else {
+                BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("start", "");
+                bundle.putString("end", "");
+                outstationRide.setArguments(bundle);
+                mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
+            }
+        });
+
         imgCurrentLoaction.setOnClickListener(v -> {
             getCurrentLoction();
         });
 
-        txtRideNow.setOnClickListener(v -> {
-            pickupAddress = edtPickUpLine.getText().toString().trim();
-            dropAddress = edtDropLine.getText().toString().trim();
-            boolean isSelectedCar = false;
-            for (int i = 0; i < carListModels.size(); i++) {
-                CarListModel carListModel = carListModels.get(i);
-                if (carListModel.isSelected()) {
-                    isSelectedCar = true;
-                    break;
-                } else {
-                    continue;
-                }
-            }
-
-            if (TextUtils.isEmpty(pickupAddress)) {
-                Toast.makeText(getContext(), "Add pickup address", Toast.LENGTH_SHORT).show();
-            } else if (TextUtils.isEmpty(dropAddress)) {
-                Toast.makeText(getContext(), "Add drop address", Toast.LENGTH_SHORT).show();
-            } else if (!isSelectedCar) {
-                Toast.makeText(getContext(), "Pelase select at least a car", Toast.LENGTH_SHORT).show();
-            } else {
-                movecarSourcetoDesignation();
-                llDrop.setVisibility(View.GONE);
-                llPickUp.setVisibility(View.GONE);
-                llBeforeRide.setVisibility(View.GONE);
-                llRuning.setVisibility(View.VISIBLE);
-                llBottomAfterRide.setVisibility(View.VISIBLE);
-            }
-        });
 
         txtRideLater.setOnClickListener(v -> {
-            PoupUtils.showDatePicker(getContext());
+//            PoupUtils.showDatePicker(getContext());
         });
     }
 
@@ -355,11 +352,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         destination = destinationEditText.getText().toString();
         destination = destination.replace(" ", "+");
         Log.d(TAG, destination);
-        mapFragment.getMapAsync(HomeFragment.this);
     }
 
     private void setCarAdapter() {
-        carListModels.clear();
+      /*  carListModels.clear();
         for (int i = 0; i < 20; i++) {
             CarListModel carListModel = new CarListModel();
             carListModel.setCarName("car" + i);
@@ -371,7 +367,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 carListModels,
                 (view, pos) -> {
 
-                });
+                });*/
         rvCarList.setAdapter(carListAdapter);
     }
 
@@ -576,15 +572,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         }
     }
 
-    @Override
-    public void initital() {
-        txtContinue.setOnClickListener(v -> {
-            BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
-            mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
-        });
-        mapFragment.getMapAsync(HomeFragment.this);
-        dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

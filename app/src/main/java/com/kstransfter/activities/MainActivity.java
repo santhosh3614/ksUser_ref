@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public LinearLayout llCenterButton;
     public ImageView imgBack;
     public ImageView imgMenu;
-    public TextView txtLocalRides, txtOutSideRide, txtTitle;
+    public TextView txtLocalRides, txtOutSideRide, txtTitle, txtCenterTitle;
     private RelativeLayout rlGoForUpdate;
 
 
@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtOutSideRide = findViewById(R.id.txtOutSideRide);
         rlGoForUpdate = findViewById(R.id.rlGoForUpdate);
         txtTitle = findViewById(R.id.txtTitle);
+        txtCenterTitle = findViewById(R.id.txtCenterTitle);
 
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtLogOut.setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         imgMenu.setOnClickListener(this);
-            imgBack.setOnClickListener(this);
+        imgBack.setOnClickListener(this);
 
         txtLocalRides.setOnClickListener(v -> {
             Toast.makeText(this, "local ride", Toast.LENGTH_SHORT).show();
@@ -78,7 +79,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             closeNavigation();
             UpadateProfileFragment upadateProfileFragment = new UpadateProfileFragment();
             replaceFragmenr(upadateProfileFragment, upadateProfileFragment.getTag(), false);
-         });
+        });
 
         try {
             initial();

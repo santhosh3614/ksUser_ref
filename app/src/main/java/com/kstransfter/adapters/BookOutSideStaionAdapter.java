@@ -10,17 +10,19 @@ import android.widget.LinearLayout;
 
 import com.kstransfter.R;
 import com.kstransfter.interfaces.RvListeners;
+import com.kstransfter.models.app.CarListModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideStaionAdapter.BookHolder> {
 
     private Context context;
-    private ArrayList<String> bookingHistory;
+    private List<CarListModel.ResponseDatum> bookingHistory;
     private LayoutInflater layoutInflater;
     private RvListeners rvListeners;
 
-    public BookOutSideStaionAdapter(Context context, ArrayList<String> bookingHistory, RvListeners rvListeners) {
+    public BookOutSideStaionAdapter(Context context, List<CarListModel.ResponseDatum> bookingHistory, RvListeners rvListeners) {
         this.context = context;
         this.bookingHistory = bookingHistory;
         this.rvListeners = rvListeners;
@@ -35,11 +37,9 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
 
     @Override
     public void onBindViewHolder(@NonNull BookHolder holder, int position) {
-
         holder.llItem.setOnClickListener(v -> {
-
+            rvListeners.onItemclick(holder.itemView, position);
         });
-
     }
 
     @Override

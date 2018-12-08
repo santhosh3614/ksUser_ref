@@ -59,7 +59,8 @@
             android:layout_toLeftOf="@+id/imgNotification"
             android:layout_toRightOf="@+id/imageView"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txtLocalRides"
@@ -97,7 +98,7 @@
             android:fontFamily="@font/opensans_regular"
             android:text="asdasd"
             android:textColor="@color/white"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

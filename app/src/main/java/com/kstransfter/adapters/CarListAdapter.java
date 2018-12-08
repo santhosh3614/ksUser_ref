@@ -37,24 +37,6 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.BookHold
     @Override
     public void onBindViewHolder(@NonNull BookHolder holder, int position) {
 
-        if (carListModels.get(position).isSelected()) {
-            holder.llCar.setSelected(true);
-        } else {
-            holder.llCar.setSelected(false);
-        }
-
-        holder.llCar.setOnClickListener(v -> {
-            CarListModel carListModel = carListModels.get(position);
-            if (holder.llCar.isSelected()) {
-                carListModel.setSelected(false);
-            } else {
-                carListModel.setSelected(true);
-            }
-            carListModels.remove(position);
-            carListModels.add(position, carListModel);
-            notifyDataSetChanged();
-            rvListeners.onItemclick(holder.llCar, position);
-        });
 
     }
 

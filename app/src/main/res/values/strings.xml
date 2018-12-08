@@ -51,6 +51,8 @@
     <string name="plase_enter_your_mobile_number_to_proced">Plase enter your mobile \n number to proced</string>
     <string name="your_mobile">Your Mobile</string>
     <string name="full_name">Full Name</string>
+    <string name="leave_on">Leave On</string>
+    <string name="return_by">Return By</string>
 
     <string-array name="Qnty">
         <item>1</item>

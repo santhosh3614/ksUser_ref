@@ -25,6 +25,7 @@ import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,14 +40,15 @@ import retrofit2.Call;
 public class BookYourOutstationRideFragment extends BaseFragment implements WsResponse {
 
     public static String TAG = BookYourOutstationRideFragment.class.getSimpleName();
-    private RecyclerView rvItem;
-    private TextView txtFrom, txtTo, txtStart, txtEnd, txtGetCar, txtLeaveDate, txtReturn;
-    private LinearLayout llOneTrip, llRound;
+    private TextView txtFrom, txtTo, txtStart, txtEnd, txtLeaveDate, txtReturn;
     private RecyclerView rvCarList;
     private ImageView imgOneWay, imgRoundWay;
     private CardView cardLeave, cardReturn;
     private AlertDialog progressDialog;
     private MainActivity mainActivity;
+    private TextView txtSelectLeave, txtReturnBy;
+    private CardView cardOneWay, carRoundWay;
+    private TextView txtGetCarList;
 
 
     @Nullable
@@ -61,23 +63,43 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         super.onViewCreated(view, savedInstanceState);
         txtFrom = view.findViewById(R.id.txtFrom);
         txtTo = view.findViewById(R.id.txtTo);
-        txtStart = view.findViewById(R.id.txtStart);
-        txtEnd = view.findViewById(R.id.txtEnd);
-        llOneTrip = view.findViewById(R.id.llOneTrip);
         rvCarList = view.findViewById(R.id.rvCarList);
-        llRound = view.findViewById(R.id.llRownd);
         imgOneWay = view.findViewById(R.id.imgOneWay);
         imgRoundWay = view.findViewById(R.id.imgRoundWay);
-        txtGetCar = view.findViewById(R.id.txtGetCar);
+        txtGetCarList = view.findViewById(R.id.txtGetCarList);
         cardLeave = view.findViewById(R.id.cardLeave);
         cardReturn = view.findViewById(R.id.cardReturn);
         txtLeaveDate = view.findViewById(R.id.txtLeaveDate);
         txtReturn = view.findViewById(R.id.txtReturn);
+
+        cardOneWay = view.findViewById(R.id.cardOneWay);
+        carRoundWay = view.findViewById(R.id.carRoundWay);
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
         mainActivity = (MainActivity) getActivity();
         imgOneWay.setSelected(true);
         cardReturn.setVisibility(View.GONE);
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext()));
+        cardOneWay.setOnClickListener(v -> {
+            imgOneWay.setSelected(true);
+            imgRoundWay.setSelected(false);
+            cardReturn.setVisibility(View.GONE);
+        });
+        carRoundWay.setOnClickListener(v -> {
+            imgOneWay.setSelected(false);
+            imgRoundWay.setSelected(true);
+            cardReturn.setVisibility(View.VISIBLE);
+        });
+
+        txtGetCarList.setOnClickListener(v -> {
+            progressDialog.show();
+            Map<String, String> map = new HashMap<>();
+            map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
+            map.put("dtReturningDateTime", "2018-11-24 11:11:00");
+            map.put("distance", "1234");
+            Call signUpWsCall = WsFactory.carList(map);
+            WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
+        });
+
         try {
             initital();
         } catch (Exception e) {
@@ -100,27 +122,14 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         });
 
 
-        llOneTrip.setOnClickListener(v -> {
-            imgOneWay.setSelected(true);
-            imgRoundWay.setSelected(false);
-            cardReturn.setVisibility(View.GONE);
+        txtSelectLeave.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext(), txtLeaveDate);
         });
 
-        llRound.setOnClickListener(v -> {
-            imgOneWay.setSelected(false);
-            imgRoundWay.setSelected(true);
-            cardReturn.setVisibility(View.VISIBLE);
+        txtSelectLeave.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(getContext(), txtReturn);
         });
 
-        txtGetCar.setOnClickListener(v -> {
-            progressDialog.show();
-            Map<String, String> map = new HashMap<>();
-            map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
-            map.put("dtReturningDateTime", "2018-11-24 11:11:00");
-            map.put("distance", "1234");
-            Call signUpWsCall = WsFactory.carList(map);
-            WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
-        });
 
     }
 

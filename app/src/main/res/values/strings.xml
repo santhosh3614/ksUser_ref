@@ -53,6 +53,7 @@
     <string name="full_name">Full Name</string>
     <string name="leave_on">Leave On</string>
     <string name="return_by">Return By</string>
+    <string name="hide_fare_details">Hide Fare Details</string>
 
     <string-array name="Qnty">
         <item>1</item>

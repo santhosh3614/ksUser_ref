@@ -212,16 +212,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 Bundle bundle = new Bundle();
                 bundle.putString("pickupPoint", pickupPoint);
                 bundle.putString("endPoint", endPoint);
-                if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
-                    BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
-                    outstationRide.setArguments(bundle);
-                    mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
-                } else {
-                    DriverListFragment driverListFragment = new DriverListFragment();
-                    driverListFragment.setArguments(bundle);
-                    mainActivity.replaceFragmenr(driverListFragment, DriverListFragment.TAG, false);
-                }
-             }
+                BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
+                outstationRide.setArguments(bundle);
+                mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
+            }
         });
 
         imgCurrentLoaction.setOnClickListener(v -> {

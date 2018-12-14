@@ -1,5 +1,6 @@
 package com.kstransfter.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,22 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.adapters.BookOutSideStaionAdapter;
 import com.kstransfter.models.app.CarListModel;
 import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.SessionManager;
 import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +47,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     private TextView txtSelectLeave, txtReturnBy;
     private CardView cardOneWay, carRoundWay;
     private TextView txtGetCarList;
-
+    private SessionManager sessionManager;
 
     @Nullable
     @Override
@@ -58,6 +56,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         return inflater.inflate(R.layout.fragment_book_outsation, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -71,11 +70,12 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         cardReturn = view.findViewById(R.id.cardReturn);
         txtLeaveDate = view.findViewById(R.id.txtLeaveDate);
         txtReturn = view.findViewById(R.id.txtReturn);
-
         cardOneWay = view.findViewById(R.id.cardOneWay);
         carRoundWay = view.findViewById(R.id.carRoundWay);
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
         mainActivity = (MainActivity) getActivity();
+        sessionManager = new SessionManager(mainActivity);
+
         imgOneWay.setSelected(true);
         cardReturn.setVisibility(View.GONE);
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -89,20 +89,30 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             imgRoundWay.setSelected(true);
             cardReturn.setVisibility(View.VISIBLE);
         });
+        if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
+            txtGetCarList.setText("Get Car List");
+        } else {
+            txtGetCarList.setText("Get Driver List");
+        }
 
         txtGetCarList.setOnClickListener(v -> {
-            progressDialog.show();
-            Map<String, String> map = new HashMap<>();
-            map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
-            map.put("dtReturningDateTime", "2018-11-24 11:11:00");
-            map.put("distance", "1234");
-            Call signUpWsCall = WsFactory.carList(map);
-            WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
-        });
-
+            String value = txtGetCarList.getText().toString().trim();
+            if (value.equalsIgnoreCase("Get Car List")) {
+                progressDialog.show();
+                Map<String, String> map = new HashMap<>();
+                map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
+                map.put("dtReturningDateTime", "2018-11-24 11:11:00");
+                map.put("distance", "1234");
+                Call signUpWsCall = WsFactory.carList(map);
+                WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
+            } else if (value.equalsIgnoreCase("Get Driver List")) {
+                DriverListFragment driverListFragment = new DriverListFragment();
+                mainActivity.replaceFragmenr(driverListFragment, DriverListFragment.TAG, false);
+            }
+         });
         try {
             initital();
-        } catch (Exception e) {
+         } catch (Exception e) {
             e.printStackTrace();
         }
     }

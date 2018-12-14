@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.kstransfter.R;
 import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 

@@ -64,6 +64,7 @@ import com.kstransfter.models.events.CurrentJourneyEvent;
 import com.kstransfter.models.events.EndJourneyEvent;
 import com.kstransfter.utils.JourneyEventBus;
 import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.SessionManager;
 import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
@@ -127,6 +128,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private MainActivity mainActivity;
     private GooglePlacesAutocompleteAdapter dataAdapter;
     private TextView txtContinue;
+    private SessionManager sessionManager;
 
     @Nullable
     @Override
@@ -141,6 +143,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     public void initital() {
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
+        sessionManager = new SessionManager(getContext());
     }
 
     @Override
@@ -206,13 +209,19 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             } else if (TextUtils.isEmpty(endPoint)) {
                 PoupUtils.showAlertDailog(getActivity(), "Please select end point");
             } else {
-                BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("start", "");
-                bundle.putString("end", "");
-                outstationRide.setArguments(bundle);
-                mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
-            }
+                bundle.putString("pickupPoint", pickupPoint);
+                bundle.putString("endPoint", endPoint);
+                if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
+                    BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
+                    outstationRide.setArguments(bundle);
+                    mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
+                } else {
+                    DriverListFragment driverListFragment = new DriverListFragment();
+                    driverListFragment.setArguments(bundle);
+                    mainActivity.replaceFragmenr(driverListFragment, DriverListFragment.TAG, false);
+                }
+             }
         });
 
         imgCurrentLoaction.setOnClickListener(v -> {

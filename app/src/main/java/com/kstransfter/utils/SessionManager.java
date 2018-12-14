@@ -17,8 +17,9 @@ public class SessionManager {
     private static final String PREF_NAME = "AndroidHivePref";
     private static final String IS_LOGIN = "IsLoggedIn";
     public static final String KEY_NAME = "name";
-    // Email address (make variable public to access from outside)
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_USER_TYPE = "user_type";
+
 
     // Constructor
     public SessionManager(Context context) {
@@ -28,47 +29,38 @@ public class SessionManager {
     }
 
 
+    public void checkLogin() {
+        if (!this.isLoggedIn()) {
+            Intent i = new Intent(_context, LoginActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            _context.startActivity(i);
+        }
+    }
+
+    public HashMap<String, String> getUserDetails() {
+        HashMap<String, String> user = new HashMap<String, String>();
+        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+        return user;
+    }
+
+    public void logoutUser() {
+        editor.clear();
+        editor.commit();
+    }
+
     public void setLoginTrue() {
         editor.putBoolean(IS_LOGIN, true);
         editor.commit();
     }
 
+    public String getSearchType() {
+        return pref.getString(KEY_USER_TYPE, "");
+     }
 
-    public void checkLogin() {
-        // Check login status
-        if (!this.isLoggedIn()) {
-            // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, LoginActivity.class);
-            // Closing all the Activities
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            // Add new Flag to start new Activity
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            // Staring Login Activity
-            _context.startActivity(i);
-        }
-
-    }
-
-    public HashMap<String, String> getUserDetails() {
-        HashMap<String, String> user = new HashMap<String, String>();
-        // user name
-        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
-
-        // user email id
-        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
-
-        // return user
-        return user;
-    }
-
-    /**
-     * Clear session details
-     */
-    public void logoutUser() {
-        // Clearing all data from Shared Preferences
-        editor.clear();
+    public void setSearchType(String searchType) {
+        editor.putString(KEY_USER_TYPE, searchType);
         editor.commit();
     }
 

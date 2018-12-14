@@ -6,12 +6,15 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.kstransfter.R;
+import com.kstransfter.utils.SessionManager;
 
 public class HomeActivity extends BaseActivity {
     //Change home..
     private LinearLayout llCar, llBookDriver;
     private ImageView imgMenu, imgBack;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,8 +35,10 @@ public class HomeActivity extends BaseActivity {
         imgBack = findViewById(R.id.imgBack);
         imgMenu.setVisibility(View.GONE);
         imgBack.setVisibility(View.VISIBLE);
+        sessionManager = new SessionManager(this);
 
         llCar.setOnClickListener(v -> {
+            sessionManager.setSearchType("Car");
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -41,7 +46,8 @@ public class HomeActivity extends BaseActivity {
         });
 
         llBookDriver.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, DriverListActivity.class);
+            sessionManager.setSearchType("Driver");
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

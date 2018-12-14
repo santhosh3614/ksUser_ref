@@ -54,6 +54,11 @@
     <string name="leave_on">Leave On</string>
     <string name="return_by">Return By</string>
     <string name="hide_fare_details">Hide Fare Details</string>
+    <string name="enter_your_mobile_no">Enter Your mobile no</string>
+    <string name="enter_your_emai_id">Enter Your Emai id</string>
+    <string name="enter_your_home_address">Enter Your Home Address</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="confirm_booking">Confirm Booking</string>
 
     <string-array name="Qnty">
         <item>1</item>

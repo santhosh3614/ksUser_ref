@@ -9,12 +9,12 @@ import android.widget.ImageView;
 
 import com.kstransfter.R;
 import com.kstransfter.adapters.DriverListAdapter;
-import com.kstransfter.interfaces.RvListeners;
+import com.kstransfter.fragments.DriverDetailsFragment;
 import com.kstransfter.models.app.Driver;
 
 import java.util.ArrayList;
 
-public class DriverListActivity extends BaseActivity implements RvListeners {
+public class DriverListActivity extends BaseActivity {
 
     private ImageView imgMenu, imgBack;
     private RecyclerView rvDriverList;
@@ -45,16 +45,13 @@ public class DriverListActivity extends BaseActivity implements RvListeners {
             driver.setName("exp:  6 years");
             drivers.add(driver);
         }
-        DriverListAdapter driverListAdapter = new DriverListAdapter(this, drivers, this);
+        DriverListAdapter driverListAdapter = new DriverListAdapter(this, drivers, (view, pos) -> {
+            replaceFragmenr(DriverDetailsFragment.getInstance(), DriverDetailsFragment.TAG, false);
+        });
         rvDriverList.setAdapter(driverListAdapter);
-
         imgBack.setOnClickListener(v -> {
             super.onBackPressed();
         });
     }
 
-    @Override
-    public void onItemclick(View view, int pos) {
-
-    }
 }

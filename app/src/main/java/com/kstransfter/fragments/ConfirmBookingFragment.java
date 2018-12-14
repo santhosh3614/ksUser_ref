@@ -17,8 +17,9 @@ import com.kstransfter.R;
 
 public class ConfirmBookingFragment extends BaseFragment {
 
-    private TextView txtHide;
-    private LinearLayout llDetails;
+    private TextView txtHideAndShow;
+    private LinearLayout llFairDetails;
+
 
     @Nullable
     @Override
@@ -30,25 +31,24 @@ public class ConfirmBookingFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        txtHide = view.findViewById(R.id.txtHide);
-        llDetails = view.findViewById(R.id.llDetails);
+        txtHideAndShow = view.findViewById(R.id.txtHideAndShow);
+        llFairDetails = view.findViewById(R.id.llFairDetails);
         try {
             initital();
-           } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void initital() {
-        txtHide.setOnClickListener(v -> {
-            if (txtHide.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
-                llDetails.setVisibility(View.GONE);
-                txtHide.setText("Show Fare Details");
+        txtHideAndShow.setOnClickListener(v -> {
+            if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
+                txtHideAndShow.setText("Show Fare Details");
+                llFairDetails.setVisibility(View.GONE);
             } else {
-                llDetails.setVisibility(View.VISIBLE);
-                txtHide.setText("Hide Fare Details");
+                txtHideAndShow.setText("Hide Fare Details");
+                llFairDetails.setVisibility(View.VISIBLE);
             }
         });
     }

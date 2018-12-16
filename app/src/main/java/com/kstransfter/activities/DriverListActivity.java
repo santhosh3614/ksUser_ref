@@ -18,7 +18,6 @@ public class DriverListActivity extends BaseActivity {
 
     private ImageView imgMenu, imgBack;
     private RecyclerView rvDriverList;
-    private ArrayList<Driver> drivers = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class DriverListActivity extends BaseActivity {
         imgBack.setVisibility(View.VISIBLE);
         rvDriverList = findViewById(R.id.rvDriverList);
         rvDriverList.setLayoutManager(new LinearLayoutManager(this));
-        for (int i = 0; i < 5; i++) {
+     /*   for (int i = 0; i < 5; i++) {
             Driver driver = new Driver();
             driver.setName("rahul Kumar");
             driver.setName("exp:  6 years");
@@ -47,8 +46,8 @@ public class DriverListActivity extends BaseActivity {
         }
         DriverListAdapter driverListAdapter = new DriverListAdapter(this, drivers, (view, pos) -> {
             replaceFragmenr(DriverDetailsFragment.getInstance(), DriverDetailsFragment.TAG, false);
-        });
-        rvDriverList.setAdapter(driverListAdapter);
+        });*/
+//        rvDriverList.setAdapter(driverListAdapter);
         imgBack.setOnClickListener(v -> {
             super.onBackPressed();
         });

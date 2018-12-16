@@ -3,28 +3,32 @@ package com.kstransfter.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.kstransfter.R;
 import com.kstransfter.interfaces.RvListeners;
-import com.kstransfter.models.app.CarListModel;
+import com.kstransfter.models.app.CarListtModel;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideStaionAdapter.BookHolder> {
 
     private Context context;
-    private List<CarListModel.ResponseDatum> bookingHistory;
+    private List<CarListtModel.ResponseDatum> responseDatumList;
     private LayoutInflater layoutInflater;
     private RvListeners rvListeners;
 
-    public BookOutSideStaionAdapter(Context context, List<CarListModel.ResponseDatum> bookingHistory, RvListeners rvListeners) {
+
+    public BookOutSideStaionAdapter(Context context, List<CarListtModel.ResponseDatum> responseDatumList, RvListeners rvListeners) {
         this.context = context;
-        this.bookingHistory = bookingHistory;
+        this.responseDatumList = responseDatumList;
         this.rvListeners = rvListeners;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -37,24 +41,37 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
 
     @Override
     public void onBindViewHolder(@NonNull BookHolder holder, int position) {
+        CarListtModel.ResponseDatum responseDatum = responseDatumList.get(position);
         holder.llItem.setOnClickListener(v -> {
             rvListeners.onItemclick(holder.itemView, position);
         });
+        if (responseDatum.getVDriverName() != null) {
+            holder.txtCar.setText(responseDatum.getVDriverName().toString());
+        }
+        if (responseDatum.getTotalPrice() != null) {
+            holder.txtPrice.setText(responseDatum.getTotalPrice().toString());
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return bookingHistory.size();
+        return responseDatumList.size();
     }
 
     class BookHolder extends RecyclerView.ViewHolder {
         private LinearLayout llItem;
+        private ImageView imgCar;
+        private TextView txtCar, txtDate, txtPrice;
 
         public BookHolder(View view) {
             super(view);
             llItem = view.findViewById(R.id.llItem);
+            txtCar = view.findViewById(R.id.txtCar);
+            txtDate = view.findViewById(R.id.txtDate);
+            txtPrice = view.findViewById(R.id.txtPrice);
+            imgCar = view.findViewById(R.id.imgCar);
         }
     }
-
 
 }

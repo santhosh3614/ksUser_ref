@@ -21,6 +21,7 @@
     <color name="green_circle">#5BB225</color>
     <color name="defaultTextColor">@android:color/black</color>
     <color name="green_text">#19B76F</color>
+    <color name="backgraund">#D6DFE6</color>
 
 
 </resources>

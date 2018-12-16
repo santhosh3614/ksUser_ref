@@ -112,11 +112,13 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtFrom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="sdasdasd" />
 
                 <TextView
+                    android:id="@+id/txtTo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="sdasdasd"
@@ -145,6 +147,7 @@
                 android:text="Leave on" />
 
             <TextView
+                android:id="@+id/txtLeaveDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -166,6 +169,7 @@
                 android:text="Return by" />
 
             <TextView
+                android:id="@+id/txtRetrurnBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -212,6 +216,7 @@
                 android:layout_alignParentRight="true">
 
                 <TextView
+                    android:id="@+id/txtPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="RS 5470"

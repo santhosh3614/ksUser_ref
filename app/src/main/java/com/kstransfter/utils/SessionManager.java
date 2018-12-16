@@ -19,6 +19,9 @@ public class SessionManager {
     public static final String KEY_NAME = "name";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_USER_TYPE = "user_type";
+    public static final String KEY_FROM = "from";
+    public static final String KEY_TO = "to";
+    public static final String KEY_DISTANCE = "distance";
 
 
     // Constructor
@@ -57,10 +60,37 @@ public class SessionManager {
 
     public String getSearchType() {
         return pref.getString(KEY_USER_TYPE, "");
-     }
+    }
 
     public void setSearchType(String searchType) {
         editor.putString(KEY_USER_TYPE, searchType);
+        editor.commit();
+    }
+
+    public String getDistance() {
+        return pref.getString(KEY_DISTANCE, "");
+    }
+
+    public void setDistance(String searchType) {
+        editor.putString(KEY_DISTANCE, searchType);
+        editor.commit();
+    }
+
+    public String getFrom() {
+        return pref.getString(KEY_FROM, "");
+    }
+
+    public void setFrom(String searchType) {
+        editor.putString(KEY_FROM, searchType);
+        editor.commit();
+    }
+
+    public String getTo() {
+        return pref.getString(KEY_TO, "");
+    }
+
+    public void setTo(String searchType) {
+        editor.putString(KEY_TO, searchType);
         editor.commit();
     }
 

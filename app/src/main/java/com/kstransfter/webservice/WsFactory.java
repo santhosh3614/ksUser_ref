@@ -4,7 +4,8 @@ import com.google.gson.JsonObject;
 import com.kstransfter.interfaces.ApiClient;
 import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.AutocompleteAddrees;
-import com.kstransfter.models.app.CarListModel;
+import com.kstransfter.models.app.CarListtModel;
+import com.kstransfter.models.app.DriverListModel;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.SignUpModel;
@@ -59,9 +60,16 @@ public class WsFactory {
 
     public static Call carList(Map<String, String> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<CarListModel> signUpModelCall = apiService.getCarList(map);
+        Call<CarListtModel> signUpModelCall = apiService.getCarList(map);
         return signUpModelCall;
     }
+
+    public static Call driverList(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<DriverListModel> signUpModelCall = apiService.getDriverList(map);
+        return signUpModelCall;
+    }
+
 
 
 }

@@ -10,18 +10,18 @@ import android.widget.LinearLayout;
 
 import com.kstransfter.R;
 import com.kstransfter.interfaces.RvListeners;
-import com.kstransfter.models.app.CarListModel;
+import com.kstransfter.models.app.CarListtModel;
 
 import java.util.ArrayList;
 
 public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.BookHolder> {
 
     private Context context;
-    private ArrayList<CarListModel> carListModels;
+    private ArrayList<CarListtModel> carListModels;
     private LayoutInflater layoutInflater;
     private RvListeners rvListeners;
 
-    public CarListAdapter(Context context, ArrayList<CarListModel> carListModels, RvListeners rvListeners) {
+    public CarListAdapter(Context context, ArrayList<CarListtModel> carListModels, RvListeners rvListeners) {
         this.context = context;
         this.carListModels = carListModels;
         this.rvListeners = rvListeners;

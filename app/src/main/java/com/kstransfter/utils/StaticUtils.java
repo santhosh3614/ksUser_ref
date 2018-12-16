@@ -29,6 +29,7 @@ public class StaticUtils {
     public static final int REQUEST_SIGN_UP = 5003;
     public static final int REQUEST_OTP_SEND_PASSWORD = 5004;
     public static final int REQUEST_CAR_LIST = 5004;
+    public static final int REQUEST_DRIVER_LIST = 5005;
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {
@@ -47,6 +48,28 @@ public class StaticUtils {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         return email.matches(emailPattern);
     }
+//given in km
+    public static double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515*2;
+        return (dist);
+    }
+
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private static double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
 
     /*public GeoPoint getLocationFromAddress(Context context, String strAddress){
 

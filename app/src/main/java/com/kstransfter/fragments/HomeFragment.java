@@ -58,7 +58,7 @@ import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.Route;
-import com.kstransfter.models.app.CarListModel;
+import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.models.events.BeginJourneyEvent;
 import com.kstransfter.models.events.CurrentJourneyEvent;
 import com.kstransfter.models.events.EndJourneyEvent;
@@ -110,7 +110,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private Disposable disposable;
     private TextView txtRideNow;
     private RecyclerView rvCarList;
-    private ArrayList<CarListModel> carListModels = new ArrayList<>();
+    private ArrayList<CarListtModel> carListModels = new ArrayList<>();
     private CarListAdapter carListAdapter;
     private TextView txtCallDriver;
     private RelativeLayout llRuning, rlcarAndDriver;
@@ -197,10 +197,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             } catch (GooglePlayServicesNotAvailableException e) {
                 // TODO: Handle the error.
             }
-
         });
 
         mainActivity.txtCenterTitle.setText("Select you location");
+
         txtContinue.setOnClickListener(v -> {
             String pickupPoint = edtPickUpLine.getText().toString().trim();
             String endPoint = edtDropLine.getText().toString().trim();
@@ -212,11 +212,14 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 Bundle bundle = new Bundle();
                 bundle.putString("pickupPoint", pickupPoint);
                 bundle.putString("endPoint", endPoint);
+                double distance = StaticUtils.distance(lat1, log1, lat2, log2);
+                sessionManager.setDistance(distance + "");
                 BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
                 outstationRide.setArguments(bundle);
                 mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
             }
         });
+
 
         imgCurrentLoaction.setOnClickListener(v -> {
             getCurrentLoction();
@@ -576,6 +579,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     }
 
 
+    private double lat1, log1, lat2, log2;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE1) {
@@ -584,11 +589,12 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 edtPickUpLine.setText(place.getAddress());
                 this.latitude = place.getLatLng().latitude;
                 this.longitude = place.getLatLng().longitude;
+                lat1 = latitude;
+                log1 = longitude;
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getContext(), data);
                 Log.i(TAG, status.getStatusMessage());
             } else if (resultCode == getActivity().RESULT_CANCELED) {
-                // The user canceled the operation.
                 Toast.makeText(getContext(), "Canceled:", Toast.LENGTH_SHORT).show();
             }
 
@@ -596,12 +602,13 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             if (resultCode == getActivity().RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(getContext(), data);
                 edtDropLine.setText(place.getAddress());
+                lat2 = place.getLatLng().latitude;
+                log2 = place.getLatLng().longitude;
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getContext(), data);
                 Log.i(TAG, status.getStatusMessage());
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 // The user canceled the operation.
-                Toast.makeText(getContext(), "Canceled:", Toast.LENGTH_SHORT).show();
             }
         }
     }

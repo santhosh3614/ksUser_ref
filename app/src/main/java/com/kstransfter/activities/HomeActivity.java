@@ -22,9 +22,9 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         try {
             initial();
-        } catch (Exception e) {
+          } catch (Exception e) {
             e.printStackTrace();
-        }
+         }
     }
 
     @Override
@@ -34,7 +34,6 @@ public class HomeActivity extends BaseActivity {
         imgMenu = findViewById(R.id.imgMenu);
         imgBack = findViewById(R.id.imgBack);
         imgMenu.setVisibility(View.GONE);
-        imgBack.setVisibility(View.VISIBLE);
         sessionManager = new SessionManager(this);
 
         llCar.setOnClickListener(v -> {

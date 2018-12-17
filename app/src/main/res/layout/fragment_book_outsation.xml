@@ -35,7 +35,7 @@
                         android:layout_height="@dimen/_5sdp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_5sdp"
-                        android:background="@drawable/red_circular" />
+                        android:background="@drawable/green_circular" />
 
                     <TextView
                         android:id="@+id/txtFrom"
@@ -66,7 +66,7 @@
                         android:layout_height="@dimen/_5sdp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_5sdp"
-                        android:background="@drawable/green_circular" />
+                        android:background="@drawable/red_circular" />
 
                     <TextView
                         android:id="@+id/txtTo"
@@ -74,11 +74,16 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
                         android:text="From Location" />
-
                 </LinearLayout>
-
-
             </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_line"
+                android:padding="@dimen/_5sdp"
+                android:text="Select your date and time" />
 
 
             <RelativeLayout
@@ -205,25 +210,17 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/opensans_semibold"
-                                    android:text="one way"
+                                    android:text="Round trip"
                                     android:textColor="@color/colorPrimary" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="get dropped off" />
+                                    android:text="@string/keep_car_till_return" />
                             </LinearLayout>
-
-
                         </RelativeLayout>
-
-
                     </LinearLayout>
-
-
                 </android.support.v7.widget.CardView>
-
-
             </RelativeLayout>
 
             <android.support.v7.widget.CardView
@@ -249,7 +246,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:drawableRight="@drawable/arrow"
                         android:gravity="center"
                         android:padding="@dimen/_5sdp"
                         android:text="Select"
@@ -285,24 +281,71 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:drawableRight="@drawable/arrow"
                         android:gravity="center"
                         android:padding="@dimen/_5sdp"
                         android:text="Select"
                         android:textColor="@color/colorPrimary" />
-
-
                 </RelativeLayout>
-
             </android.support.v7.widget.CardView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_line"
+                android:padding="@dimen/_5sdp"
+                android:text="Select vechile type" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/rlLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/location_pin" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/rlLocation"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="one way raund trip about 270km"
+                        android:textColor="@color/green" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/check"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:text="No pre payment requirmnet"
+                        android:textColor="@color/green" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/check"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:text="one way raund trip"
+                        android:textColor="@color/green" />
+
+                </LinearLayout>
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvCarList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_5sdp" />
+
+
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
     <TextView

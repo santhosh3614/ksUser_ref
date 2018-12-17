@@ -3,7 +3,6 @@ package com.kstransfter.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
     private List<CarListtModel.ResponseDatum> responseDatumList;
     private LayoutInflater layoutInflater;
     private RvListeners rvListeners;
-
 
     public BookOutSideStaionAdapter(Context context, List<CarListtModel.ResponseDatum> responseDatumList, RvListeners rvListeners) {
         this.context = context;

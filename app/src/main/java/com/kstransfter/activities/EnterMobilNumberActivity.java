@@ -44,15 +44,22 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
         progressDialog = new SpotsDialog(this, R.style.Custom);
         txtNext = findViewById(R.id.txtNext);
         txtNext.setOnClickListener(v -> {
-            progressDialog.show();
-            Map<String, String> map = new HashMap<>();
-            map.put("iMobileExtension", "91");
-            map.put("vMobileno", "9584288185");
-            map.put("txDeviceToken", "sdfnsdfkjkdnf");
-            map.put("eDeviceType", "Android");
-            Call signUpWsCall = WsFactory.signUp(map);
-            WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_SIGN_UP, this);
-        });
+            Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+         });
+    }
+
+    private void otpGet() {
+        progressDialog.show();
+        Map<String, String> map = new HashMap<>();
+        map.put("iMobileExtension", "91");
+        map.put("vMobileno", "9584288185");
+        map.put("txDeviceToken", "sdfnsdfkjkdnf");
+        map.put("eDeviceType", "Android");
+        Call signUpWsCall = WsFactory.signUp(map);
+        WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_SIGN_UP, this);
     }
 
     @Override

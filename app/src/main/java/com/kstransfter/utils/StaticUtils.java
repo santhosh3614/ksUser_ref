@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.kstransfter.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 public class StaticUtils {
 
@@ -48,7 +52,8 @@ public class StaticUtils {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         return email.matches(emailPattern);
     }
-//given in km
+
+    //given in km
     public static double distance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;
         double dist = Math.sin(deg2rad(lat1))
@@ -58,7 +63,7 @@ public class StaticUtils {
                 * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
         dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515*2;
+        dist = dist * 60 * 1.1515 * 2;
         return (dist);
     }
 
@@ -70,30 +75,10 @@ public class StaticUtils {
         return (rad * 180.0 / Math.PI);
     }
 
-
-    /*public GeoPoint getLocationFromAddress(Context context, String strAddress){
-
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        GeoPoint p1 = null;
-
-        try {
-            address = coder.getFromLocationName(strAddress,5);
-            if (address==null) {
-                return null;
-            }
-            Address location=address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-
-            p1 = new GeoPoint((double) (location.getLatitude() * 1E6),
-                    (double) (location.getLongitude() * 1E6));
-
-            return p1;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static String getDateAndTime() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Calendar cal = Calendar.getInstance();
+        return dateFormat.format(cal.getTime());
     }
-*/
 
 }

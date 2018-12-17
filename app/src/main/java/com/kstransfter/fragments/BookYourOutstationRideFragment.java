@@ -25,7 +25,9 @@ import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
@@ -90,32 +92,34 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             imgRoundWay.setSelected(true);
             cardReturn.setVisibility(View.VISIBLE);
         });
+
         if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
             txtGetCarList.setText("Get Car List");
+            txtGetCarList.setVisibility(View.GONE);
         } else {
             txtGetCarList.setText("Get Driver List");
+            txtGetCarList.setVisibility(View.VISIBLE);
         }
 
         txtGetCarList.setOnClickListener(v -> {
-            String value = txtGetCarList.getText().toString().trim();
-            if (value.equalsIgnoreCase("Get Car List")) {
-                progressDialog.show();
-                Map<String, String> map = new HashMap<>();
-                map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
-                map.put("dtReturningDateTime", "2018-11-24 11:11:00");
-                map.put("distance", sessionManager.getDistance());
-                Call signUpWsCall = WsFactory.carList(map);
-                WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
-            } else if (value.equalsIgnoreCase("Get Driver List")) {
-                DriverListFragment driverListFragment = new DriverListFragment();
-                mainActivity.replaceFragmenr(driverListFragment, DriverListFragment.TAG, false);
-            }
+            DriverListFragment driverListFragment = new DriverListFragment();
+            mainActivity.replaceFragmenr(driverListFragment, DriverListFragment.TAG, false);
         });
         try {
             initital();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void callApiForCar() {
+        progressDialog.show();
+        Map<String, String> map = new HashMap<>();
+        map.put("dtLeavingDateTime", txtLeaveDate.getText().toString());
+        map.put("dtReturningDateTime", txtReturnBy.getText().toString());
+        map.put("distance", sessionManager.getDistance());
+        Call signUpWsCall = WsFactory.carList(map);
+        WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
     }
 
     private void getDataFromArgument() {
@@ -128,6 +132,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
 
     @Override
     public void initital() {
+        txtLeaveDate.setText(StaticUtils.getDateAndTime());
         cardLeave.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext(), txtLeaveDate);
         });
@@ -135,6 +140,25 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             PoupUtils.showDatePicker(getContext(), txtReturn);
         });
         getDataFromArgument();
+//        callApiForCar();
+        showDefaultData();
+    }
+
+    private void showDefaultData() {
+        List<CarListtModel.ResponseDatum> responseDatumList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            CarListtModel.ResponseDatum responseDatum = new CarListtModel.ResponseDatum();
+            responseDatum.setExtraKm(10.0);
+            responseDatumList.add(responseDatum);
+        }
+        BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (v, pos) -> {
+            CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("carModel", responseDatum);
+            ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
+            mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
+        });
+        rvCarList.setAdapter(bookOutSideStaionAdapter);
     }
 
     @Override
@@ -146,7 +170,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                 BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
                     CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("carModel",responseDatum);
+                    bundle.putParcelable("carModel", responseDatum);
                     ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
                     mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                 });

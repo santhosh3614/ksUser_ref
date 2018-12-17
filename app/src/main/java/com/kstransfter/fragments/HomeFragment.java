@@ -114,7 +114,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private CarListAdapter carListAdapter;
     private TextView txtCallDriver;
     private RelativeLayout llRuning, rlcarAndDriver;
-    private LinearLayout llBottomAfterRide, llDrop, llPickUp, llBeforeRide;
+    private LinearLayout llBottomAfterRide, llDrop, llPickUp, llBeforeRide, llPopupButtom;
     private EditText edtPickUpLine, edtDropLine;
     private FusedLocationProviderClient mFusedLocationClient;
     private ImageView imgCurrentLoaction;
@@ -144,7 +144,14 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
         sessionManager = new SessionManager(getContext());
-    }
+
+        if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
+            llPopupButtom.setVisibility(View.VISIBLE);
+        } else {
+            llPopupButtom.setVisibility(View.GONE);
+        }
+
+     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -165,6 +172,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         imgCurrentLoaction = view.findViewById(R.id.imgCurrentLoaction);
         txtRideLater = view.findViewById(R.id.txtRideLater);
         txtContinue = view.findViewById(R.id.txtContinue);
+        llPopupButtom = view.findViewById(R.id.llPopupButtom);
         mainActivity = (MainActivity) getActivity();
         setVisibleAndGone();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -177,7 +185,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             e.printStackTrace();
         }
 
-        edtPickUpLine.setOnClickListener(v -> {
+        llPickUp.setOnClickListener(v -> {
             try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
@@ -188,7 +196,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             }
         });
 
-        edtDropLine.setOnClickListener(v -> {
+        llDrop.setOnClickListener(v -> {
             try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE2);

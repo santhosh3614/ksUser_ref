@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.kstransfter.R;
 
 public class TutorialTwo extends BaseFragment {
@@ -15,7 +14,7 @@ public class TutorialTwo extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_tutorial_one, container, false);
+        return inflater.inflate(R.layout.fragment_tutorial_two, container, false);
     }
 
     @Override

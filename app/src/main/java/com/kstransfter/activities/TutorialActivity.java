@@ -44,21 +44,25 @@ public class TutorialActivity extends BaseActivity {
         viewpager = findViewById(R.id.viewpager);
         indicator = findViewById(R.id.indicator);
 
-        txtNext.setOnClickListener(v -> {
-            Intent intent = new Intent(TutorialActivity.this, EnterMobilNumberActivity.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        });
-
         fragments.add(new TutorialOne());
         fragments.add(new TutorialTwo());
         fragments.add(new TutorialThree());
         fragments.add(new TutorialFour());
-
         ScreenSlidePagerAdapter screenSlidePagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), this, fragments);
         viewpager.setAdapter(screenSlidePagerAdapter);
         indicator.setViewPager(viewpager);
+
+        txtNext.setOnClickListener(v -> {
+            if (viewpager.getCurrentItem() == 3) {
+                Intent intent = new Intent(TutorialActivity.this, EnterMobilNumberActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            } else {
+                viewpager.setCurrentItem(viewpager.getCurrentItem() + 1);
+            }
+        });
+
     }
 }
 

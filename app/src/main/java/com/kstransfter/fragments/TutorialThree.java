@@ -14,7 +14,7 @@ public class TutorialThree extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_tutorial_one, container, false);
+        return inflater.inflate(R.layout.fragment_tutorial_three, container, false);
     }
 
     @Override

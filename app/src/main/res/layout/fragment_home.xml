@@ -54,8 +54,9 @@
 
     </RelativeLayout>
 
+
     <LinearLayout
-        android:id="@+id/llDrop"
+        android:id="@+id/llPickUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_5sdp"
@@ -64,6 +65,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/bg_edit_text_map"
         android:orientation="vertical"
+        android:padding="@dimen/_2sdp"
         android:visibility="visible">
 
         <LinearLayout
@@ -104,14 +106,15 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llPickUp"
+        android:id="@+id/llDrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llDrop"
+        android:layout_below="@+id/llPickUp"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
         android:background="@drawable/bg_edit_text_map"
         android:orientation="vertical"
+        android:padding="@dimen/_2sdp"
         android:visibility="visible">
 
         <LinearLayout
@@ -148,9 +151,89 @@
             android:padding="@dimen/_7sdp"
             android:singleLine="true"
             android:textSize="12sp" />
+    </LinearLayout>
+    <!--New Added design-->
+
+    <LinearLayout
+        android:id="@+id/llPopupButtom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtContinue"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:src="@drawable/indica" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_regular"
+            android:text="@string/_45_min_away"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_5sdp"
+            android:drawableRight="@drawable/info"
+            android:fontFamily="@font/opensans_bold"
+            android:text="Round out at affordable fee"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/info"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="left"
+                android:text="@string/adavace_booking"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/info"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="left"
+                android:text="@string/on_way_trip"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/info"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="left"
+                android:text="@string/round_trip"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
 
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/txtContinue"

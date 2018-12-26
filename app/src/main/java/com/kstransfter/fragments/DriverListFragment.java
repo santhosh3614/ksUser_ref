@@ -15,6 +15,7 @@ import com.kstransfter.activities.MainActivity;
 import com.kstransfter.adapters.DriverListAdapter;
 import com.kstransfter.models.app.Driver;
 import com.kstransfter.models.app.DriverListModel;
+import com.kstransfter.utils.SessionManager;
 import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
@@ -34,6 +35,7 @@ public class DriverListFragment extends BaseFragment implements WsResponse {
     private ArrayList<Driver> drivers = new ArrayList<>();
     private MainActivity mainActivity;
     private AlertDialog progressDialog;
+    private SessionManager sessionManager;
 
 
     @Nullable
@@ -50,25 +52,25 @@ public class DriverListFragment extends BaseFragment implements WsResponse {
         rvDriverList.setLayoutManager(new LinearLayoutManager(getContext()));
         try {
             initital();
-        } catch (Exception e) {
+          } catch (Exception e) {
             e.printStackTrace();
-        }
+         }
     }
 
     @Override
     public void initital() {
         mainActivity = (MainActivity) getActivity();
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
+        sessionManager = new SessionManager(mainActivity);
         getDrivertList();
     }
-
 
     private void getDrivertList() {
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
         map.put("dtLeavingDateTime", "2018-11-22 11:11:00");
         map.put("dtReturningDateTime", "2018-11-24 11:11:00");
-        map.put("distance", "1234");
+        map.put("distance", sessionManager.getDistance());
         Call signUpWsCall = WsFactory.driverList(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_LIST, this);
     }
@@ -81,16 +83,14 @@ public class DriverListFragment extends BaseFragment implements WsResponse {
                 DriverListModel driverListModel = (DriverListModel) response;
                 DriverListAdapter driverListAdapter = new DriverListAdapter(getContext(), driverListModel.getResponseData(), (view, pos) -> {
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("DriverDetails",driverListModel);
+                    bundle.putParcelable("DriverDetails", driverListModel);
                     mainActivity.replaceFragmenr(DriverDetailsFragment.getInstance(bundle), DriverDetailsFragment.TAG, false);
                 });
                 rvDriverList.setAdapter(driverListAdapter);
                 break;
             default:
                 break;
-
-        }
-
+         }
     }
 
     @Override

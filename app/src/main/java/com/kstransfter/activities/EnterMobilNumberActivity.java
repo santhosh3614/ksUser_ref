@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.kstransfter.R;
@@ -27,6 +28,7 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
 
     private TextView txtNext;
     private AlertDialog progressDialog;
+    private EditText edtPhone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,18 +46,17 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
         progressDialog = new SpotsDialog(this, R.style.Custom);
         txtNext = findViewById(R.id.txtNext);
         txtNext.setOnClickListener(v -> {
-            Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-         });
+            otpGet();
+        });
     }
 
     private void otpGet() {
+        edtPhone = findViewById(R.id.edtPhone);
+        String phone = edtPhone.getText().toString().trim();
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
         map.put("iMobileExtension", "91");
-        map.put("vMobileno", "9584288185");
+        map.put("vMobileno", phone);
         map.put("txDeviceToken", "sdfnsdfkjkdnf");
         map.put("eDeviceType", "Android");
         Call signUpWsCall = WsFactory.signUp(map);
@@ -68,7 +69,7 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
         switch (code) {
             case StaticUtils.REQUEST_SIGN_UP:
                 SignUpModel signUpModel = (SignUpModel) response;
-                if (signUpModel.getResponseCode() == 1) {
+                if (signUpModel.getResponseCode() == 200) {
                     Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
                     startActivity(intent);
                     finish();

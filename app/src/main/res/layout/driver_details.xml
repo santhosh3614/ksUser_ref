@@ -149,17 +149,7 @@
                     android:textColor="@color/green"
                     android:textSize="@dimen/_12sdp" />
 
-                <EditText
-                    android:id="@+id/edtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/bg_selected_gray"
-                    android:hint="@string/enter_your_emai_id"
-                    android:inputType="textEmailAddress"
-                    android:padding="@dimen/_7sdp"
-                    android:textSize="16sp" />
+
             </LinearLayout>
 
             <View
@@ -184,22 +174,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Alto / Inova / Tata Suno / Swift / Indigo "
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/opensans_regular"
+                    />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/black" />
+                android:background="@color/gray_line" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:fontFamily="@font/opensans_bold"
+                android:textColor="@color/black"
                 android:text="Contactat Driver" />
 
+
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_selected_gray"
+                android:hint="@string/enter_your_emai_id"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/opensans_regular"
+                android:padding="@dimen/_7sdp"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/edtMobile"
@@ -208,6 +216,7 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/bg_selected_gray"
+                android:fontFamily="@font/opensans_regular"
                 android:hint="@string/enter_your_mobile_no"
                 android:inputType="number"
                 android:padding="@dimen/_7sdp"
@@ -224,6 +233,7 @@
                 android:background="@drawable/bg_selected_gray"
                 android:hint="@string/enter_your_home_address"
                 android:textSize="16sp"
+                android:fontFamily="@font/opensans_regular"
                 android:gravity="top"
                 android:lines="3"
                 android:padding="@dimen/_7sdp" />
@@ -232,16 +242,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/total_payment"
+                android:fontFamily="@font/opensans_bold"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/bg_gray"
+                >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Your payable" />
+                    android:text="Your payable"
+                    android:fontFamily="@font/opensans_regular"
+                    />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -252,18 +270,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rs. " />
+                        android:text="Rs. "
+                        android:fontFamily="@font/opensans_regular"
+                        />
 
                     <TextView
                         android:id="@+id/txtPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3000" />
-
+                        android:text="3000"
+                        android:fontFamily="@font/opensans_regular"
+                        />
                 </LinearLayout>
-
-
-            </RelativeLayout>
+              </RelativeLayout>
 
 
         </LinearLayout>

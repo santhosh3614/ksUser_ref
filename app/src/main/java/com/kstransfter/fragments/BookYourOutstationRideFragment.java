@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kstransfter.R;
@@ -50,6 +52,8 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     private CardView cardOneWay, carRoundWay;
     private TextView txtGetCarList;
     private SessionManager sessionManager;
+    private RelativeLayout rlOneAndRound;
+    private LinearLayout llCarView;
 
     @Nullable
     @Override
@@ -74,6 +78,8 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         txtReturn = view.findViewById(R.id.txtReturn);
         cardOneWay = view.findViewById(R.id.cardOneWay);
         carRoundWay = view.findViewById(R.id.carRoundWay);
+        rlOneAndRound = view.findViewById(R.id.rlOneAndRound);
+        llCarView = view.findViewById(R.id.llCarView);
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
@@ -93,13 +99,6 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             cardReturn.setVisibility(View.VISIBLE);
         });
 
-        if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
-            txtGetCarList.setText("Get Car List");
-            txtGetCarList.setVisibility(View.GONE);
-        } else {
-            txtGetCarList.setText("Get Driver List");
-            txtGetCarList.setVisibility(View.VISIBLE);
-        }
 
         txtGetCarList.setOnClickListener(v -> {
             DriverListFragment driverListFragment = new DriverListFragment();
@@ -115,9 +114,9 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     private void callApiForCar() {
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
-        map.put("dtLeavingDateTime", txtLeaveDate.getText().toString());
-        map.put("dtReturningDateTime", txtReturnBy.getText().toString());
-        map.put("distance", sessionManager.getDistance());
+        map.put("dtLeavingDateTime", "2018-11-22 22:11:00");
+        map.put("dtReturningDateTime", "2018-11-22 22:11:00");
+        map.put("vDistance", "170");
         Call signUpWsCall = WsFactory.carList(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
     }
@@ -140,8 +139,21 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             PoupUtils.showDatePicker(getContext(), txtReturn);
         });
         getDataFromArgument();
-//        callApiForCar();
-        showDefaultData();
+//        showDefaultData();
+        if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
+            txtGetCarList.setText("Get Car List");
+            txtGetCarList.setVisibility(View.GONE);
+            llCarView.setVisibility(View.VISIBLE);
+            rlOneAndRound.setVisibility(View.VISIBLE);
+            cardReturn.setVisibility(View.GONE);
+            callApiForCar();
+        } else {
+            txtGetCarList.setText("Get Driver List");
+            txtGetCarList.setVisibility(View.VISIBLE);
+            llCarView.setVisibility(View.GONE);
+            rlOneAndRound.setVisibility(View.GONE);
+            cardReturn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showDefaultData() {
@@ -172,6 +184,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("carModel", responseDatum);
                     ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
+                    confirmBookingFragment.setArguments(bundle);
                     mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                 });
                 rvCarList.setAdapter(bookOutSideStaionAdapter);

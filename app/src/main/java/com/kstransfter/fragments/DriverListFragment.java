@@ -83,7 +83,7 @@ public class DriverListFragment extends BaseFragment implements WsResponse {
                 DriverListModel driverListModel = (DriverListModel) response;
                 DriverListAdapter driverListAdapter = new DriverListAdapter(getContext(), driverListModel.getResponseData(), (view, pos) -> {
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("DriverDetails", driverListModel);
+                    bundle.putParcelable("driverDetails", driverListModel.getResponseData().get(pos));
                     mainActivity.replaceFragmenr(DriverDetailsFragment.getInstance(bundle), DriverDetailsFragment.TAG, false);
                 });
                 rvDriverList.setAdapter(driverListAdapter);

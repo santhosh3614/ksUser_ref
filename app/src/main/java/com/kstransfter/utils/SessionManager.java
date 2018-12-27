@@ -22,6 +22,8 @@ public class SessionManager {
     public static final String KEY_FROM = "from";
     public static final String KEY_TO = "to";
     public static final String KEY_DISTANCE = "distance";
+    public static final String KEY_START_DATE = "start_date";
+    public static final String KEY_END_DATE = "end_date";
 
 
     // Constructor
@@ -69,6 +71,24 @@ public class SessionManager {
 
     public String getDistance() {
         return pref.getString(KEY_DISTANCE, "");
+    }
+
+    public void setStartDate(String startDate) {
+        editor.putString(KEY_START_DATE, startDate);
+        editor.commit();
+    }
+
+    public void setEndDate(String endDate) {
+        editor.putString(KEY_END_DATE, endDate);
+        editor.commit();
+    }
+
+    public String getStartDate() {
+        return pref.getString(KEY_START_DATE, "");
+    }
+
+    public String getEndDate() {
+        return pref.getString(KEY_END_DATE, "");
     }
 
     public void setDistance(String searchType) {

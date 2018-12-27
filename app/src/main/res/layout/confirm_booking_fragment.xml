@@ -19,13 +19,13 @@
                 android:id="@+id/imgCar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:src="@drawable/indica" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_toLeftOf="@+id/txtPrice"
                 android:layout_toRightOf="@+id/imgCar"
                 android:orientation="vertical">
 
@@ -204,6 +204,7 @@
             android:padding="@dimen/_5sdp">
 
             <TextView
+                android:id="@+id/txtKmPerH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_10sdp"
@@ -273,6 +274,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/txtbaseFare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -298,6 +300,7 @@
 
 
                 <TextView
+                    android:id="@+id/txtEstimatePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

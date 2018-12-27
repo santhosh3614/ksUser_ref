@@ -42,7 +42,7 @@ import retrofit2.Call;
 public class BookYourOutstationRideFragment extends BaseFragment implements WsResponse {
 
     public static String TAG = BookYourOutstationRideFragment.class.getSimpleName();
-    private TextView txtFrom, txtTo, txtStart, txtEnd, txtLeaveDate, txtReturn;
+    private TextView txtFrom, txtTo, txtStart, txtEnd, txtLeaveDate, txtReturn,txtPrice,txtbaseFare,txtEstimatePrice;
     private RecyclerView rvCarList;
     private ImageView imgOneWay, imgRoundWay;
     private CardView cardLeave, cardReturn;
@@ -80,6 +80,9 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         carRoundWay = view.findViewById(R.id.carRoundWay);
         rlOneAndRound = view.findViewById(R.id.rlOneAndRound);
         llCarView = view.findViewById(R.id.llCarView);
+        txtPrice=view.findViewById(R.id.txtPrice);
+        txtbaseFare=view.findViewById(R.id.txtbaseFare);
+        txtEstimatePrice=view.findViewById(R.id.txtEstimatePrice);
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
@@ -169,6 +172,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             Bundle bundle = new Bundle();
             bundle.putParcelable("carModel", responseDatum);
             ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
+            confirmBookingFragment.setArguments(bundle);
             mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
         });
         rvCarList.setAdapter(bookOutSideStaionAdapter);
@@ -180,7 +184,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         switch (code) {
             case StaticUtils.REQUEST_CAR_LIST:
                 CarListtModel carListModel = (CarListtModel) response;
-                 BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
+                BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
                     CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("carModel", responseDatum);

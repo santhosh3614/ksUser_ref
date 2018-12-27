@@ -69,7 +69,7 @@ public class PoupUtils {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         String dateAndTime = txtLeaveDate.getText().toString().trim();
-        if (!TextUtils.isEmpty(dateAndTime)) {
+        if (!TextUtils.isEmpty(dateAndTime) && !dateAndTime.equalsIgnoreCase("Select")) {
             String datestimes[] = dateAndTime.split(" ");
             String datesvale = datestimes[0];
             String dates[] = datesvale.split("-");

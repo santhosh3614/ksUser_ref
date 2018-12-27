@@ -16,6 +16,7 @@ import com.kstransfter.activities.MainActivity;
 import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.SessionManager;
 import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
@@ -36,9 +37,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private TextView txtHideAndShow;
     private LinearLayout llFairDetails;
     private ImageView imgCar;
-    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking;
+    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking, txtFrom, txtTo;
     private AlertDialog progressDialog;
     private MainActivity mainActivity;
+    private SessionManager sessionManager;
 
     @Nullable
     @Override
@@ -58,6 +60,8 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtRetrurnBy = view.findViewById(R.id.txtRetrurnBy);
         txtPrice = view.findViewById(R.id.txtPrice);
         txtConfirmBooking = view.findViewById(R.id.txtConfirmBooking);
+        txtFrom = view.findViewById(R.id.txtFrom);
+        txtTo = view.findViewById(R.id.txtTo);
         try {
             initital();
         } catch (Exception e) {
@@ -68,8 +72,8 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     @Override
     public void initital() {
         mainActivity = (MainActivity) getActivity();
+        sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
-
         txtHideAndShow.setOnClickListener(v -> {
             if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
                 txtHideAndShow.setText("Show Fare Details");
@@ -84,6 +88,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
             //txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice;
             if (responseDatum.getVCar() != null) {
                 txtCar.setText(responseDatum.getVCar().toString());
+                txtFrom.setText(sessionManager.getFrom());
+                txtTo.setText(sessionManager.getTo());
+                txtLeaveDate.setText(sessionManager.getStartDate());
+                txtRetrurnBy.setText(sessionManager.getEndDate());
             }
             txtPrice.setText(responseDatum.getTotalPrice().toString());
         }

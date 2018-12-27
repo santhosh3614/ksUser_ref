@@ -6,12 +6,11 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kstransfter.R;
 
@@ -69,19 +68,25 @@ public class PoupUtils {
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-
+        String dateAndTime = txtLeaveDate.getText().toString().trim();
+        if (!TextUtils.isEmpty(dateAndTime)) {
+            String datestimes[] = dateAndTime.split(" ");
+            String datesvale = datestimes[0];
+            String dates[] = datesvale.split("-");
+            mDay = Integer.parseInt(dates[0]);
+            int month = Integer.parseInt(dates[1]);
+            mMonth = month - 1;
+            mYear = Integer.parseInt(dates[2]);
+        }
         datePickerDialog = new DatePickerDialog(context,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        int month = monthOfYear + 1;
-                        String dateValue = view.getDayOfMonth() + "/" + month + "/" + view.getYear();
-                        Log.e("date", "" + date);
-                        showTimePicker(context, txtLeaveDate, dateValue);
-                    }
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    int month = monthOfYear + 1;
+                    String dateValue = view.getDayOfMonth() + "-" + month + "-" + view.getYear();
+                    Log.e("date", "" + date);
+                    showTimePicker(context, txtLeaveDate, dateValue);
                 }, mYear, mMonth, mDay);
-           datePickerDialog.show();
+          datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+          datePickerDialog.show();
     }
 
     public static void showTimePicker(Context context, TextView txtLeaveDate, String date) {
@@ -91,7 +96,7 @@ public class PoupUtils {
         TimePickerDialog timePickerDialog = new TimePickerDialog(context,
                 (view, hourOfDay, minute) -> {
                     txtLeaveDate.setText(date + " " + hourOfDay + ":" + minute);
-                 }, mHour, mMinute, false);
+                }, mHour, mMinute, false);
         timePickerDialog.show();
         timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
                 (view, which) -> {
@@ -103,7 +108,7 @@ public class PoupUtils {
 
                 });
 
-      }
+    }
 
 }
 

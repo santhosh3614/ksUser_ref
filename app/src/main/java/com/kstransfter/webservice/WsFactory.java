@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.kstransfter.interfaces.ApiClient;
 import com.kstransfter.interfaces.ApiInterface;
 import com.kstransfter.models.AutocompleteAddrees;
+import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.models.app.DriverListModel;
 import com.kstransfter.models.app.Login;
@@ -70,6 +71,10 @@ public class WsFactory {
         return signUpModelCall;
     }
 
-
+    public static Call carBooked(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<BookedCarModel> signUpModelCall = apiService.getBookedCar(map);
+        return signUpModelCall;
+    }
 
 }

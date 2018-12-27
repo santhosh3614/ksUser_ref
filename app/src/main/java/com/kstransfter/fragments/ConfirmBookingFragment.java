@@ -1,5 +1,6 @@
 package com.kstransfter.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,20 +12,33 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kstransfter.R;
+import com.kstransfter.activities.MainActivity;
+import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.CarListtModel;
-import com.kstransfter.models.app.DriverListModel;
+import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.StaticUtils;
+import com.kstransfter.webservice.WsFactory;
+import com.kstransfter.webservice.WsResponse;
+import com.kstransfter.webservice.WsUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
 
 /**
  * Created by SONI on 12/9/2018.
  */
 
-public class ConfirmBookingFragment extends BaseFragment {
+public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
 
     private TextView txtHideAndShow;
     private LinearLayout llFairDetails;
     private ImageView imgCar;
-    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice;
-
+    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking;
+    private AlertDialog progressDialog;
+    private MainActivity mainActivity;
 
     @Nullable
     @Override
@@ -43,6 +57,7 @@ public class ConfirmBookingFragment extends BaseFragment {
         txtLeaveDate = view.findViewById(R.id.txtLeaveDate);
         txtRetrurnBy = view.findViewById(R.id.txtRetrurnBy);
         txtPrice = view.findViewById(R.id.txtPrice);
+        txtConfirmBooking = view.findViewById(R.id.txtConfirmBooking);
         try {
             initital();
         } catch (Exception e) {
@@ -52,7 +67,8 @@ public class ConfirmBookingFragment extends BaseFragment {
 
     @Override
     public void initital() {
-
+        mainActivity = (MainActivity) getActivity();
+        progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
 
         txtHideAndShow.setOnClickListener(v -> {
             if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
@@ -63,7 +79,6 @@ public class ConfirmBookingFragment extends BaseFragment {
                 llFairDetails.setVisibility(View.VISIBLE);
             }
         });
-
         CarListtModel.ResponseDatum responseDatum = getArguments().getParcelable("carModel");
         if (responseDatum != null) {
             //txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice;
@@ -72,7 +87,46 @@ public class ConfirmBookingFragment extends BaseFragment {
             }
             txtPrice.setText(responseDatum.getTotalPrice().toString());
         }
+        txtConfirmBooking.setOnClickListener(v -> {
+            confirmBooking();
+        });
     }
 
+    private void confirmBooking() {
+        progressDialog.show();
+        Map<String, String> map = new HashMap<>();
+        map.put("txPickUpAddress", "asdfasdfasdfsdf");
+        map.put("iDriverId", "1");
+        map.put("iUserId", "1");
+        map.put("dcPickUpLatitude", "23.26565464");
+        map.put("dcPickUpLongitude", "23.665");
+        map.put("vPickUpCity", "rajkot");
+        map.put("dtLeavingDateTime", "2018-11-28 11:11:00");
+        map.put("iWaitingHour", "2");
+        map.put("vDistance", "50");
+        Call signUpWsCall = WsFactory.carBooked(map);
+        WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
+    }
 
+    @Override
+    public void successResponse(Object response, int code) {
+        progressDialog.cancel();
+        switch (code) {
+            case StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING:
+                BookedCarModel bookedCarModel = (BookedCarModel) response;
+                if (bookedCarModel != null) {
+                    PoupUtils.showAlertDailog(mainActivity, "Booking confirm your car on the way.");
+                } else {
+                    PoupUtils.showAlertDailog(mainActivity, "Somthing went wrong,Please try again with some change");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void failureRespons(Throwable error, int code) {
+
+    }
 }

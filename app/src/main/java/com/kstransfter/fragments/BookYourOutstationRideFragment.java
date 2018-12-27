@@ -93,6 +93,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             imgRoundWay.setSelected(false);
             cardReturn.setVisibility(View.GONE);
         });
+
         carRoundWay.setOnClickListener(v -> {
             imgOneWay.setSelected(false);
             imgRoundWay.setSelected(true);
@@ -179,7 +180,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         switch (code) {
             case StaticUtils.REQUEST_CAR_LIST:
                 CarListtModel carListModel = (CarListtModel) response;
-                BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
+                 BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
                     CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("carModel", responseDatum);

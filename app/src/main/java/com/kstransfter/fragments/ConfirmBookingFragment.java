@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
@@ -37,10 +39,13 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private TextView txtHideAndShow;
     private LinearLayout llFairDetails;
     private ImageView imgCar;
-    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking, txtFrom, txtTo;
+    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking, txtFrom, txtTo, txtKmPerH,
+            txtbaseFare, txtEstimatePrice, txtFareRule, txtDetails;
     private AlertDialog progressDialog;
     private MainActivity mainActivity;
     private SessionManager sessionManager;
+    private CardView cardApplyCoupn;
+
 
     @Nullable
     @Override
@@ -62,6 +67,12 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtConfirmBooking = view.findViewById(R.id.txtConfirmBooking);
         txtFrom = view.findViewById(R.id.txtFrom);
         txtTo = view.findViewById(R.id.txtTo);
+        txtKmPerH = view.findViewById(R.id.txtKmPerH);
+        txtbaseFare = view.findViewById(R.id.txtbaseFare);
+        txtEstimatePrice = view.findViewById(R.id.txtEstimatePrice);
+        txtFareRule = view.findViewById(R.id.txtFareRule);
+        cardApplyCoupn = view.findViewById(R.id.cardApplyCoupn);
+        txtDetails = view.findViewById(R.id.txtDetails);
         try {
             initital();
         } catch (Exception e) {
@@ -83,17 +94,25 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 llFairDetails.setVisibility(View.VISIBLE);
             }
         });
+        cardApplyCoupn.setOnClickListener(v -> {
+            Toast.makeText(mainActivity, "aaply card coupon", Toast.LENGTH_SHORT).show();
+        });
+
         CarListtModel.ResponseDatum responseDatum = getArguments().getParcelable("carModel");
         if (responseDatum != null) {
-            //txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice;
             if (responseDatum.getVCar() != null) {
                 txtCar.setText(responseDatum.getVCar().toString());
                 txtFrom.setText(sessionManager.getFrom());
                 txtTo.setText(sessionManager.getTo());
                 txtLeaveDate.setText(sessionManager.getStartDate());
                 txtRetrurnBy.setText(sessionManager.getEndDate());
+                txtKmPerH.setText(responseDatum.getMinKmCharge() + "");
+                txtbaseFare.setText(responseDatum.getTotalPrice() + "");
+                txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
+                txtPrice.setText(responseDatum.getTotalPrice().toString());
+                txtFareRule.setText("");
+
             }
-            txtPrice.setText(responseDatum.getTotalPrice().toString());
         }
         txtConfirmBooking.setOnClickListener(v -> {
             confirmBooking();

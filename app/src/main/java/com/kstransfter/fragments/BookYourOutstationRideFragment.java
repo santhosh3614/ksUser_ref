@@ -42,7 +42,7 @@ import retrofit2.Call;
 public class BookYourOutstationRideFragment extends BaseFragment implements WsResponse {
 
     public static String TAG = BookYourOutstationRideFragment.class.getSimpleName();
-    private TextView txtFrom, txtTo, txtStart, txtEnd, txtLeaveDate, txtReturn,txtPrice,txtbaseFare,txtEstimatePrice;
+    private TextView txtFrom, txtTo, txtStart, txtEnd, txtLeaveDate, txtReturn, txtPrice, txtbaseFare, txtEstimatePrice;
     private RecyclerView rvCarList;
     private ImageView imgOneWay, imgRoundWay;
     private CardView cardLeave, cardReturn;
@@ -80,9 +80,9 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         carRoundWay = view.findViewById(R.id.carRoundWay);
         rlOneAndRound = view.findViewById(R.id.rlOneAndRound);
         llCarView = view.findViewById(R.id.llCarView);
-        txtPrice=view.findViewById(R.id.txtPrice);
-        txtbaseFare=view.findViewById(R.id.txtbaseFare);
-        txtEstimatePrice=view.findViewById(R.id.txtEstimatePrice);
+        txtPrice = view.findViewById(R.id.txtPrice);
+        txtbaseFare = view.findViewById(R.id.txtbaseFare);
+        txtEstimatePrice = view.findViewById(R.id.txtEstimatePrice);
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
@@ -128,6 +128,8 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     private void getDataFromArgument() {
         String pickupPoint = getArguments().getString("pickupPoint");
         String endPoint = getArguments().getString("endPoint");
+        sessionManager.setFrom(pickupPoint);
+        sessionManager.setTo(endPoint);
         txtFrom.setText(pickupPoint);
         txtTo.setText(endPoint);
     }
@@ -135,15 +137,20 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
 
     @Override
     public void initital() {
-        txtLeaveDate.setText(StaticUtils.getDateAndTime());
+        sessionManager.setStartDate(StaticUtils.getDateAndTime());
+        txtLeaveDate.setText(sessionManager.getStartDate());
         cardLeave.setOnClickListener(v -> {
-            PoupUtils.showDatePicker(getContext(), txtLeaveDate);
+            PoupUtils.showDatePicker(getContext(), txtLeaveDate, view -> {
+                sessionManager.setStartDate(txtLeaveDate.getText().toString().trim());
+            });
         });
         cardReturn.setOnClickListener(v -> {
-            PoupUtils.showDatePicker(getContext(), txtReturn);
+            PoupUtils.showDatePicker(getContext(), txtReturn, view -> {
+                sessionManager.setEndDate(txtReturn.getText().toString().trim());
+            });
         });
+
         getDataFromArgument();
-//        showDefaultData();
         if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
             txtGetCarList.setText("Get Car List");
             txtGetCarList.setVisibility(View.GONE);

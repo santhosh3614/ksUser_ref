@@ -63,7 +63,7 @@ public class PoupUtils {
     private static String date;
     private static DatePickerDialog datePickerDialog;
 
-    public static void showDatePicker(Context context, TextView txtLeaveDate) {
+    public static void showDatePicker(Context context, TextView txtLeaveDate, View.OnClickListener onClickListener) {
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
@@ -83,30 +83,31 @@ public class PoupUtils {
                     int month = monthOfYear + 1;
                     String dateValue = view.getDayOfMonth() + "-" + month + "-" + view.getYear();
                     Log.e("date", "" + date);
-                    showTimePicker(context, txtLeaveDate, dateValue);
+                    showTimePicker(context, txtLeaveDate, dateValue,onClickListener);
                 }, mYear, mMonth, mDay);
           datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
           datePickerDialog.show();
     }
 
-    public static void showTimePicker(Context context, TextView txtLeaveDate, String date) {
+    public static void showTimePicker(Context context, TextView txtLeaveDate, String date, View.OnClickListener onClickListener) {
         final Calendar c = Calendar.getInstance();
         int mHour = c.get(Calendar.HOUR_OF_DAY);
         int mMinute = c.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(context,
                 (view, hourOfDay, minute) -> {
                     txtLeaveDate.setText(date + " " + hourOfDay + ":" + minute);
-                }, mHour, mMinute, false);
+                    onClickListener.onClick(txtLeaveDate);
+                  }, mHour, mMinute, false);
         timePickerDialog.show();
-        timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
+        timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
                 (view, which) -> {
 
                 });
 
-        timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "cancel",
+        timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
                 (view, which) -> {
 
-                });
+                 });
 
     }
 

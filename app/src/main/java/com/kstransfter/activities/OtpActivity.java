@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,7 +26,7 @@ import java.util.Map;
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 
-public class OtpActivity extends BaseActivity implements WsResponse {
+public class OtpActivity extends BaseActivity implements WsResponse, TextWatcher {
 
     private TextView txtDone;
     private LinearLayout llResendOtp;
@@ -31,6 +34,8 @@ public class OtpActivity extends BaseActivity implements WsResponse {
     private SignUpModel.ResponseData responseData;
     private EditText edtFirstDigit, edtSecondDigit, edtThirdDigit, edtFourthDigit;
     private SessionManager sessionManager;
+    private View view;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +58,11 @@ public class OtpActivity extends BaseActivity implements WsResponse {
         edtSecondDigit = findViewById(R.id.edtSecondDigit);
         edtThirdDigit = findViewById(R.id.edtThirdDigit);
         edtFourthDigit = findViewById(R.id.edtFourthDigit);
-        getDataFromPrev();
+        edtFirstDigit.addTextChangedListener(this);
+        edtSecondDigit.addTextChangedListener(this);
+        edtThirdDigit.addTextChangedListener(this);
+
+        //        getDataFromPrev();
         llResendOtp.setOnClickListener(v -> {
             progressDialog.show();
             Map<String, String> map = new HashMap<>();
@@ -70,7 +79,7 @@ public class OtpActivity extends BaseActivity implements WsResponse {
 
             if (!responseData.getVVerificationcode().equalsIgnoreCase(enteredOtp)) {
                 PoupUtils.showAlertDailog(this, "OTP not match");
-             } else {
+            } else {
                 Intent intent = new Intent(OtpActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 finish();
@@ -84,6 +93,7 @@ public class OtpActivity extends BaseActivity implements WsResponse {
         if (responseData != null) {
 
         } else {
+
         }
     }
 
@@ -97,4 +107,29 @@ public class OtpActivity extends BaseActivity implements WsResponse {
     public void failureRespons(Throwable error, int code) {
 
     }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (edtFirstDigit.getText().toString().trim().length() == 1) {
+            edtSecondDigit.requestFocus();
+        }
+        if (edtSecondDigit.getText().toString().trim().length() == 1) {
+            edtThirdDigit.requestFocus();
+        }
+        if (edtThirdDigit.getText().toString().trim().length() == 1) {
+            edtFourthDigit.requestFocus();
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+
+    }
+
 }

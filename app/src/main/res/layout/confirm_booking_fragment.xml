@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_5sdp">
 
             <ImageView
                 android:id="@+id/imgCar"
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_5sdp">
 
 
             <ImageView
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_5sdp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -102,7 +102,9 @@
                 android:id="@+id/imgLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/address_icon" />
+                android:src="@drawable/address_icon"
+                android:layout_centerVertical="true"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,15 +117,15 @@
                     android:id="@+id/txtFrom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/_3sdp"
                     android:text="sdasdasd" />
 
                 <TextView
                     android:id="@+id/txtTo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="sdasdasd"
-
-                    />
+                    android:padding="@dimen/_3sdp"
+                    android:text="sdasdasd" />
 
             </LinearLayout>
 

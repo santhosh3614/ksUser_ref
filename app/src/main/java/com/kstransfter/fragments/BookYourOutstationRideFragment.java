@@ -83,9 +83,6 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         txtPrice = view.findViewById(R.id.txtPrice);
         txtbaseFare = view.findViewById(R.id.txtbaseFare);
         txtEstimatePrice = view.findViewById(R.id.txtEstimatePrice);
-        progressDialog = new SpotsDialog(getContext(), R.style.Custom);
-        mainActivity = (MainActivity) getActivity();
-        sessionManager = new SessionManager(mainActivity);
         imgOneWay.setSelected(true);
         cardReturn.setVisibility(View.GONE);
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -103,7 +100,6 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             cardReturn.setVisibility(View.VISIBLE);
         });
 
-
         txtGetCarList.setOnClickListener(v -> {
             DriverListFragment driverListFragment = new DriverListFragment();
             mainActivity.replaceFragmenr(driverListFragment, DriverListFragment.TAG, false);
@@ -116,6 +112,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     }
 
     private void callApiForCar() {
+        progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
         map.put("dtLeavingDateTime", "2018-11-22 22:11:00");
@@ -123,6 +120,20 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         map.put("vDistance", "170");
         Call signUpWsCall = WsFactory.carList(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
+    }
+
+
+    @Override
+    public void onPause() {
+        progressDialog.cancel();
+        super.onPause();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        progressDialog.cancel();
+        super.onDestroy();
     }
 
     private void getDataFromArgument() {
@@ -137,6 +148,8 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
 
     @Override
     public void initital() {
+        mainActivity = (MainActivity) getActivity();
+        sessionManager = new SessionManager(mainActivity);
         sessionManager.setStartDate(StaticUtils.getDateAndTime());
         txtLeaveDate.setText(sessionManager.getStartDate());
         cardLeave.setOnClickListener(v -> {
@@ -149,8 +162,8 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                 sessionManager.setEndDate(txtReturn.getText().toString().trim());
             });
         });
-
         getDataFromArgument();
+
         if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
             txtGetCarList.setText("Get Car List");
             txtGetCarList.setVisibility(View.GONE);

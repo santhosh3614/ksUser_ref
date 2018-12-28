@@ -1,15 +1,9 @@
-package com.kstransfter.models.app;
+package com.kstransfter.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by SONI on 10/28/2018.
- */
-
-public class SignUpModel implements Parcelable {
+public class SignUpAndUpdate {
 
     @SerializedName("responseCode")
     @Expose
@@ -46,21 +40,20 @@ public class SignUpModel implements Parcelable {
     }
 
 
-
-    public static class ResponseData implements Parcelable {
+    public static class ResponseData {
 
         @SerializedName("iUserId")
         @Expose
-        private String iUserId;
+        private Integer iUserId;
         @SerializedName("txAuthToken")
         @Expose
-        private String txAuthToken;
+        private Integer txAuthToken;
         @SerializedName("vUserName")
         @Expose
-        private Object vUserName;
+        private String vUserName;
         @SerializedName("vEmail")
         @Expose
-        private Object vEmail;
+        private String vEmail;
         @SerializedName("dBirthdate")
         @Expose
         private Object dBirthdate;
@@ -90,7 +83,7 @@ public class SignUpModel implements Parcelable {
         private Object txProfilePic;
         @SerializedName("vPassword")
         @Expose
-        private Object vPassword;
+        private String vPassword;
         @SerializedName("iMobileExtension")
         @Expose
         private String iMobileExtension;
@@ -99,7 +92,7 @@ public class SignUpModel implements Parcelable {
         private String vMobileno;
         @SerializedName("vVerificationcode")
         @Expose
-        private String vVerificationcode;
+        private Integer vVerificationcode;
         @SerializedName("dLatitude")
         @Expose
         private Object dLatitude;
@@ -114,7 +107,7 @@ public class SignUpModel implements Parcelable {
         private Object txGoogleId;
         @SerializedName("iLoginType")
         @Expose
-        private String iLoginType;
+        private Integer iLoginType;
         @SerializedName("eUserType")
         @Expose
         private String eUserType;
@@ -123,55 +116,55 @@ public class SignUpModel implements Parcelable {
         private String eStatus;
         @SerializedName("iIsDelete")
         @Expose
-        private String iIsDelete;
+        private Integer iIsDelete;
         @SerializedName("iIsApprove")
         @Expose
-        private String iIsApprove;
+        private Integer iIsApprove;
         @SerializedName("iCreatedAt")
         @Expose
-        private String iCreatedAt;
+        private Integer iCreatedAt;
         @SerializedName("iUpdatedAt")
         @Expose
-        private String iUpdatedAt;
+        private Integer iUpdatedAt;
         @SerializedName("iLastlogin")
         @Expose
-        private String iLastlogin;
+        private Integer iLastlogin;
         @SerializedName("iCompletedStep")
         @Expose
-        private String iCompletedStep;
+        private Integer iCompletedStep;
         @SerializedName("iIsOnline")
         @Expose
-        private String iIsOnline;
+        private Integer iIsOnline;
 
-        public String getIUserId() {
+        public Integer getIUserId() {
             return iUserId;
         }
 
-        public void setIUserId(String iUserId) {
+        public void setIUserId(Integer iUserId) {
             this.iUserId = iUserId;
         }
 
-        public String getTxAuthToken() {
+        public Integer getTxAuthToken() {
             return txAuthToken;
         }
 
-        public void setTxAuthToken(String txAuthToken) {
+        public void setTxAuthToken(Integer txAuthToken) {
             this.txAuthToken = txAuthToken;
         }
 
-        public Object getVUserName() {
+        public String getVUserName() {
             return vUserName;
         }
 
-        public void setVUserName(Object vUserName) {
+        public void setVUserName(String vUserName) {
             this.vUserName = vUserName;
         }
 
-        public Object getVEmail() {
+        public String getVEmail() {
             return vEmail;
         }
 
-        public void setVEmail(Object vEmail) {
+        public void setVEmail(String vEmail) {
             this.vEmail = vEmail;
         }
 
@@ -247,11 +240,11 @@ public class SignUpModel implements Parcelable {
             this.txProfilePic = txProfilePic;
         }
 
-        public Object getVPassword() {
+        public String getVPassword() {
             return vPassword;
         }
 
-        public void setVPassword(Object vPassword) {
+        public void setVPassword(String vPassword) {
             this.vPassword = vPassword;
         }
 
@@ -271,11 +264,11 @@ public class SignUpModel implements Parcelable {
             this.vMobileno = vMobileno;
         }
 
-        public String getVVerificationcode() {
+        public Integer getVVerificationcode() {
             return vVerificationcode;
         }
 
-        public void setVVerificationcode(String vVerificationcode) {
+        public void setVVerificationcode(Integer vVerificationcode) {
             this.vVerificationcode = vVerificationcode;
         }
 
@@ -311,11 +304,11 @@ public class SignUpModel implements Parcelable {
             this.txGoogleId = txGoogleId;
         }
 
-        public String getILoginType() {
+        public Integer getILoginType() {
             return iLoginType;
         }
 
-        public void setILoginType(String iLoginType) {
+        public void setILoginType(Integer iLoginType) {
             this.iLoginType = iLoginType;
         }
 
@@ -335,168 +328,61 @@ public class SignUpModel implements Parcelable {
             this.eStatus = eStatus;
         }
 
-        public String getIIsDelete() {
+        public Integer getIIsDelete() {
             return iIsDelete;
         }
 
-        public void setIIsDelete(String iIsDelete) {
+        public void setIIsDelete(Integer iIsDelete) {
             this.iIsDelete = iIsDelete;
         }
 
-        public String getIIsApprove() {
+        public Integer getIIsApprove() {
             return iIsApprove;
         }
 
-        public void setIIsApprove(String iIsApprove) {
+        public void setIIsApprove(Integer iIsApprove) {
             this.iIsApprove = iIsApprove;
         }
 
-        public String getICreatedAt() {
+        public Integer getICreatedAt() {
             return iCreatedAt;
         }
 
-        public void setICreatedAt(String iCreatedAt) {
+        public void setICreatedAt(Integer iCreatedAt) {
             this.iCreatedAt = iCreatedAt;
         }
 
-        public String getIUpdatedAt() {
+        public Integer getIUpdatedAt() {
             return iUpdatedAt;
         }
 
-        public void setIUpdatedAt(String iUpdatedAt) {
+        public void setIUpdatedAt(Integer iUpdatedAt) {
             this.iUpdatedAt = iUpdatedAt;
         }
 
-        public String getILastlogin() {
+        public Integer getILastlogin() {
             return iLastlogin;
         }
 
-        public void setILastlogin(String iLastlogin) {
+        public void setILastlogin(Integer iLastlogin) {
             this.iLastlogin = iLastlogin;
         }
 
-        public String getICompletedStep() {
+        public Integer getICompletedStep() {
             return iCompletedStep;
         }
 
-        public void setICompletedStep(String iCompletedStep) {
+        public void setICompletedStep(Integer iCompletedStep) {
             this.iCompletedStep = iCompletedStep;
         }
 
-        public String getIIsOnline() {
+        public Integer getIIsOnline() {
             return iIsOnline;
         }
 
-        public void setIIsOnline(String iIsOnline) {
+        public void setIIsOnline(Integer iIsOnline) {
             this.iIsOnline = iIsOnline;
         }
 
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(this.iUserId);
-            dest.writeString(this.txAuthToken);
-            dest.writeString(this.vZipcode);
-            dest.writeString(this.iMobileExtension);
-            dest.writeString(this.vMobileno);
-            dest.writeString(this.vVerificationcode);
-            dest.writeString(this.iLoginType);
-            dest.writeString(this.eUserType);
-            dest.writeString(this.eStatus);
-            dest.writeString(this.iIsDelete);
-            dest.writeString(this.iIsApprove);
-            dest.writeString(this.iCreatedAt);
-            dest.writeString(this.iUpdatedAt);
-            dest.writeString(this.iLastlogin);
-            dest.writeString(this.iCompletedStep);
-            dest.writeString(this.iIsOnline);
-        }
-
-        public ResponseData() {
-        }
-
-        protected ResponseData(Parcel in) {
-            this.iUserId = in.readString();
-            this.txAuthToken = in.readString();
-            this.vUserName = in.readParcelable(Object.class.getClassLoader());
-            this.vEmail = in.readParcelable(Object.class.getClassLoader());
-            this.dBirthdate = in.readParcelable(Object.class.getClassLoader());
-            this.eGender = in.readParcelable(Object.class.getClassLoader());
-            this.txAbout = in.readParcelable(Object.class.getClassLoader());
-            this.txAddress1 = in.readParcelable(Object.class.getClassLoader());
-            this.txAddress2 = in.readParcelable(Object.class.getClassLoader());
-            this.vCity = in.readParcelable(Object.class.getClassLoader());
-            this.vState = in.readParcelable(Object.class.getClassLoader());
-            this.vZipcode = in.readString();
-            this.txProfilePic = in.readParcelable(Object.class.getClassLoader());
-            this.vPassword = in.readParcelable(Object.class.getClassLoader());
-            this.iMobileExtension = in.readString();
-            this.vMobileno = in.readString();
-            this.vVerificationcode = in.readString();
-            this.dLatitude = in.readParcelable(Object.class.getClassLoader());
-            this.dLongitude = in.readParcelable(Object.class.getClassLoader());
-            this.txFacebookId = in.readParcelable(Object.class.getClassLoader());
-            this.txGoogleId = in.readParcelable(Object.class.getClassLoader());
-            this.iLoginType = in.readString();
-            this.eUserType = in.readString();
-            this.eStatus = in.readString();
-            this.iIsDelete = in.readString();
-            this.iIsApprove = in.readString();
-            this.iCreatedAt = in.readString();
-            this.iUpdatedAt = in.readString();
-            this.iLastlogin = in.readString();
-            this.iCompletedStep = in.readString();
-            this.iIsOnline = in.readString();
-        }
-
-        public final Parcelable.Creator<ResponseData> CREATOR = new Parcelable.Creator<ResponseData>() {
-            @Override
-            public ResponseData createFromParcel(Parcel source) {
-                return new ResponseData(source);
-            }
-
-            @Override
-            public ResponseData[] newArray(int size) {
-                return new ResponseData[size];
-            }
-        };
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.responseCode);
-        dest.writeParcelable(this.responseData, flags);
-        dest.writeString(this.responseMessage);
-    }
-
-    public SignUpModel() {
-    }
-
-    protected SignUpModel(Parcel in) {
-        this.responseCode = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.responseData = in.readParcelable(ResponseData.class.getClassLoader());
-        this.responseMessage = in.readString();
-    }
-
-    public static final Parcelable.Creator<SignUpModel> CREATOR = new Parcelable.Creator<SignUpModel>() {
-        @Override
-        public SignUpModel createFromParcel(Parcel source) {
-            return new SignUpModel(source);
-        }
-
-        @Override
-        public SignUpModel[] newArray(int size) {
-            return new SignUpModel[size];
-        }
-    };
 }

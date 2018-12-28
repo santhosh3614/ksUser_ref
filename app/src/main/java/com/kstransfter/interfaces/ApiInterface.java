@@ -4,6 +4,7 @@ package com.kstransfter.interfaces;
 import com.google.gson.JsonObject;
 import com.kstransfter.models.AutocompleteAddrees;
 import com.kstransfter.models.Result;
+import com.kstransfter.models.SignUpAndUpdate;
 import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.models.app.DriverListModel;
@@ -107,6 +108,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("oauth/bookedcar")
     Call<BookedCarModel> getBookedCar(@FieldMap Map<String, String> fields);
+
+
+    @FormUrlEncoded
+    @POST("oauth/signup")
+    Call<SignUpAndUpdate> signUpAndUpdate(@FieldMap Map<String, String> fields);
 
 
 }

@@ -24,6 +24,8 @@ public class SessionManager {
     public static final String KEY_DISTANCE = "distance";
     public static final String KEY_START_DATE = "start_date";
     public static final String KEY_END_DATE = "end_date";
+    public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_NOTIFACTION_KEY = "notification_key";
 
 
     // Constructor
@@ -66,6 +68,25 @@ public class SessionManager {
 
     public void setSearchType(String searchType) {
         editor.putString(KEY_USER_TYPE, searchType);
+        editor.commit();
+    }
+
+    public String getNotificationToken() {
+        return pref.getString(KEY_NOTIFACTION_KEY, "abc123456");
+    }
+
+    public void setNoificationToken(String token) {
+        editor.putString(KEY_NOTIFACTION_KEY, token);
+        editor.commit();
+    }
+
+
+    public String getUserId() {
+        return pref.getString(KEY_USER_ID, "-1");
+    }
+
+    public void setUserId(String userId) {
+        editor.putString(KEY_USER_ID, userId);
         editor.commit();
     }
 

@@ -23,6 +23,7 @@ import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +46,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private MainActivity mainActivity;
     private SessionManager sessionManager;
     private CardView cardApplyCoupn;
+    private CarListtModel.ResponseDatum responseDatum;
 
 
     @Nullable
@@ -73,6 +75,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtFareRule = view.findViewById(R.id.txtFareRule);
         cardApplyCoupn = view.findViewById(R.id.cardApplyCoupn);
         txtDetails = view.findViewById(R.id.txtDetails);
+        imgCar = view.findViewById(R.id.imgCar);
         try {
             initital();
         } catch (Exception e) {
@@ -97,8 +100,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         cardApplyCoupn.setOnClickListener(v -> {
             Toast.makeText(mainActivity, "aaply card coupon", Toast.LENGTH_SHORT).show();
         });
-
-        CarListtModel.ResponseDatum responseDatum = getArguments().getParcelable("carModel");
+        responseDatum = getArguments().getParcelable("carModel");
         if (responseDatum != null) {
             if (responseDatum.getVCar() != null) {
                 txtCar.setText(responseDatum.getVCar().toString());
@@ -111,7 +113,8 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
                 txtPrice.setText(responseDatum.getTotalPrice().toString());
                 txtFareRule.setText("");
-
+                txtDate.setText(StaticUtils.getDateAndTime());
+                Picasso.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }
         txtConfirmBooking.setOnClickListener(v -> {
@@ -122,18 +125,18 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private void confirmBooking() {
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
-        map.put("txPickUpAddress", "asdfasdfasdfsdf");
-        map.put("iDriverId", "1");
-        map.put("iUserId", "1");
+        map.put("txPickUpAddress", txtTo.getText().toString().trim());
+        map.put("iDriverId", responseDatum.getIDriverId());
+        map.put("iUserId", sessionManager.getUserId());
         map.put("dcPickUpLatitude", "23.26565464");
         map.put("dcPickUpLongitude", "23.665");
         map.put("vPickUpCity", "rajkot");
-        map.put("dtLeavingDateTime", "2018-11-28 11:11:00");
+        map.put("dtLeavingDateTime", sessionManager.getEndDate());
         map.put("iWaitingHour", "2");
-        map.put("vDistance", "50");
+        map.put("vDistance", sessionManager.getDistance());
         Call signUpWsCall = WsFactory.carBooked(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
-    }
+     }
 
     @Override
     public void successResponse(Object response, int code) {

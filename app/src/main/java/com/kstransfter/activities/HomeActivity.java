@@ -50,7 +50,7 @@ public class HomeActivity extends BaseActivity {
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        });
+         });
 
     }
 

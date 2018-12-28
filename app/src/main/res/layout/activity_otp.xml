@@ -63,6 +63,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/edtFirstDigit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/_5sdp"
@@ -81,24 +82,7 @@
 
 
         <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edit_text"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxEms="1"
-            android:maxLength="1"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
-
-        <EditText
+            android:id="@+id/edtSecondDigit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
@@ -117,7 +101,26 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/edtUserName"
+            android:id="@+id/edtThirdDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_edit_text"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxEms="1"
+            android:maxLength="1"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
+
+         <EditText
+            android:id="@+id/edtFourthDigit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

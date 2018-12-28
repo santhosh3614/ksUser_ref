@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
+
 import com.kstransfter.R;
 import com.kstransfter.utils.SessionManager;
 
@@ -28,13 +29,13 @@ public class SplashActivity extends BaseActivity {
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (sessionManager.isLoggedIn()) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                if (sessionManager.getUserId().equalsIgnoreCase("-1")) {
+                    Intent intent = new Intent(SplashActivity.this, TutorialActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                  } else {
-                    Intent intent = new Intent(SplashActivity.this, TutorialActivity.class);
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

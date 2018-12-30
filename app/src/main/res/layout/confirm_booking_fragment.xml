@@ -17,14 +17,17 @@
 
             <ImageView
                 android:id="@+id/imgCar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_centerVertical="true"
+                android:padding="@dimen/_5sdp"
+                android:scaleType="fitXY"
                 android:src="@drawable/indica" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_toRightOf="@+id/imgCar"
                 android:orientation="vertical">
@@ -33,13 +36,19 @@
                     android:id="@+id/txtCar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xuv GJ 27 V 8587" />
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="Xuv GJ 27 V 8587"
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SUN,SEP 02, 01:30 PM" />
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="4 Sheeter"
+                    android:textColor="@color/colorPrimary" />
+
+
             </LinearLayout>
         </RelativeLayout>
 
@@ -50,18 +59,26 @@
             android:orientation="horizontal"
             android:padding="@dimen/_5sdp">
 
+            <RelativeLayout
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/value" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/value" />
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:text="Value for money" />
+                android:fontFamily="@font/opensans_regular"
+                android:text="Value for money"
+                android:textColor="@color/colorPrimary" />
 
 
         </LinearLayout>
@@ -73,17 +90,29 @@
             android:orientation="horizontal"
             android:padding="@dimen/_5sdp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ac" />
+
+            <RelativeLayout
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ac" />
+
+
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:text="AC" />
+                android:fontFamily="@font/opensans_regular"
+                android:text="AC"
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 
@@ -102,9 +131,8 @@
                 android:id="@+id/imgLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/address_icon"
                 android:layout_centerVertical="true"
-                />
+                android:src="@drawable/address_icon" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,17 +214,43 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/gray_line" />
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/_5sdp"
-            android:fontFamily="@font/opensans_semibold"
-            android:padding="@dimen/_5sdp"
-            android:text="6 Hour round trip of about 526 km"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtHrs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/opensans_semibold"
+                android:padding="@dimen/_5sdp"
+                android:text="6 Hour"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:padding="@dimen/_5sdp"
+                android:text="round trip of about"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtDis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:padding="@dimen/_5sdp"
+                android:text="526 km"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
 
         <RelativeLayout
@@ -209,40 +263,64 @@
                 android:id="@+id/txtKmPerH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:text="RS 9 PER KM"
+                android:text="RS 9 KM"
                 android:textColor="@color/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true">
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_bold"
                     android:text="RS 5470"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_19sdp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estimate fare"
-                    android:textColor="@color/colorPrimary" />
-
+                    android:fontFamily="@font/opensans_regular"
+                    android:text="Estimate fare" />
             </LinearLayout>
-
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txtHideAndShow"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/gray_line" />
+
+
+        <LinearLayout
+            android:id="@+id/llHideAndShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:text="Hide Fare Details"
-            android:textColor="@color/colorPrimary" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgHide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/arrow_hid" />
+
+            <TextView
+                android:id="@+id/txtHideAndShow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Hide Fare Details"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/llFairDetails"
@@ -254,7 +332,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp">
+                android:padding="@dimen/_5sdp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -268,10 +347,27 @@
                         android:text="Base fare"
                         android:textColor="@color/black" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="140km * Rs 9" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtKm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="140km X " />
+
+
+                        <TextView
+                            android:id="@+id/txtRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" RS 9 " />
+
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
@@ -287,6 +383,11 @@
 
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray_line" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -309,6 +410,80 @@
                     android:layout_marginRight="@dimen/_5sdp"
                     android:text="RS 5470"
                     android:textColor="@color/black" />
+
+            </RelativeLayout>
+
+             <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Taxes &amp; Fees"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="@string/night_time_allowance_n_taxes" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="RS 736"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:text="RS 200" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:text="RS 150" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:text="RS 386" />
+
+                </LinearLayout>
+
 
             </RelativeLayout>
 
@@ -345,7 +520,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Free concellation available. know more." />
+                    android:text="Free concellation available. know more."
+                    android:textColor="@color/green_text" />
 
 
                 <ImageView
@@ -397,7 +573,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/_8sdp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -429,7 +605,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/_8sdp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -462,7 +638,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/_8sdp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -496,7 +672,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/_8sdp">
 
                     <ImageView
                         android:layout_width="wrap_content"

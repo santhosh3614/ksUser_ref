@@ -115,24 +115,23 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
-        map.put("dtLeavingDateTime", "2018-11-22 22:11:00");
-        map.put("dtReturningDateTime", "2018-11-22 22:11:00");
-        map.put("vDistance", "170");
+        map.put("dtLeavingDateTime", txtLeaveDate.getText().toString().trim());
+        map.put("dtReturningDateTime", txtReturn.getText().toString().trim());
+        map.put("vDistance", sessionManager.getDistance());
         Call signUpWsCall = WsFactory.carList(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_CAR_LIST, this);
     }
 
-
     @Override
     public void onPause() {
-        progressDialog.cancel();
+//        progressDialog.cancel();
         super.onPause();
     }
 
 
     @Override
     public void onDestroy() {
-        progressDialog.cancel();
+//        progressDialog.cancel();
         super.onDestroy();
     }
 
@@ -150,6 +149,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     public void initital() {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
+        setHeader(true, "Car List");
         sessionManager.setStartDate(StaticUtils.getDateAndTime());
         txtLeaveDate.setText(sessionManager.getStartDate());
         cardLeave.setOnClickListener(v -> {

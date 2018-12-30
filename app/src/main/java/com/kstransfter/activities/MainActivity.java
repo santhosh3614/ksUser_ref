@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.kstransfter.R;
 import com.kstransfter.fragments.BookingHistoryFragment;
 import com.kstransfter.fragments.HomeFragment;
+import com.kstransfter.fragments.TermsAndCondtionFragment;
 import com.kstransfter.fragments.UpadateProfileFragment;
 import com.kstransfter.utils.PoupUtils;
 
@@ -166,6 +167,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case R.id.txtTermAndCond:
                 closeNavigation();
+                replaceFragmenr(TermsAndCondtionFragment.getInstance(),TermsAndCondtionFragment.TAG,false);
                 break;
             case R.id.txtRegisterCar:
                 closeNavigation();

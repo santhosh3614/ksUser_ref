@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.models.app.BookedCarModel;
@@ -23,7 +24,6 @@ import com.kstransfter.utils.StaticUtils;
 import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +47,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private SessionManager sessionManager;
     private CardView cardApplyCoupn;
     private CarListtModel.ResponseDatum responseDatum;
+    private TextView txtHrs, txtDis;
 
 
     @Nullable
@@ -76,6 +77,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         cardApplyCoupn = view.findViewById(R.id.cardApplyCoupn);
         txtDetails = view.findViewById(R.id.txtDetails);
         imgCar = view.findViewById(R.id.imgCar);
+        txtHrs = view.findViewById(R.id.txtHrs);
+        txtDis = view.findViewById(R.id.txtDis);
+
+
         try {
             initital();
         } catch (Exception e) {
@@ -88,6 +93,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
+        setHeader(true, "Confirm Car Booking");
         txtHideAndShow.setOnClickListener(v -> {
             if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
                 txtHideAndShow.setText("Show Fare Details");
@@ -108,13 +114,14 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtTo.setText(sessionManager.getTo());
                 txtLeaveDate.setText(sessionManager.getStartDate());
                 txtRetrurnBy.setText(sessionManager.getEndDate());
-                txtKmPerH.setText(responseDatum.getMinKmCharge() + "");
+//                txtKmPerH.setText(responseDatum.getMinKmCharge() + "");
                 txtbaseFare.setText(responseDatum.getTotalPrice() + "");
                 txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
                 txtPrice.setText(responseDatum.getTotalPrice().toString());
                 txtFareRule.setText("");
+                txtDis.setText(responseDatum.getExtraKm() + "");
                 txtDate.setText(StaticUtils.getDateAndTime());
-                Picasso.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
+                Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }
         txtConfirmBooking.setOnClickListener(v -> {
@@ -128,15 +135,15 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         map.put("txPickUpAddress", txtTo.getText().toString().trim());
         map.put("iDriverId", responseDatum.getIDriverId());
         map.put("iUserId", sessionManager.getUserId());
-        map.put("dcPickUpLatitude", "23.26565464");
-        map.put("dcPickUpLongitude", "23.665");
-        map.put("vPickUpCity", "rajkot");
+        map.put("dcPickUpLatitude", sessionManager.getPickUpLat());
+        map.put("dcPickUpLongitude", sessionManager.getPickUpLong());
+        map.put("vPickUpCity", txtFrom.getText().toString().trim());
         map.put("dtLeavingDateTime", sessionManager.getEndDate());
-        map.put("iWaitingHour", "2");
+        map.put("iWaitingHour", "0");
         map.put("vDistance", sessionManager.getDistance());
         Call signUpWsCall = WsFactory.carBooked(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
-     }
+    }
 
     @Override
     public void successResponse(Object response, int code) {

@@ -11,11 +11,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.models.app.DriverListModel;
 import com.kstransfter.utils.SessionManager;
-import com.squareup.picasso.Picasso;
 
 public class DriverDetailsFragment extends BaseFragment {
 
@@ -76,7 +76,8 @@ public class DriverDetailsFragment extends BaseFragment {
             txtExprence.setText(driverListModel.getVDriverExp());
             txtStartDate.setText(sessionManager.getStartDate());
             txtEndDate.setText(sessionManager.getEndDate());
-            Picasso.with(mainActivity).load(driverListModel.getVDriverImage()).into(imgDriverProfile);
+            Glide.with(mainActivity).load(driverListModel.getVDriverImage()).into(imgDriverProfile);
+
         }
     }
 }

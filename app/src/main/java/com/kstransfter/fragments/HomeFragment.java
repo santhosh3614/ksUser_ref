@@ -151,7 +151,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             llPopupButtom.setVisibility(View.GONE);
         }
 
-     }
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -220,7 +220,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 Bundle bundle = new Bundle();
                 bundle.putString("pickupPoint", pickupPoint);
                 bundle.putString("endPoint", endPoint);
-                double distance = StaticUtils.distance(lat1, log1, lat2, log2);
+                long distance = StaticUtils.distance(lat1, log1, lat2, log2);
                 sessionManager.setDistance(distance + "");
                 BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
                 outstationRide.setArguments(bundle);
@@ -599,6 +599,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 this.longitude = place.getLatLng().longitude;
                 lat1 = latitude;
                 log1 = longitude;
+                sessionManager.setPickUpLat(lat1 + "");
+                sessionManager.setPickUpLong(log1 + "");
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(getContext(), data);
                 Log.i(TAG, status.getStatusMessage());

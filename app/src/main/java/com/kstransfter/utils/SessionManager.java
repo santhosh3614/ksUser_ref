@@ -27,6 +27,9 @@ public class SessionManager {
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_NOTIFACTION_KEY = "notification_key";
 
+    public static final String KEY_PICKUP_LAT = "dcPickUpLatitude";
+    public static final String KEY_PICKUP_LONG = "dcPickUpLongitude";
+
 
     // Constructor
     public SessionManager(Context context) {
@@ -70,6 +73,26 @@ public class SessionManager {
         editor.putString(KEY_USER_TYPE, searchType);
         editor.commit();
     }
+
+    public String getPickUpLat() {
+        return pref.getString(KEY_PICKUP_LAT, "");
+    }
+
+    public void setPickUpLat(String pickup) {
+        editor.putString(KEY_PICKUP_LAT, pickup);
+        editor.commit();
+    }
+
+    public String getPickUpLong() {
+        return pref.getString(KEY_PICKUP_LONG, "");
+    }
+
+    public void setPickUpLong(String pickup) {
+        editor.putString(KEY_PICKUP_LONG, pickup);
+        editor.commit();
+    }
+
+
 
     public String getNotificationToken() {
         return pref.getString(KEY_NOTIFACTION_KEY, "abc123456");

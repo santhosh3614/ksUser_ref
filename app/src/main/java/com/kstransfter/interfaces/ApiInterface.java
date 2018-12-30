@@ -8,6 +8,7 @@ import com.kstransfter.models.SignUpAndUpdate;
 import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.models.app.DriverListModel;
+import com.kstransfter.models.app.GetPages;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.ResendOtp;
@@ -109,10 +110,11 @@ public interface ApiInterface {
     @POST("oauth/bookedcar")
     Call<BookedCarModel> getBookedCar(@FieldMap Map<String, String> fields);
 
-
     @FormUrlEncoded
     @POST("oauth/signup")
     Call<SignUpAndUpdate> signUpAndUpdate(@FieldMap Map<String, String> fields);
 
+    @GET("site/getpage")
+    Call<GetPages> termsAndCondition();
 
 }

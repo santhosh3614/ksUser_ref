@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.kstransfter.R;
 import com.kstransfter.interfaces.RvListeners;
 import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.utils.StaticUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
     @Override
     public void onBindViewHolder(@NonNull BookHolder holder, int position) {
         CarListtModel.ResponseDatum responseDatum = responseDatumList.get(position);
-        Picasso.with(context).load(responseDatum.getVCarImage()).into(holder.imgCar);
+        Glide.with(context).load(responseDatum.getVCarImage()).into(holder.imgCar);
         holder.txtDate.setText(StaticUtils.getDateAndTime());
         holder.llItem.setOnClickListener(v -> {
             rvListeners.onItemclick(holder.itemView, position);

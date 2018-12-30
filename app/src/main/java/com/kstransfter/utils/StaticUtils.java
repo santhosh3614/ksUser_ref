@@ -35,6 +35,7 @@ public class StaticUtils {
     public static final int REQUEST_CAR_LIST = 5004;
     public static final int REQUEST_DRIVER_LIST = 5005;
     public static final int REQUEST_DRIVER_CONFIRM_BOOKING = 5006;
+    public static final int REQUEST_GET_PAGES = 5007;
 
 
 
@@ -56,7 +57,7 @@ public class StaticUtils {
     }
 
     //given in km
-    public static double distance(double lat1, double lon1, double lat2, double lon2) {
+    public static long distance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;
         double dist = Math.sin(deg2rad(lat1))
                 * Math.sin(deg2rad(lat2))
@@ -66,7 +67,7 @@ public class StaticUtils {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515 * 2;
-        return (dist);
+        return (long)dist;
     }
 
     private static double deg2rad(double deg) {

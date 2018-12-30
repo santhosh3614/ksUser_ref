@@ -8,6 +8,7 @@ import com.kstransfter.models.SignUpAndUpdate;
 import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.CarListtModel;
 import com.kstransfter.models.app.DriverListModel;
+import com.kstransfter.models.app.GetPages;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.SignUpModel;
@@ -85,6 +86,11 @@ public class WsFactory {
         return signUpModelCall;
     }
 
+    public static Call termsAndCondition() {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<GetPages> signUpModelCall = apiService.termsAndCondition();
+        return signUpModelCall;
+    }
 
 
 }

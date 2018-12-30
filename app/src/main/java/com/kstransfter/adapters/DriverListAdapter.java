@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.kstransfter.R;
 import com.kstransfter.interfaces.RvListeners;
 import com.kstransfter.models.app.DriverListModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class DriverListAdapter extends RecyclerView.Adapter<DriverListAdapter.Dr
         });
         String image = responseDatum.getVDriverImage();
         if (!TextUtils.isEmpty(image))
-            Picasso.with(context).load(image).into(holder.imgDriverProfile);
+            Glide.with(context).load(image).into(holder.imgDriverProfile);
         holder.txtDriverName.setText(responseDatum.getVDriverName());
         holder.txtExprence.setText(responseDatum.getVDriverExp());
     }

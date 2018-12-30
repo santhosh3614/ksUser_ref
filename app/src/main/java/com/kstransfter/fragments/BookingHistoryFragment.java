@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
 import com.kstransfter.adapters.BookHistoryAdapter;
+
 import java.util.ArrayList;
 
 public class BookingHistoryFragment extends BaseFragment {
@@ -49,16 +51,8 @@ public class BookingHistoryFragment extends BaseFragment {
         }
         BookHistoryAdapter bookHistoryAdapter = new BookHistoryAdapter(getContext(), bookings);
         rvBookingHistory.setAdapter(bookHistoryAdapter);
-        setVisibleAndGone();
+        setHeader(true, "Booking History");
     }
 
-    private void setVisibleAndGone() {
-        mainActivity.txtLocalRides.setVisibility(View.GONE);
-        mainActivity.txtOutSideRide.setVisibility(View.GONE);
-        mainActivity.imgMenu.setVisibility(View.GONE);
-        mainActivity.imgBack.setVisibility(View.VISIBLE);
-        mainActivity.txtTitle.setVisibility(View.VISIBLE);
-        mainActivity.txtTitle.setText("Booking History");
-    }
 
 }

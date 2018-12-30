@@ -63,7 +63,9 @@
     <string name="adavace_booking">Adavace \n booking</string>
     <string name="on_way_trip">one way \n trip</string>
     <string name="round_trip">Round \n Trip</string>
-    <string name="keep_car_till_return">keep car till return</string>
+    <string name="keep_car_till_return">Keep Car Till Return</string>
+    <string name="night_time_allowance_n_taxes">Night time allowance \nTaxes</string>
+    <string name="terms_and_condition">terms and condition</string>
 
     <string-array name="Qnty">
         <item>1</item>

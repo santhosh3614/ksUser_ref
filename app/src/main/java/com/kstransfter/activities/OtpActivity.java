@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.utils.PoupUtils;
@@ -83,14 +81,10 @@ public class OtpActivity extends BaseActivity implements WsResponse, TextWatcher
             }
         });
     }
+
     private void getDataFromPrev() {
         vCode = getIntent().getExtras().getString("vCode");
-        if (TextUtils.isEmpty(vCode)) {
-            Toast.makeText(this, "data is coming: " + vCode, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "data is not coming " + vCode, Toast.LENGTH_SHORT).show();
-        }
-    }
+      }
 
     @Override
     public void successResponse(Object response, int code) {

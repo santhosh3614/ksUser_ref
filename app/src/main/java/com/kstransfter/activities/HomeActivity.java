@@ -11,7 +11,6 @@ import com.kstransfter.R;
 import com.kstransfter.utils.SessionManager;
 
 public class HomeActivity extends BaseActivity {
-    //Change home..
     private LinearLayout llCar, llBookDriver;
     private ImageView imgMenu, imgBack;
     private SessionManager sessionManager;
@@ -22,9 +21,9 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         try {
             initial();
-          } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-         }
+        }
     }
 
     @Override
@@ -40,7 +39,6 @@ public class HomeActivity extends BaseActivity {
             sessionManager.setSearchType("Car");
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
@@ -48,9 +46,8 @@ public class HomeActivity extends BaseActivity {
             sessionManager.setSearchType("Driver");
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-         });
+        });
 
     }
 

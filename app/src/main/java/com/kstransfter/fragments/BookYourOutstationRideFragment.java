@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -205,12 +206,25 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             case StaticUtils.REQUEST_CAR_LIST:
                 CarListtModel carListModel = (CarListtModel) response;
                 BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), carListModel.getResponseData(), (v, pos) -> {
-                    CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("carModel", responseDatum);
-                    ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
-                    confirmBookingFragment.setArguments(bundle);
-                    mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
+                    if (imgRoundWay.isSelected()) {
+                        if (TextUtils.isEmpty(txtReturn.getText().toString().trim())) {
+                            PoupUtils.showAlertDailog(mainActivity, "Please select return date");
+                        } else {
+                            CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable("carModel", responseDatum);
+                            ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
+                            confirmBookingFragment.setArguments(bundle);
+                            mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
+                        }
+                    } else {
+                        CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("carModel", responseDatum);
+                        ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
+                        confirmBookingFragment.setArguments(bundle);
+                        mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
+                    }
                 });
                 rvCarList.setAdapter(bookOutSideStaionAdapter);
                 break;

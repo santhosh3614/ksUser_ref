@@ -81,9 +81,8 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
                 if (signUpModel != null) {
                     sessionManager.setUserId(signUpModel.getResponseData().getIUserId());
                     Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
-                    intent.putExtra("signUpResponse", signUpModel.getResponseData());
+                    intent.putExtra("vCode", signUpModel.getResponseData().getVVerificationcode());
                     startActivity(intent);
-                    finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else {
                     PoupUtils.showAlertDailog(this, "Somthing went wrong,please try again");

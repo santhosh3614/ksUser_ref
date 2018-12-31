@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.kstransfter.R;
-import com.kstransfter.models.app.SignUpModel;
+import com.kstransfter.models.SignUpAndUpdate;
 import com.kstransfter.utils.PoupUtils;
 import com.kstransfter.utils.SessionManager;
 import com.kstransfter.utils.StaticUtils;
@@ -74,7 +74,7 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
     public void successResponse(Object response, int code) {
         switch (code) {
             case StaticUtils.REQUEST_SIGN_UP:
-                SignUpModel signUpModel = (SignUpModel) response;
+                SignUpAndUpdate signUpModel = (SignUpAndUpdate) response;
                 if (signUpModel != null) {
                     Intent intent = new Intent(this, HomeActivity.class);
                     startActivity(intent);

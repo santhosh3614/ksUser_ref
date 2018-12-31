@@ -196,6 +196,28 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             }
         });
 
+        edtPickUpLine.setOnClickListener(v -> {
+            try {
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE1);
+            } catch (GooglePlayServicesRepairableException e) {
+                // TODO: Handle the error.
+            } catch (GooglePlayServicesNotAvailableException e) {
+                // TODO: Handle the error.
+            }
+         });
+
+        edtDropLine.setOnClickListener(v -> {
+            try {
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());
+                startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE2);
+            } catch (GooglePlayServicesRepairableException e) {
+                // TODO: Handle the error.
+            } catch (GooglePlayServicesNotAvailableException e) {
+                // TODO: Handle the error.
+            }
+        });
+
         llDrop.setOnClickListener(v -> {
             try {
                 Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(getActivity());

@@ -47,7 +47,8 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private SessionManager sessionManager;
     private CardView cardApplyCoupn;
     private CarListtModel.ResponseDatum responseDatum;
-    private TextView txtHrs, txtDis;
+    private TextView txtHrs, txtDis, totalExtraFare;
+    private LinearLayout llHideAndShow;
 
 
     @Nullable
@@ -79,8 +80,8 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         imgCar = view.findViewById(R.id.imgCar);
         txtHrs = view.findViewById(R.id.txtHrs);
         txtDis = view.findViewById(R.id.txtDis);
-
-
+        totalExtraFare = view.findViewById(R.id.totalExtraFare);
+        llHideAndShow = view.findViewById(R.id.llHideAndShow);
         try {
             initital();
         } catch (Exception e) {
@@ -94,7 +95,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         setHeader(true, "Confirm Car Booking");
-        txtHideAndShow.setOnClickListener(v -> {
+        llHideAndShow.setOnClickListener(v -> {
             if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
                 txtHideAndShow.setText("Show Fare Details");
                 llFairDetails.setVisibility(View.GONE);

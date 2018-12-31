@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstransfter.R;
-import com.kstransfter.models.app.SignUpModel;
 import com.kstransfter.utils.PoupUtils;
 import com.kstransfter.utils.SessionManager;
 import com.kstransfter.utils.StaticUtils;
@@ -31,11 +32,10 @@ public class OtpActivity extends BaseActivity implements WsResponse, TextWatcher
     private TextView txtDone;
     private LinearLayout llResendOtp;
     private AlertDialog progressDialog;
-    private SignUpModel.ResponseData responseData;
     private EditText edtFirstDigit, edtSecondDigit, edtThirdDigit, edtFourthDigit;
     private SessionManager sessionManager;
     private View view;
-
+    private String vCode = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,8 +61,7 @@ public class OtpActivity extends BaseActivity implements WsResponse, TextWatcher
         edtFirstDigit.addTextChangedListener(this);
         edtSecondDigit.addTextChangedListener(this);
         edtThirdDigit.addTextChangedListener(this);
-
-        //        getDataFromPrev();
+        getDataFromPrev();
         llResendOtp.setOnClickListener(v -> {
             progressDialog.show();
             Map<String, String> map = new HashMap<>();
@@ -70,30 +69,26 @@ public class OtpActivity extends BaseActivity implements WsResponse, TextWatcher
             Call signUpWsCall = WsFactory.signUp(map);
             WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_OTP_SEND_PASSWORD, this);
         });
-
         txtDone.setOnClickListener(v -> {
             String enteredOtp = edtFirstDigit.getText().toString().trim()
                     + edtSecondDigit.getText().toString().trim()
                     + edtThirdDigit.getText().toString().trim()
                     + edtFourthDigit.getText().toString().trim();
-
-            if (!responseData.getVVerificationcode().equalsIgnoreCase(enteredOtp)) {
-                PoupUtils.showAlertDailog(this, "OTP not match");
-            } else {
+            if (vCode.equalsIgnoreCase(enteredOtp)) {
                 Intent intent = new Intent(OtpActivity.this, SignUpActivity.class);
                 startActivity(intent);
-                finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            } else {
+                PoupUtils.showAlertDailog(this, "OTP not match");
             }
         });
     }
-
     private void getDataFromPrev() {
-        responseData = getIntent().getParcelableExtra("signUpResponse");
-        if (responseData != null) {
-
+        vCode = getIntent().getExtras().getString("vCode");
+        if (TextUtils.isEmpty(vCode)) {
+            Toast.makeText(this, "data is coming: " + vCode, Toast.LENGTH_SHORT).show();
         } else {
-
+            Toast.makeText(this, "data is not coming " + vCode, Toast.LENGTH_SHORT).show();
         }
     }
 

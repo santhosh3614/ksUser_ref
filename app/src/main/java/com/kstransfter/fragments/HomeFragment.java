@@ -88,7 +88,6 @@ import static com.google.android.gms.maps.model.JointType.ROUND;
 
 public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
-    private static final String TAG = HomeFragment.class.getSimpleName();
 
     private static final int REQUEST_LOCATION = 1111;
     SupportMapFragment mapFragment;
@@ -129,6 +128,14 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private GooglePlacesAutocompleteAdapter dataAdapter;
     private TextView txtContinue;
     private SessionManager sessionManager;
+
+    public static HomeFragment getInstance(Bundle bundle) {
+        HomeFragment homeFragment = new HomeFragment();
+        homeFragment.setArguments(bundle);
+        return homeFragment;
+    }
+
+    public static final String TAG = HomeFragment.class.getSimpleName();
 
     @Nullable
     @Override
@@ -205,7 +212,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             } catch (GooglePlayServicesNotAvailableException e) {
                 // TODO: Handle the error.
             }
-         });
+        });
 
         edtDropLine.setOnClickListener(v -> {
             try {

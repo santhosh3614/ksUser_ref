@@ -76,7 +76,7 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
             case StaticUtils.REQUEST_SIGN_UP:
                 SignUpAndUpdate signUpModel = (SignUpAndUpdate) response;
                 if (signUpModel != null) {
-                    Intent intent = new Intent(this, HomeActivity.class);
+                    Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

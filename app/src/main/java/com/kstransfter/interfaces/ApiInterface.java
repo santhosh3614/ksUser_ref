@@ -12,6 +12,7 @@ import com.kstransfter.models.app.GetPages;
 import com.kstransfter.models.app.Login;
 import com.kstransfter.models.app.MoviesResponse;
 import com.kstransfter.models.app.ResendOtp;
+import com.kstransfter.models.app.ResendPasswordModel;
 import com.kstransfter.models.app.SignUpModel;
 import com.kstransfter.models.app.UploadImage;
 import com.kstransfter.models.app.User;
@@ -113,6 +114,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("oauth/signup")
     Call<SignUpAndUpdate> signUpAndUpdate(@FieldMap Map<String, String> fields);
+
+    @FormUrlEncoded
+    @POST("oauth/resendotp")
+    Call<ResendPasswordModel> resendPassword(@FieldMap Map<String, String> fields);
 
     @GET("site/getpage")
     Call<GetPages> termsAndCondition();

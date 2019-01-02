@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.fragments.BookingHistoryFragment;
-import com.kstransfter.fragments.HomeFragment;
+import com.kstransfter.fragments.MainFragment;
 import com.kstransfter.fragments.TermsAndCondtionFragment;
 import com.kstransfter.fragments.UpadateProfileFragment;
 import com.kstransfter.utils.PoupUtils;
@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         imgMenu = findViewById(R.id.imgMenu);
@@ -56,7 +57,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         rlGoForUpdate = findViewById(R.id.rlGoForUpdate);
         txtTitle = findViewById(R.id.txtTitle);
         txtCenterTitle = findViewById(R.id.txtCenterTitle);
-
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);
         txtSupport.setOnClickListener(this);
@@ -91,9 +91,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void initial() {
-        //Relace Fragment
-        HomeFragment homeFragment = new HomeFragment();
-        replaceFragmenr(homeFragment, homeFragment.getTag(), false);
+        //Replace Fragment
+        Bundle bundle = new Bundle();
+        replaceFragmenr(MainFragment.getInstance(bundle), MainFragment.TAG, false);
     }
 
     private void openNavigation() {
@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case R.id.txtTermAndCond:
                 closeNavigation();
-                replaceFragmenr(TermsAndCondtionFragment.getInstance(),TermsAndCondtionFragment.TAG,false);
+                replaceFragmenr(TermsAndCondtionFragment.getInstance(), TermsAndCondtionFragment.TAG, false);
                 break;
             case R.id.txtRegisterCar:
                 closeNavigation();

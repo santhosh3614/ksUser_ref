@@ -60,6 +60,9 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
         String phone = edtPhone.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
             PoupUtils.showAlertDailog(this, "Enter your phone no.");
+        } else if (phone.length() < 10) {
+            PoupUtils.showAlertDailog(this, "Mobile number is not valid");
+
         } else {
             progressDialog.show();
             Map<String, String> map = new HashMap<>();
@@ -79,11 +82,14 @@ public class EnterMobilNumberActivity extends BaseActivity implements WsResponse
             case StaticUtils.REQUEST_SIGN_UP:
                 SignUpModel signUpModel = (SignUpModel) response;
                 if (signUpModel != null) {
-                    sessionManager.setUserId(signUpModel.getResponseData().getIUserId());
+//                    sessionManager.setUserId(signUpModel.getResponseData().getIUserId());
+                    String userId = signUpModel.getResponseData().getIUserId();
                     Intent intent = new Intent(EnterMobilNumberActivity.this, OtpActivity.class);
+                    intent.putExtra("userId", userId);
                     intent.putExtra("vCode", signUpModel.getResponseData().getVVerificationcode());
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                 } else {
                     PoupUtils.showAlertDailog(this, "Somthing went wrong,please try again");
                 }

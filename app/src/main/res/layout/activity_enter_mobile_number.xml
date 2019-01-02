@@ -8,11 +8,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
+        android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp" />
+            android:layout_height="@dimen/_80sdp"
+            android:visibility="gone"
+            />
 
 
         <ImageView
@@ -47,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_regular"
                 android:text="+91"
-                android:textSize="22sp" />
+                android:textSize="18sp"
+                />
 
             <EditText
                 android:id="@+id/edtPhone"

@@ -32,14 +32,7 @@ public class UpadateFieldName extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rlName = view.findViewById(R.id.rlName);
-        rlMobile = view.findViewById(R.id.rlMobile);
-        rlEmail = view.findViewById(R.id.rlEmail);
-        rlPassword = view.findViewById(R.id.rlPassword);
-        rlName = view.findViewById(R.id.rlName);
-        rlMobile = view.findViewById(R.id.rlMobile);
-        rlEmail = view.findViewById(R.id.rlEmail);
-        rlPassword = view.findViewById(R.id.rlPassword);
+
         btnUpdate = view.findViewById(R.id.btnUpdate);
         txtFieldName = view.findViewById(R.id.txtFieldName);
         try {

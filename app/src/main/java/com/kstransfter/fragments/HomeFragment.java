@@ -2,6 +2,7 @@ package com.kstransfter.fragments;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -73,6 +74,7 @@ import com.kstransfter.webservice.WsUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import io.fabric.sdk.android.Fabric;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -128,6 +130,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private GooglePlacesAutocompleteAdapter dataAdapter;
     private TextView txtContinue;
     private SessionManager sessionManager;
+    private AlertDialog progressDialog;
+
 
     public static HomeFragment getInstance(Bundle bundle) {
         HomeFragment homeFragment = new HomeFragment();
@@ -148,10 +152,10 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
     @Override
     public void initital() {
+        progressDialog=new SpotsDialog(mainActivity, R.style.Custom);
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
         sessionManager = new SessionManager(getContext());
-
         if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
             llPopupButtom.setVisibility(View.VISIBLE);
         } else {
@@ -246,15 +250,55 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             } else if (TextUtils.isEmpty(endPoint)) {
                 PoupUtils.showAlertDailog(getActivity(), "Please select end point");
             } else {
-                Bundle bundle = new Bundle();
-                bundle.putString("pickupPoint", pickupPoint);
-                bundle.putString("endPoint", endPoint);
-                long distance = StaticUtils.distance(lat1, log1, lat2, log2);
-                sessionManager.setDistance(distance + "");
-                BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
-                outstationRide.setArguments(bundle);
-                mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
+
+                progressDialog.show();
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .baseUrl("https://maps.googleapis.com/")
+                        .build();
+                apiInterface = retrofit.create(ApiInterface.class);
+
+                apiInterface.getDirections("driving",
+                        "less_driving",
+                        lat1 + "," + log1, endPoint,
+                        getResources().getString(R.string.google_directions_key))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                new SingleObserver<Result>() {
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
+                                        progressDialog.cancel();
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Result result) {
+                                        progressDialog.cancel();
+                                        List<Route> routeList = result.getRoutes();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("pickupPoint", pickupPoint);
+                                        bundle.putString("endPoint", endPoint);
+                                        sessionManager.setDistance(routeList.get(0).getLegs().get(0).getDistance().getText());
+                                        sessionManager.setDuration(routeList.get(0).getLegs().get(0).getDuration().getText());
+                                        BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
+                                        outstationRide.setArguments(bundle);
+                                        mainActivity.replaceFragmenr(outstationRide, BookYourOutstationRideFragment.TAG, false);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        progressDialog.cancel();
+                                        e.printStackTrace();
+                                        PoupUtils.showAlertDailog(mainActivity, "Somthing went wrong,Please try again.");
+                                    }
+                                });
+
+
             }
+
+
         });
 
 
@@ -306,6 +350,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                 .baseUrl("https://maps.googleapis.com/")
                 .build();
         apiInterface = retrofit.create(ApiInterface.class);
+
+
         sydney = new LatLng(latitude, longitude);
 
         apiInterface.getDirections("driving",

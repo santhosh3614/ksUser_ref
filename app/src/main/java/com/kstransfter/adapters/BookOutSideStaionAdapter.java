@@ -25,11 +25,13 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
     private List<CarListtModel.ResponseDatum> responseDatumList;
     private LayoutInflater layoutInflater;
     private RvListeners rvListeners;
+    private boolean isRound;
 
-    public BookOutSideStaionAdapter(Context context, List<CarListtModel.ResponseDatum> responseDatumList, RvListeners rvListeners) {
+    public BookOutSideStaionAdapter(Context context, List<CarListtModel.ResponseDatum> responseDatumList, RvListeners rvListeners, Boolean isRound) {
         this.context = context;
         this.responseDatumList = responseDatumList;
         this.rvListeners = rvListeners;
+        this.isRound = isRound;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -44,6 +46,16 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
         CarListtModel.ResponseDatum responseDatum = responseDatumList.get(position);
         Glide.with(context).load(responseDatum.getVCarImage()).into(holder.imgCar);
         holder.txtDate.setText(StaticUtils.getDateAndTime());
+        holder.txtPricePerKm.setText(responseDatum.getMinKm());
+
+        if (isRound) {
+            holder.txtPrice.setVisibility(View.GONE);
+            holder.txtPricePerKm.setVisibility(View.VISIBLE);
+        } else {
+            holder.txtPrice.setVisibility(View.VISIBLE);
+            holder.txtPricePerKm.setVisibility(View.GONE);
+        }
+
         holder.llItem.setOnClickListener(v -> {
             rvListeners.onItemclick(holder.itemView, position);
         });
@@ -53,6 +65,8 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
         if (responseDatum.getTotalPrice() != null) {
             holder.txtPrice.setText(responseDatum.getTotalPrice().toString());
         }
+
+
     }
 
     @Override
@@ -63,7 +77,7 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
     class BookHolder extends RecyclerView.ViewHolder {
         private LinearLayout llItem;
         private ImageView imgCar;
-        private TextView txtCar, txtDate, txtPrice;
+        private TextView txtCar, txtDate, txtPrice, txtPricePerKm;
 
         public BookHolder(View view) {
             super(view);
@@ -72,6 +86,7 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
             txtDate = view.findViewById(R.id.txtDate);
             txtPrice = view.findViewById(R.id.txtPrice);
             imgCar = view.findViewById(R.id.imgCar);
+            txtPricePerKm = view.findViewById(R.id.txtPricePerKm);
         }
     }
 

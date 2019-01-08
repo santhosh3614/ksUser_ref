@@ -55,11 +55,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:fontFamily="@font/opensans_bold"
                 android:text="120"
                 android:textColor="@color/black" />
+
+             <TextView
+                android:id="@+id/txtPricePerKm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_bold"
+                android:text="10/km"
+                android:textColor="@color/black"
+                android:visibility="gone" />
 
 
         </RelativeLayout>

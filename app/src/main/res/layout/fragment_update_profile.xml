@@ -1,163 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rlName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:paddingRight="@dimen/_5sdp">
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtNameTitle"
+        <EditText
+            android:id="@+id/edtUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="name" />
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtNameTitle"
-            android:text="Rahul Kumar" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_below="@+id/txtName"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/black" />
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="@string/full_name"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlMobile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:paddingRight="@dimen/_5sdp">
-
-        <TextView
-            android:id="@+id/txtMobile"
+        <EditText
+            android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="phone" />
-
-        <TextView
-            android:id="@+id/txtMobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtMobile"
-            android:text="+91 9584288185" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_below="@+id/txtMobileNo"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/black" />
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="Email (Option)"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rlEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:paddingRight="@dimen/_5sdp">
-
-        <TextView
-            android:id="@+id/txtEmail"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update Email id" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp">
 
-        <TextView
-            android:id="@+id/txtEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtEmail"
-            android:text="Rahul Kumar"
-            android:visibility="gone" />
+            <TextView
+                android:id="@+id/txtUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_yello_button"
+                android:fontFamily="@font/opensans_regular"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:paddingRight="@dimen/_30sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:text="Update"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_below="@+id/txtEmailAddress"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/black" />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rlPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:paddingRight="@dimen/_5sdp">
-
-        <TextView
-            android:id="@+id/txtSetPasword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Set Password" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtSetPasword"
-            android:text="Rahul Kumar"
-            android:visibility="gone" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_below="@+id/txtSetPasword"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/black" />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
-
-    </RelativeLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

@@ -55,6 +55,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     private SessionManager sessionManager;
     private RelativeLayout rlOneAndRound;
     private LinearLayout llCarView;
+    private TextView txtDis;
 
     @Nullable
     @Override
@@ -84,6 +85,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         txtPrice = view.findViewById(R.id.txtPrice);
         txtbaseFare = view.findViewById(R.id.txtbaseFare);
         txtEstimatePrice = view.findViewById(R.id.txtEstimatePrice);
+        txtDis = view.findViewById(R.id.txtDis);
         imgOneWay.setSelected(true);
         cardReturn.setVisibility(View.GONE);
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext()));

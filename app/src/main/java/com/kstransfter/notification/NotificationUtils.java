@@ -19,7 +19,8 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-import com.ksdriverapp.R;
+import com.kstransfter.R;
+import com.kstransfter.utils.StaticUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

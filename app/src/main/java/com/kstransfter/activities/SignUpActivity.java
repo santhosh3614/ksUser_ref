@@ -53,11 +53,13 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
             String userName = edtUserName.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
             if (TextUtils.isEmpty(userName)) {
-                PoupUtils.showAlertDailog(this, "Enter user name.");
+                PoupUtils.showAlertDailog(this, "Please enter name.");
+            } else if (TextUtils.isEmpty(email)) {
+                PoupUtils.showAlertDailog(this, "Please enter email.");
             } else {
                 wsCallingHere(userName, email);
             }
-         });
+        });
     }
 
     private void wsCallingHere(String userName, String email) {
@@ -80,9 +82,9 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                 } else {
+                } else {
                     PoupUtils.showAlertDailog(this, "Something went wrong,Please try again.");
-                 }
+                }
                 break;
             default:
                 break;

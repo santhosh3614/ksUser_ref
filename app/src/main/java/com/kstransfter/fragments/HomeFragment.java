@@ -250,7 +250,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             } else if (TextUtils.isEmpty(endPoint)) {
                 PoupUtils.showAlertDailog(getActivity(), "Please select end point");
             } else {
-
                 progressDialog.show();
 
                 Retrofit retrofit = new Retrofit.Builder()
@@ -259,7 +258,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                         .baseUrl("https://maps.googleapis.com/")
                         .build();
                 apiInterface = retrofit.create(ApiInterface.class);
-
                 apiInterface.getDirections("driving",
                         "less_driving",
                         lat1 + "," + log1, endPoint,

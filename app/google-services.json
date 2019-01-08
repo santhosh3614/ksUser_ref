@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1049531902088",
+    "firebase_url": "https://kstransfer-a8b8d.firebaseio.com",
+    "project_id": "kstransfer-a8b8d",
+    "storage_bucket": "kstransfer-a8b8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049531902088:android:6834b2c1f3b29b66",
+        "android_client_info": {
+          "package_name": "com.kstransfter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049531902088-shp5fal0ltqn96s8nar3fiq5u2nh4ij3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kstransfter",
+            "certificate_hash": "b90fcdb0b18134e25f694c032ba8ec70ce210bc0"
+          }
+        },
+        {
+          "client_id": "1049531902088-frinqmrpfg9ie5859jqup66kp0av6e41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByaqJqw4KzdUWs_WSsgmSdlD4X1P3p8Zs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049531902088-frinqmrpfg9ie5859jqup66kp0av6e41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

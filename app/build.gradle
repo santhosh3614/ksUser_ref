@@ -64,6 +64,8 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:0.4@aar'
     implementation 'io.michaelrocks:libphonenumber-android:8.8.5'
     implementation 'me.relex:circleindicator:1.2.2@aar'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -75,3 +77,5 @@ dependencies {
 
 
 }
+
+apply plugin: 'com.google.gms.google-services'

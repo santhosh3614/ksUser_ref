@@ -21,17 +21,15 @@ public class SessionManager {
     public static final String KEY_USER_TYPE = "user_type";
     public static final String KEY_FROM = "from";
     public static final String KEY_TO = "to";
-    public static final String KEY_DISTANCE = "distance";
     public static final String KEY_START_DATE = "start_date";
     public static final String KEY_END_DATE = "end_date";
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_NOTIFACTION_KEY = "notification_key";
-
     public static final String KEY_PICKUP_LAT = "dcPickUpLatitude";
     public static final String KEY_PICKUP_LONG = "dcPickUpLongitude";
-
-    public static final String KEY_DURATION= "duration";
-
+    public static final String KEY_DURATION = "duration";
+    public static final String KEY_DISTANCE_STRING = "distance_string";
+    public static final String KEY_DISTANCE = "distance";
 
 
     // Constructor
@@ -119,6 +117,20 @@ public class SessionManager {
         return pref.getString(KEY_DISTANCE, "");
     }
 
+    public void setDistance(String distance) {
+        editor.putString(KEY_DISTANCE, distance);
+        editor.commit();
+    }
+
+    public String getDistanceString() {
+        return pref.getString(KEY_DISTANCE_STRING, "");
+    }
+
+    public void setDistanceString(String distanceString) {
+        editor.putString(KEY_DISTANCE_STRING, distanceString);
+        editor.commit();
+    }
+
     public void setStartDate(String startDate) {
         editor.putString(KEY_START_DATE, startDate);
         editor.commit();
@@ -137,10 +149,6 @@ public class SessionManager {
         return pref.getString(KEY_END_DATE, "");
     }
 
-    public void setDistance(String searchType) {
-        editor.putString(KEY_DISTANCE, searchType);
-        editor.commit();
-    }
 
     public String getFrom() {
         return pref.getString(KEY_FROM, "");

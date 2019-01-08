@@ -152,7 +152,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
 
     @Override
     public void initital() {
-        progressDialog=new SpotsDialog(mainActivity, R.style.Custom);
+        progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
         sessionManager = new SessionManager(getContext());
@@ -280,7 +280,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                                         Bundle bundle = new Bundle();
                                         bundle.putString("pickupPoint", pickupPoint);
                                         bundle.putString("endPoint", endPoint);
-                                        sessionManager.setDistance(routeList.get(0).getLegs().get(0).getDistance().getText());
+                                        int value = (routeList.get(0).getLegs().get(0).getDistance().getValue().intValue()) / 1000;
+                                        sessionManager.setDistance(value + "");
+                                        sessionManager.setDistanceString(routeList.get(0).getLegs().get(0).getDistance().getText());
                                         sessionManager.setDuration(routeList.get(0).getLegs().get(0).getDuration().getText());
                                         BookYourOutstationRideFragment outstationRide = new BookYourOutstationRideFragment();
                                         outstationRide.setArguments(bundle);

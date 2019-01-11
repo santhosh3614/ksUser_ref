@@ -200,8 +200,6 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     public void initital() {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
-
-
         txtDis.setText(sessionManager.getDistance());
         setHeader(true, "Car List");
         sessionManager.setStartDate(StaticUtils.getDateAndTime());

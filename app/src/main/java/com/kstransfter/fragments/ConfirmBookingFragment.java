@@ -120,8 +120,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
                 txtPrice.setText(responseDatum.getTotalPrice().toString());
                 txtFareRule.setText("");
-                txtDis.setText(responseDatum.getExtraKm() + "");
+//                txtDis.setText(sessionManager.getDistanceString() + "");
                 txtDate.setText(StaticUtils.getDateAndTime());
+                txtHrs.setText(sessionManager.getDuration() +" totalExtraFareround trip of about " +sessionManager.getDistanceString());
+
                 Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }

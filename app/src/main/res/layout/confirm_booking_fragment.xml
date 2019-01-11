@@ -233,7 +233,6 @@
                     android:layout_alignParentRight="true"
                     android:fontFamily="@font/opensans_semibold"
                     android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
                     android:text="6 Hour"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -469,7 +468,7 @@
 
                         <LinearLayout
                             android:id="@+id/llTaxDetails"
-                            android:layout_width="12dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:visibility="visible">

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1049531902088",
-    "firebase_url": "https://kstransfer-a8b8d.firebaseio.com",
-    "project_id": "kstransfer-a8b8d",
-    "storage_bucket": "kstransfer-a8b8d.appspot.com"
+    "project_number": "637554169247",
+    "firebase_url": "https://kstransferuser.firebaseio.com",
+    "project_id": "kstransferuser",
+    "storage_bucket": "kstransferuser.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1049531902088:android:6834b2c1f3b29b66",
+        "mobilesdk_app_id": "1:637554169247:android:35eca7201d7a9ec4",
         "android_client_info": {
-          "package_name": "com.kstransfter"
+          "package_name": "com.kstransfer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1049531902088-shp5fal0ltqn96s8nar3fiq5u2nh4ij3.apps.googleusercontent.com",
+          "client_id": "637554169247-ph8t1g3ppufubiihs2j344riam3dolqr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.kstransfter",
-            "certificate_hash": "b90fcdb0b18134e25f694c032ba8ec70ce210bc0"
+            "package_name": "com.kstransfer",
+            "certificate_hash": "d807bbebee130a2383e6fb23579b5e4d2ec2b034"
           }
         },
         {
-          "client_id": "1049531902088-frinqmrpfg9ie5859jqup66kp0av6e41.apps.googleusercontent.com",
+          "client_id": "637554169247-idbfk94mo44b4f9d2mql7507sa0s965d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyByaqJqw4KzdUWs_WSsgmSdlD4X1P3p8Zs"
+          "current_key": "AIzaSyA9fVQiJtQt2nddhtOd12S7Aa6hA5dyQqg"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1049531902088-frinqmrpfg9ie5859jqup66kp0av6e41.apps.googleusercontent.com",
+              "client_id": "637554169247-idbfk94mo44b4f9d2mql7507sa0s965d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

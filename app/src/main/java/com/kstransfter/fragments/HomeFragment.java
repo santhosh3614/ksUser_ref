@@ -339,7 +339,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mainActivity.txtOutSideRide.setVisibility(View.VISIBLE);
         mainActivity.imgMenu.setVisibility(View.VISIBLE);
         mainActivity.imgBack.setVisibility(View.GONE);
-        mainActivity.txtTitle.setVisibility(View.GONE);
+        mainActivity.txtTitle.setVisibility(View.VISIBLE);
+
+
     }
 
     private void movecarSourcetoDesignation() {

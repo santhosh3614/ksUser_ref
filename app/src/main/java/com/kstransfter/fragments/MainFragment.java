@@ -47,6 +47,8 @@ public class MainFragment extends BaseFragment {
     public void initital() {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
+
+
         llCar.setOnClickListener(v -> {
             sessionManager.setSearchType("Car");
             Bundle bundle = new Bundle();

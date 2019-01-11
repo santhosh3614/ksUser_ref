@@ -231,24 +231,25 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             cardReturn.setVisibility(View.VISIBLE);
         }
     }
-
+/*
     private void showDefaultData() {
         List<CarListtModel.ResponseDatum> responseDatumList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+     *//*   for (int i = 0; i < 5; i++) {
             CarListtModel.ResponseDatum responseDatum = new CarListtModel.ResponseDatum();
             responseDatum.setExtraKm(10.0);
-            responseDatumList.add(responseDatum);
+            responseDatumList.add(responseDatum);*//*
         }
-     /*   BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (v, pos) -> {
+     *//*   BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (v, pos) -> {
             CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
             Bundle bundle = new Bundle();
             bundle.putParcelable("carModel", responseDatum);
             ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
             confirmBookingFragment.setArguments(bundle);
             mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
-        });*/
+        });*//*
 //        rvCarList.setAdapter(bookOutSideStaionAdapter);
-    }
+    }*/
+
 
     @Override
     public void successResponse(Object response, int code) {

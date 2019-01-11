@@ -122,7 +122,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtFareRule.setText("");
 //                txtDis.setText(sessionManager.getDistanceString() + "");
                 txtDate.setText(StaticUtils.getDateAndTime());
-                txtHrs.setText(sessionManager.getDuration() +" totalExtraFareround trip of about " +sessionManager.getDistanceString());
+                txtHrs.setText(sessionManager.getDuration() +" total Extra Fareround trip of about " +sessionManager.getDistanceString());
 
                 Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }

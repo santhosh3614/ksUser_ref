@@ -18,11 +18,12 @@ repositories {
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.kstransfter"
+        applicationId "com.kstransfer"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -77,5 +78,3 @@ dependencies {
 
 
 }
-
-apply plugin: 'com.google.gms.google-services'

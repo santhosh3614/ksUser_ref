@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "637554169247-f9sp9959brjek4k1r1ra93jhjup2g1om.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kstransfer",
+            "certificate_hash": "b90fcdb0b18134e25f694c032ba8ec70ce210bc0"
+          }
+        },
+        {
           "client_id": "637554169247-idbfk94mo44b4f9d2mql7507sa0s965d.apps.googleusercontent.com",
           "client_type": 3
         }

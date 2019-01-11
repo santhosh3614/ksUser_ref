@@ -505,7 +505,7 @@
                     android:padding="@dimen/_5sdp"
                     android:text="Fare Rules" />
 
-                <TextView
+                 <TextView
                     android:id="@+id/txtFareRule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

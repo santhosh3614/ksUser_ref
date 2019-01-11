@@ -49,6 +49,7 @@ public class MainFragment extends BaseFragment {
         sessionManager = new SessionManager(mainActivity);
 
 
+        mainActivity.txtCenterTitle.setText("Home");
         llCar.setOnClickListener(v -> {
             sessionManager.setSearchType("Car");
             Bundle bundle = new Bundle();

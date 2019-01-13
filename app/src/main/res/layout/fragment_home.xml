@@ -16,10 +16,10 @@
         android:id="@+id/llRuning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/bg_edit_text_map"
         android:orientation="vertical"
         android:visibility="gone">
@@ -59,10 +59,10 @@
         android:id="@+id/llPickUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/bg_edit_text_map"
         android:orientation="vertical"
         android:padding="@dimen/_2sdp"
@@ -180,8 +180,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/_5sdp"
             android:drawableRight="@drawable/info"
+            android:drawablePadding="@dimen/_5sdp"
             android:fontFamily="@font/opensans_bold"
             android:text="Round out at affordable fee"
             android:textColor="@color/black"
@@ -191,10 +191,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_30sdp"
-            android:layout_marginRight="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:weightSum="3">
 
             <TextView
@@ -203,7 +203,7 @@
                 android:drawableLeft="@drawable/info"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/opensans_regular"
-                android:gravity="left"
+                android:gravity="top"
                 android:text="@string/adavace_booking"
                 android:textSize="12sp" />
 
@@ -215,7 +215,7 @@
                 android:drawableLeft="@drawable/info"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/opensans_regular"
-                android:gravity="left"
+                android:gravity="top"
                 android:text="@string/on_way_trip"
                 android:textSize="12sp" />
 
@@ -227,7 +227,7 @@
                 android:drawableLeft="@drawable/info"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/opensans_regular"
-                android:gravity="left"
+                android:gravity="top"
                 android:text="@string/round_trip"
                 android:textSize="12sp" />
 
@@ -404,8 +404,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp">
 
             <TextView
                 android:id="@+id/txtCallDriver"
@@ -416,9 +416,9 @@
                 android:background="@drawable/bg_edit_text_map"
                 android:drawableLeft="@drawable/call_icon"
                 android:gravity="center"
-                android:paddingBottom="@dimen/_5sdp"
                 android:paddingLeft="@dimen/_10sdp"
                 android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
                 android:text="Call Driver" />
 
             <TextView
@@ -430,9 +430,9 @@
                 android:background="@drawable/bg_edit_text_map"
                 android:drawableLeft="@drawable/cancel_icon"
                 android:gravity="center"
-                android:paddingBottom="@dimen/_5sdp"
                 android:paddingLeft="@dimen/_10sdp"
                 android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
                 android:text="Cancel Ride" />
         </LinearLayout>
     </LinearLayout>
@@ -442,10 +442,10 @@
         android:id="@+id/imgCurrentLoaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/_150sdp"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_150sdp"
         android:src="@drawable/location_pin" />
 
 

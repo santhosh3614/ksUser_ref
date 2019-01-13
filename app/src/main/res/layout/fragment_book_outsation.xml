@@ -328,7 +328,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="one way raund trip about "
+                                android:text="One way Trip about "
                                 android:textColor="@color/green" />
 
                             <TextView
@@ -347,7 +347,7 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/check"
                             android:drawablePadding="@dimen/_5sdp"
-                            android:text="No pre payment requirmnet"
+                            android:text="No pre-payment required"
                             android:textColor="@color/green" />
 
                         <TextView
@@ -355,7 +355,7 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/check"
                             android:drawablePadding="@dimen/_5sdp"
-                            android:text="one way raund trip"
+                            android:text="Free canellation in 30 mins."
                             android:textColor="@color/green" />
 
                     </LinearLayout>

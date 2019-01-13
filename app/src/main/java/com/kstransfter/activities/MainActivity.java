@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public LinearLayout llCenterButton;
     public ImageView imgBack;
     public ImageView imgMenu;
-    public TextView txtLocalRides, txtOutSideRide, txtTitle, txtCenterTitle;
+    public TextView txtLocalRides, txtOutSideRide, txtCenterTitle;
     private RelativeLayout rlGoForUpdate;
 
 
@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtLocalRides = findViewById(R.id.txtLocalRides);
         txtOutSideRide = findViewById(R.id.txtOutSideRide);
         rlGoForUpdate = findViewById(R.id.rlGoForUpdate);
-        txtTitle = findViewById(R.id.txtTitle);
         txtCenterTitle = findViewById(R.id.txtCenterTitle);
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);

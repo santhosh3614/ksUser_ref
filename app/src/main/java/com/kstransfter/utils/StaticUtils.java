@@ -12,8 +12,10 @@ import android.widget.TextView;
 import com.kstransfter.R;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class StaticUtils {
@@ -36,7 +38,6 @@ public class StaticUtils {
     public static final int REQUEST_DRIVER_LIST = 5005;
     public static final int REQUEST_DRIVER_CONFIRM_BOOKING = 5006;
     public static final int REQUEST_GET_PAGES = 5007;
-
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {
@@ -67,7 +68,7 @@ public class StaticUtils {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515 * 2;
-        return (long)dist;
+        return (long) dist;
     }
 
     private static double deg2rad(double deg) {
@@ -82,6 +83,22 @@ public class StaticUtils {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime());
+    }
+
+    public static String converDateFormate(String inputDate) {
+        String inputPattern = "dd-MMM-yyyy HH:mm:ss";
+        String outputPattern = "E, dd MMM yyyy HH:mm:ss z";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date = null;
+        String str = null;
+        try {
+            date = inputFormat.parse(inputDate);
+            str = outputFormat.format(date);
+         } catch (ParseException e) {
+            e.printStackTrace();
+         }
+        return str;
     }
 
 }

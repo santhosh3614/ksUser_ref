@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_5sdp"
     android:layout_marginLeft="@dimen/_10sdp"
-    android:layout_marginRight="@dimen/_10sdp"
     android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
     app:cardBackgroundColor="@color/white">
 
     <LinearLayout
@@ -23,9 +23,9 @@
 
             <ImageView
                 android:id="@+id/imgCar"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:scaleType="fitXY"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/car" />
 
             <LinearLayout
@@ -40,14 +40,21 @@
                     android:id="@+id/txtCar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xuv GJ 27 V 8587" />
+                    android:text="Xuv GJ 27 V 8587"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:textSize="@dimen/_14sdp"
+                    />
 
                 <TextView
                     android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="SUN,SEP 02, 01:30 PM" />
+                    android:text="SUN,SEP 02, 01:30 PM"
+                    android:fontFamily="@font/opensans_regular"
+                    android:textSize="@dimen/_14sdp"
+                    />
             </LinearLayout>
 
             <TextView
@@ -58,18 +65,22 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:fontFamily="@font/opensans_bold"
                 android:text="120"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone" />
 
-             <TextView
+            <TextView
                 android:id="@+id/txtPricePerKm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:drawableLeft="@drawable/rupee"
+                android:drawablePadding="@dimen/_2sdp"
                 android:fontFamily="@font/opensans_bold"
+                android:gravity="center"
                 android:text="10/km"
                 android:textColor="@color/black"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
 
         </RelativeLayout>

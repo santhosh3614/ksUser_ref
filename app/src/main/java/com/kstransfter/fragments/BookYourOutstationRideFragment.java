@@ -203,7 +203,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         txtDis.setText(sessionManager.getDistanceString());
         setHeader(true, "Car List");
         sessionManager.setStartDate(StaticUtils.getDateAndTime());
-        txtLeaveDate.setText(sessionManager.getStartDate());
+        txtLeaveDate.setText(StaticUtils.converDateFormate(sessionManager.getStartDate()));
         cardLeave.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext(), txtLeaveDate, view -> {
                 sessionManager.setStartDate(txtLeaveDate.getText().toString().trim());
@@ -270,7 +270,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                             confirmBookingFragment.setArguments(bundle);
                             mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                         }
-                    } else {
+                     } else {
                         CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("carModel", responseDatum);

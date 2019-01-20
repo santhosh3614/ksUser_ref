@@ -86,8 +86,8 @@ public class StaticUtils {
     }
 
     public static String converDateFormate(String inputDate) {
-        String inputPattern = "dd-MMM-yyyy HH:mm:ss";
-        String outputPattern = "E, dd MMM yyyy HH:mm:ss z";
+        String inputPattern = "dd-MM-yyyy HH:mm";
+        String outputPattern = "dd MMM, hh:mm a";
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
         Date date = null;

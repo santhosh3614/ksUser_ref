@@ -45,9 +45,8 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
     public void onBindViewHolder(@NonNull BookHolder holder, int position) {
         CarListtModel.ResponseDatum responseDatum = responseDatumList.get(position);
         Glide.with(context).load(responseDatum.getVCarImage()).into(holder.imgCar);
-        holder.txtDate.setText(StaticUtils.getDateAndTime());
-        holder.txtPricePerKm.setText(responseDatum.getMinKm());
-
+        holder.txtDate.setText(StaticUtils.converDateFormate(StaticUtils.getDateAndTime()));
+        holder.txtPricePerKm.setText(responseDatum.getIPrice() + " / " + "Km");
         if (isRound) {
             holder.txtPrice.setVisibility(View.GONE);
             holder.txtPricePerKm.setVisibility(View.VISIBLE);
@@ -63,9 +62,8 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
             holder.txtCar.setText(responseDatum.getVDriverName().toString());
         }
         if (responseDatum.getTotalPrice() != null) {
-            holder.txtPrice.setText(responseDatum.getTotalPrice().toString());
+            holder.txtPrice.setText("Rs. " + responseDatum.getTotalPrice().toString());
         }
-
 
     }
 

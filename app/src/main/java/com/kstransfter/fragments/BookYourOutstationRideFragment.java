@@ -28,7 +28,6 @@ import com.kstransfter.webservice.WsFactory;
 import com.kstransfter.webservice.WsResponse;
 import com.kstransfter.webservice.WsUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,10 +199,11 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
     public void initital() {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
-        txtDis.setText(sessionManager.getDistance());
+        txtDis.setText(sessionManager.getDistanceString());
         setHeader(true, "Car List");
         sessionManager.setStartDate(StaticUtils.getDateAndTime());
-        txtLeaveDate.setText(sessionManager.getStartDate());
+        txtLeaveDate.setText(StaticUtils.converDateFormate(sessionManager.getStartDate()));
+        txtLeaveDate.setTag(sessionManager.getStartDate());
         cardLeave.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext(), txtLeaveDate, view -> {
                 sessionManager.setStartDate(txtLeaveDate.getText().toString().trim());
@@ -231,24 +231,25 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             cardReturn.setVisibility(View.VISIBLE);
         }
     }
-
+/*
     private void showDefaultData() {
         List<CarListtModel.ResponseDatum> responseDatumList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+     *//*   for (int i = 0; i < 5; i++) {
             CarListtModel.ResponseDatum responseDatum = new CarListtModel.ResponseDatum();
             responseDatum.setExtraKm(10.0);
-            responseDatumList.add(responseDatum);
+            responseDatumList.add(responseDatum);*//*
         }
-     /*   BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (v, pos) -> {
+     *//*   BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (v, pos) -> {
             CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
             Bundle bundle = new Bundle();
             bundle.putParcelable("carModel", responseDatum);
             ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
             confirmBookingFragment.setArguments(bundle);
             mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
-        });*/
+        });*//*
 //        rvCarList.setAdapter(bookOutSideStaionAdapter);
-    }
+    }*/
+
 
     @Override
     public void successResponse(Object response, int code) {
@@ -269,7 +270,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                             confirmBookingFragment.setArguments(bundle);
                             mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                         }
-                    } else {
+                     } else {
                         CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("carModel", responseDatum);

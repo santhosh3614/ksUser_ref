@@ -68,7 +68,7 @@ public class PoupUtils {
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-        String dateAndTime = txtLeaveDate.getText().toString().trim();
+        String dateAndTime = txtLeaveDate.getTag().toString().trim();
         if (!TextUtils.isEmpty(dateAndTime) && !dateAndTime.equalsIgnoreCase("Select")) {
             String datestimes[] = dateAndTime.split(" ");
             String datesvale = datestimes[0];
@@ -83,10 +83,10 @@ public class PoupUtils {
                     int month = monthOfYear + 1;
                     String dateValue = view.getDayOfMonth() + "-" + month + "-" + view.getYear();
                     Log.e("date", "" + date);
-                    showTimePicker(context, txtLeaveDate, dateValue,onClickListener);
+                    showTimePicker(context, txtLeaveDate, dateValue, onClickListener);
                 }, mYear, mMonth, mDay);
-          datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-          datePickerDialog.show();
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.show();
     }
 
     public static void showTimePicker(Context context, TextView txtLeaveDate, String date, View.OnClickListener onClickListener) {
@@ -95,10 +95,10 @@ public class PoupUtils {
         int mMinute = c.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(context,
                 (view, hourOfDay, minute) -> {
-                    txtLeaveDate.setText(date + " " + hourOfDay + ":" + minute);
+                    txtLeaveDate.setTag(date + " " + hourOfDay + ":" + minute);
+                    txtLeaveDate.setText(StaticUtils.converDateFormate(date + " " + hourOfDay + ":" + minute));
                     onClickListener.onClick(txtLeaveDate);
-                  }, mHour, mMinute, false);
-        timePickerDialog.show();
+                }, mHour, mMinute, false);
         timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
                 (view, which) -> {
 
@@ -107,7 +107,9 @@ public class PoupUtils {
         timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
                 (view, which) -> {
 
-                 });
+                });
+
+        timePickerDialog.show();
 
     }
 

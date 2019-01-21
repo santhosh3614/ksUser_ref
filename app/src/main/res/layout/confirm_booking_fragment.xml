@@ -47,7 +47,7 @@
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/txtDate"
+                        android:id="@+id/txtSheeter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
@@ -112,6 +112,7 @@
 
 
                 <TextView
+                    android:id="@+id/txtAcAndNon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -416,7 +417,10 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_5sdp"
                         android:text="RS 5470"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/opensans_bold"
+                        android:textSize="@dimen/_15sdp"
+                        />
 
                 </RelativeLayout>
 
@@ -474,6 +478,7 @@
                             android:visibility="visible">
 
                             <TextView
+                                android:id="@+id/txtGstPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -481,6 +486,7 @@
                                 android:text="RS 200" />
 
                             <TextView
+                                android:id="@+id/txtDriverCharge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -488,6 +494,7 @@
                                 android:text="RS 150" />
 
                             <TextView
+                                android:id="@+id/txtNightAllownce"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -505,7 +512,7 @@
                     android:padding="@dimen/_5sdp"
                     android:text="Fare Rules" />
 
-                 <TextView
+                <TextView
                     android:id="@+id/txtFareRule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

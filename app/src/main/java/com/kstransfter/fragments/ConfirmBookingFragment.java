@@ -40,15 +40,16 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private TextView txtHideAndShow;
     private LinearLayout llFairDetails;
     private ImageView imgCar;
-    private TextView txtCar, txtDate, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking, txtFrom, txtTo, txtKmPerH,
+    private TextView txtCar, txtSheeter, txtLeaveDate, txtRetrurnBy, txtPrice, txtConfirmBooking, txtFrom, txtTo, txtKmPerH,
             txtbaseFare, txtEstimatePrice, txtFareRule, txtDetails;
     private AlertDialog progressDialog;
     private MainActivity mainActivity;
     private SessionManager sessionManager;
     private CardView cardApplyCoupn;
     private CarListtModel.ResponseDatum responseDatum;
-    private TextView txtHrs, txtDis, totalExtraFare;
-    private LinearLayout llHideAndShow;
+    private TextView txtHrs, txtDis, totalExtraFare, txtAcAndNon;
+    private LinearLayout llHideAndShow, llTaxDetails;
+    private TextView txtGstPrice, txtDriverCharge, txtNightAllownce;
 
 
     @Nullable
@@ -64,7 +65,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtHideAndShow = view.findViewById(R.id.txtHideAndShow);
         llFairDetails = view.findViewById(R.id.llFairDetails);
         txtCar = view.findViewById(R.id.txtCar);
-        txtDate = view.findViewById(R.id.txtDate);
+        txtSheeter = view.findViewById(R.id.txtSheeter);
         txtLeaveDate = view.findViewById(R.id.txtLeaveDate);
         txtRetrurnBy = view.findViewById(R.id.txtRetrurnBy);
         txtPrice = view.findViewById(R.id.txtPrice);
@@ -82,6 +83,11 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtDis = view.findViewById(R.id.txtDis);
         totalExtraFare = view.findViewById(R.id.totalExtraFare);
         llHideAndShow = view.findViewById(R.id.llHideAndShow);
+        llTaxDetails = view.findViewById(R.id.llTaxDetails);
+        txtAcAndNon = view.findViewById(R.id.txtAcAndNon);
+        txtGstPrice = view.findViewById(R.id.txtGstPrice);
+        txtDriverCharge = view.findViewById(R.id.txtDriverCharge);
+        txtNightAllownce = view.findViewById(R.id.txtNightAllownce);
         try {
             initital();
         } catch (Exception e) {
@@ -95,6 +101,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         setHeader(true, "Confirm Car Booking");
+        totalExtraFare.setOnClickListener(v -> {
+            llTaxDetails.setVisibility(View.VISIBLE);
+        });
+
         llHideAndShow.setOnClickListener(v -> {
             if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
                 txtHideAndShow.setText("Show Fare Details");
@@ -113,17 +123,22 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtCar.setText(responseDatum.getVCar().toString());
                 txtFrom.setText(sessionManager.getFrom());
                 txtTo.setText(sessionManager.getTo());
-                txtLeaveDate.setText(sessionManager.getStartDate());
+                txtLeaveDate.setText(StaticUtils.converDateFormate(sessionManager.getStartDate()));
                 txtRetrurnBy.setText(sessionManager.getEndDate());
-//                txtKmPerH.setText(responseDatum.getMinKmCharge() + "");
                 txtbaseFare.setText(responseDatum.getTotalPrice() + "");
                 txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
                 txtPrice.setText(responseDatum.getTotalPrice().toString());
                 txtFareRule.setText("");
-//                txtDis.setText(sessionManager.getDistanceString() + "");
-                txtDate.setText(StaticUtils.getDateAndTime());
-                txtHrs.setText(sessionManager.getDuration() +" totalExtraFareround trip of about " +sessionManager.getDistanceString());
-
+                txtSheeter.setText(responseDatum.getISeater() + " - " + "Sheeters");
+                txtHrs.setText(sessionManager.getDuration() + " total Extra Fareround trip of about " + sessionManager.getDistanceString());
+                if (Integer.parseInt(responseDatum.getTiIsAc() + "") == 1) {
+                    txtAcAndNon.setText("Ac");
+                } else {
+                    txtAcAndNon.setText("Non Ac");
+                }
+                txtGstPrice.setText(responseDatum.getGSTRs() + "");
+                txtDriverCharge.setText(responseDatum.getDriverAllownace() + "");
+                txtNightAllownce.setText(responseDatum.getDriverNightCharge() + "");
                 Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }

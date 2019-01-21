@@ -48,7 +48,6 @@ public class CarListtModel implements Parcelable {
         this.responseData = responseData;
     }
 
-
     public static class ResponseDatum implements Parcelable {
 
         @SerializedName("iDriverId")
@@ -56,19 +55,28 @@ public class CarListtModel implements Parcelable {
         private String iDriverId;
         @SerializedName("iCarCetegoryId")
         @Expose
-        private Object iCarCetegoryId;
+        private String iCarCetegoryId;
         @SerializedName("vCar")
         @Expose
-        private Object vCar;
+        private String vCar;
         @SerializedName("vCarImage")
         @Expose
         private String vCarImage;
         @SerializedName("vCarNumber")
         @Expose
         private String vCarNumber;
+        @SerializedName("iPrice")
+        @Expose
+        private String iPrice;
+        @SerializedName("iSeater")
+        @Expose
+        private String iSeater;
+        @SerializedName("tiIsAc")
+        @Expose
+        private String tiIsAc;
         @SerializedName("vDriverName")
         @Expose
-        private Object vDriverName;
+        private String vDriverName;
         @SerializedName("vLicenceNumber")
         @Expose
         private String vLicenceNumber;
@@ -83,7 +91,7 @@ public class CarListtModel implements Parcelable {
         private String vDriverEmail;
         @SerializedName("totalPrice")
         @Expose
-        private Double totalPrice;
+        private Integer totalPrice;
         @SerializedName("minKm")
         @Expose
         private String minKm;
@@ -92,19 +100,25 @@ public class CarListtModel implements Parcelable {
         private Integer minKmCharge;
         @SerializedName("extraKm")
         @Expose
-        private Double extraKm;
+        private Integer extraKm;
         @SerializedName("extraKmcharge")
         @Expose
-        private Double extraKmcharge;
+        private Integer extraKmcharge;
         @SerializedName("driverNightCharge")
         @Expose
         private Integer driverNightCharge;
         @SerializedName("driverAllownace")
         @Expose
-        private String driverAllownace;
+        private Integer driverAllownace;
         @SerializedName("GSTPer")
         @Expose
         private String gSTPer;
+        @SerializedName("GSTRs")
+        @Expose
+        private double gSTRs;
+        @SerializedName("offerDiscount")
+        @Expose
+        private Integer offerDiscount;
 
         public String getIDriverId() {
             return iDriverId;
@@ -118,7 +132,7 @@ public class CarListtModel implements Parcelable {
             return iCarCetegoryId;
         }
 
-        public void setICarCetegoryId(Object iCarCetegoryId) {
+        public void setICarCetegoryId(String iCarCetegoryId) {
             this.iCarCetegoryId = iCarCetegoryId;
         }
 
@@ -126,7 +140,7 @@ public class CarListtModel implements Parcelable {
             return vCar;
         }
 
-        public void setVCar(Object vCar) {
+        public void setVCar(String vCar) {
             this.vCar = vCar;
         }
 
@@ -146,11 +160,35 @@ public class CarListtModel implements Parcelable {
             this.vCarNumber = vCarNumber;
         }
 
+        public Object getIPrice() {
+            return iPrice;
+        }
+
+        public void setIPrice(String iPrice) {
+            this.iPrice = iPrice;
+        }
+
+        public Object getISeater() {
+            return iSeater;
+        }
+
+        public void setISeater(String iSeater) {
+            this.iSeater = iSeater;
+        }
+
+        public Object getTiIsAc() {
+            return tiIsAc;
+        }
+
+        public void setTiIsAc(String tiIsAc) {
+            this.tiIsAc = tiIsAc;
+        }
+
         public Object getVDriverName() {
             return vDriverName;
         }
 
-        public void setVDriverName(Object vDriverName) {
+        public void setVDriverName(String vDriverName) {
             this.vDriverName = vDriverName;
         }
 
@@ -186,11 +224,11 @@ public class CarListtModel implements Parcelable {
             this.vDriverEmail = vDriverEmail;
         }
 
-        public Double getTotalPrice() {
+        public Integer getTotalPrice() {
             return totalPrice;
         }
 
-        public void setTotalPrice(Double totalPrice) {
+        public void setTotalPrice(Integer totalPrice) {
             this.totalPrice = totalPrice;
         }
 
@@ -210,19 +248,19 @@ public class CarListtModel implements Parcelable {
             this.minKmCharge = minKmCharge;
         }
 
-        public Double getExtraKm() {
+        public Integer getExtraKm() {
             return extraKm;
         }
 
-        public void setExtraKm(Double extraKm) {
+        public void setExtraKm(Integer extraKm) {
             this.extraKm = extraKm;
         }
 
-        public Double getExtraKmcharge() {
+        public Integer getExtraKmcharge() {
             return extraKmcharge;
         }
 
-        public void setExtraKmcharge(Double extraKmcharge) {
+        public void setExtraKmcharge(Integer extraKmcharge) {
             this.extraKmcharge = extraKmcharge;
         }
 
@@ -234,11 +272,11 @@ public class CarListtModel implements Parcelable {
             this.driverNightCharge = driverNightCharge;
         }
 
-        public String getDriverAllownace() {
+        public Integer getDriverAllownace() {
             return driverAllownace;
         }
 
-        public void setDriverAllownace(String driverAllownace) {
+        public void setDriverAllownace(Integer driverAllownace) {
             this.driverAllownace = driverAllownace;
         }
 
@@ -250,6 +288,23 @@ public class CarListtModel implements Parcelable {
             this.gSTPer = gSTPer;
         }
 
+        public double getGSTRs() {
+            return gSTRs;
+        }
+
+        public void setGSTRs(Integer gSTRs) {
+            this.gSTRs = gSTRs;
+        }
+
+        public Integer getOfferDiscount() {
+            return offerDiscount;
+        }
+
+        public void setOfferDiscount(Integer offerDiscount) {
+            this.offerDiscount = offerDiscount;
+        }
+
+
         @Override
         public int describeContents() {
             return 0;
@@ -258,11 +313,14 @@ public class CarListtModel implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.iDriverId);
-            dest.writeParcelable((Parcelable) this.iCarCetegoryId, flags);
-            dest.writeParcelable((Parcelable) this.vCar, flags);
+            dest.writeString(this.iCarCetegoryId);
+            dest.writeString(this.vCar);
             dest.writeString(this.vCarImage);
             dest.writeString(this.vCarNumber);
-            dest.writeParcelable((Parcelable) this.vDriverName, flags);
+            dest.writeString(this.iPrice);
+            dest.writeString(this.iSeater);
+            dest.writeString(this.tiIsAc);
+            dest.writeString(this.vDriverName);
             dest.writeString(this.vLicenceNumber);
             dest.writeString(this.iDriverContactNo);
             dest.writeString(this.iDriverAlterContactNo);
@@ -273,8 +331,10 @@ public class CarListtModel implements Parcelable {
             dest.writeValue(this.extraKm);
             dest.writeValue(this.extraKmcharge);
             dest.writeValue(this.driverNightCharge);
-            dest.writeString(this.driverAllownace);
+            dest.writeValue(this.driverAllownace);
             dest.writeString(this.gSTPer);
+            dest.writeValue(this.gSTRs);
+            dest.writeValue(this.offerDiscount);
         }
 
         public ResponseDatum() {
@@ -282,26 +342,31 @@ public class CarListtModel implements Parcelable {
 
         protected ResponseDatum(Parcel in) {
             this.iDriverId = in.readString();
-            this.iCarCetegoryId = in.readParcelable(Object.class.getClassLoader());
-            this.vCar = in.readParcelable(Object.class.getClassLoader());
+            this.iCarCetegoryId = in.readString();
+            this.vCar = in.readString();
             this.vCarImage = in.readString();
             this.vCarNumber = in.readString();
-            this.vDriverName = in.readParcelable(Object.class.getClassLoader());
+            this.iPrice = in.readString();
+            this.iSeater = in.readString();
+            this.tiIsAc = in.readString();
+            this.vDriverName = in.readString();
             this.vLicenceNumber = in.readString();
             this.iDriverContactNo = in.readString();
             this.iDriverAlterContactNo = in.readString();
             this.vDriverEmail = in.readString();
-            this.totalPrice = (Double) in.readValue(Double.class.getClassLoader());
+            this.totalPrice = (Integer) in.readValue(Integer.class.getClassLoader());
             this.minKm = in.readString();
             this.minKmCharge = (Integer) in.readValue(Integer.class.getClassLoader());
-            this.extraKm = (Double) in.readValue(Double.class.getClassLoader());
-            this.extraKmcharge = (Double) in.readValue(Double.class.getClassLoader());
+            this.extraKm = (Integer) in.readValue(Integer.class.getClassLoader());
+            this.extraKmcharge = (Integer) in.readValue(Integer.class.getClassLoader());
             this.driverNightCharge = (Integer) in.readValue(Integer.class.getClassLoader());
-            this.driverAllownace = in.readString();
+            this.driverAllownace = (Integer) in.readValue(Integer.class.getClassLoader());
             this.gSTPer = in.readString();
+            this.gSTRs = (Integer) in.readValue(Integer.class.getClassLoader());
+            this.offerDiscount = (Integer) in.readValue(Integer.class.getClassLoader());
         }
 
-        public static final Parcelable.Creator<ResponseDatum> CREATOR = new Parcelable.Creator<ResponseDatum>() {
+        public static final Creator<ResponseDatum> CREATOR = new Creator<ResponseDatum>() {
             @Override
             public ResponseDatum createFromParcel(Parcel source) {
                 return new ResponseDatum(source);
@@ -313,7 +378,6 @@ public class CarListtModel implements Parcelable {
             }
         };
     }
-
 
     @Override
     public int describeContents() {

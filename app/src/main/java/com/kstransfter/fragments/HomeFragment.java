@@ -246,9 +246,9 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
             String pickupPoint = edtPickUpLine.getText().toString().trim();
             String endPoint = edtDropLine.getText().toString().trim();
             if (TextUtils.isEmpty(pickupPoint)) {
-                PoupUtils.showAlertDailog(getActivity(), "Please select pickup point");
+                PoupUtils.showAlertDailog(getActivity(), "Please enter Pickup location");
             } else if (TextUtils.isEmpty(endPoint)) {
-                PoupUtils.showAlertDailog(getActivity(), "Please select end point");
+                PoupUtils.showAlertDailog(getActivity(), "Please enter Drop of location");
             } else {
                 progressDialog.show();
 
@@ -335,11 +335,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     }
 
     private void setVisibleAndGone() {
-        mainActivity.txtLocalRides.setVisibility(View.VISIBLE);
-        mainActivity.txtOutSideRide.setVisibility(View.VISIBLE);
-        mainActivity.imgMenu.setVisibility(View.VISIBLE);
-        mainActivity.imgBack.setVisibility(View.GONE);
-        mainActivity.txtTitle.setVisibility(View.GONE);
+        setHeader(true, "Search your trip");
     }
 
     private void movecarSourcetoDesignation() {

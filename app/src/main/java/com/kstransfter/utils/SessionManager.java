@@ -30,6 +30,8 @@ public class SessionManager {
     public static final String KEY_DURATION = "duration";
     public static final String KEY_DISTANCE_STRING = "distance_string";
     public static final String KEY_DISTANCE = "distance";
+    public static final String KEY_IS_ROUND = "distance";
+
 
 
     // Constructor
@@ -74,6 +76,16 @@ public class SessionManager {
         editor.putString(KEY_USER_TYPE, searchType);
         editor.commit();
     }
+
+    public boolean isRaundTrip() {
+        return pref.getBoolean(KEY_IS_ROUND, false);
+    }
+
+    public void setRound(Boolean isRoundOrNot) {
+        editor.putBoolean(KEY_IS_ROUND, isRoundOrNot);
+        editor.commit();
+    }
+
 
     public String getPickUpLat() {
         return pref.getString(KEY_PICKUP_LAT, "");
@@ -182,6 +194,9 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
     }
+
+
+
 
 
 }

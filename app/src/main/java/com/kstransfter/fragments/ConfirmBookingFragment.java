@@ -136,9 +136,22 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 } else {
                     txtAcAndNon.setText("Non Ac");
                 }
-                txtGstPrice.setText(responseDatum.getGSTRs() + "");
-                txtDriverCharge.setText(responseDatum.getDriverAllownace() + "");
-                txtNightAllownce.setText(responseDatum.getDriverNightCharge() + "");
+                if (sessionManager.isRaundTrip()) {
+                    txtGstPrice.setText(responseDatum.getGSTRs() + "");
+                    txtDriverCharge.setText(responseDatum.getDriverAllownace() + "");
+                    txtNightAllownce.setText(responseDatum.getDriverNightCharge() + "");
+                    txtDriverCharge.setVisibility(View.VISIBLE);
+                    txtNightAllownce.setVisibility(View.VISIBLE);
+                    double totalPrice = responseDatum.getGSTRs() + responseDatum.getDriverAllownace() + responseDatum.getDriverNightCharge();
+                    totalExtraFare.setText(totalPrice + "");
+                } else {
+                    txtGstPrice.setText(responseDatum.getGSTRs() + "");
+                    txtDriverCharge.setText(responseDatum.getDriverAllownace() + "");
+                    txtNightAllownce.setText(responseDatum.getDriverNightCharge() + "");
+                    txtDriverCharge.setVisibility(View.GONE);
+                    txtNightAllownce.setVisibility(View.GONE);
+                    totalExtraFare.setText(responseDatum.getGSTRs() + "");
+                }
                 Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }

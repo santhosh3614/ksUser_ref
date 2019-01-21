@@ -95,10 +95,8 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             imgOneWay.setSelected(true);
             imgRoundWay.setSelected(false);
             cardReturn.setVisibility(View.GONE);
-
-
+            sessionManager.setRound(false);
             BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (view1, pos) -> {
-
                 if (imgRoundWay.isSelected()) {
                     if (TextUtils.isEmpty(txtReturn.getText().toString().trim())) {
                         PoupUtils.showAlertDailog(mainActivity, "Please select return date");
@@ -109,7 +107,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                         ConfirmBookingFragment confirmBookingFragment = new ConfirmBookingFragment();
                         confirmBookingFragment.setArguments(bundle);
                         mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
-                    }
+                     }
                 } else {
                     CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
                     Bundle bundle = new Bundle();
@@ -126,11 +124,12 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
             imgOneWay.setSelected(false);
             imgRoundWay.setSelected(true);
             cardReturn.setVisibility(View.VISIBLE);
+            sessionManager.setRound(true);
             BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (view1, pos) -> {
                 if (imgRoundWay.isSelected()) {
                     if (TextUtils.isEmpty(txtReturn.getText().toString().trim())) {
                         PoupUtils.showAlertDailog(mainActivity, "Please select return date");
-                    } else {
+                     } else {
                         CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("carModel", responseDatum);
@@ -138,7 +137,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                         confirmBookingFragment.setArguments(bundle);
                         mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                     }
-                } else {
+                 } else {
                     CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("carModel", responseDatum);
@@ -270,7 +269,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                             confirmBookingFragment.setArguments(bundle);
                             mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                         }
-                     } else {
+                    } else {
                         CarListtModel.ResponseDatum responseDatum = carListModel.getResponseData().get(pos);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("carModel", responseDatum);

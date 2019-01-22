@@ -516,12 +516,72 @@
                     android:id="@+id/txtFareRule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n" />
+                    android:text="one"
+                    android:drawableLeft="@drawable/circle_gray"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/txtFareRule1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:text="one"
+                    android:drawableLeft="@drawable/circle_gray"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/txtFareRule2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:text="one"
+                    android:drawableLeft="@drawable/circle_gray"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:gravity="center"
+                    />
 
 
+                <TextView
+                    android:id="@+id/txtFareRule3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:text="one"
+                    android:drawableLeft="@drawable/circle_gray"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/txtFareRule4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:text="one"
+                    android:drawableLeft="@drawable/circle_gray"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:gravity="left|top"
+                    />
+                <TextView
+                    android:id="@+id/txtFareRule5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:text="one"
+                    android:drawableLeft="@drawable/circle_gray"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:gravity="center"
+                    />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"

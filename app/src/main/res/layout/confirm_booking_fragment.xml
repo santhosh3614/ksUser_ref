@@ -27,7 +27,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_centerVertical="true"
                     android:padding="@dimen/_5sdp"
-                    android:scaleType="fitXY"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/indica" />
 
                 <LinearLayout

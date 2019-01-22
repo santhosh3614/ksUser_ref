@@ -119,7 +119,19 @@ public interface ApiInterface {
     @POST("oauth/resendotp")
     Call<ResendPasswordModel> resendPassword(@FieldMap Map<String, String> fields);
 
+
+    @FormUrlEncoded
+    @POST("oauth/getbookinghistory")
+    Call<JsonObject> bookinghistory(@FieldMap Map<String, String> fields);
+
+
     @GET("site/getpage")
     Call<GetPages> termsAndCondition();
+
+
+
+
+
+
 
 }

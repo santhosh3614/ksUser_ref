@@ -99,5 +99,11 @@ public class WsFactory {
         return signUpModelCall;
     }
 
+    public static Call getBookingHistory(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<JsonObject> signUpModelCall = apiService.bookinghistory(map);
+        return signUpModelCall;
+    }
+
 
 }

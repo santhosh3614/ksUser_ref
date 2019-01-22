@@ -241,7 +241,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         });
 
         mainActivity.txtCenterTitle.setText("Select you location");
-
         txtContinue.setOnClickListener(v -> {
             String pickupPoint = edtPickUpLine.getText().toString().trim();
             String endPoint = edtDropLine.getText().toString().trim();
@@ -268,8 +267,8 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                                 new SingleObserver<Result>() {
                                     @Override
                                     public void onSubscribe(Disposable d) {
-                                        progressDialog.cancel();
-                                    }
+
+                                     }
 
                                     @Override
                                     public void onSuccess(Result result) {

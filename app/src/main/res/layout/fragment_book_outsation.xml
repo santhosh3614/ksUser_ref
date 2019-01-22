@@ -236,7 +236,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_6sdp"
                         android:text="Leave On" />
 
                     <TextView
@@ -244,9 +244,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:drawablePadding="@dimen/_5sdp"
                         android:gravity="center"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_6sdp"
                         android:text="Select"
                         android:textColor="@color/colorPrimary" />
 
@@ -271,7 +270,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_6sdp"
                         android:text="Return by" />
 
                     <TextView
@@ -279,10 +278,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:drawablePadding="@dimen/_5sdp"
                         android:gravity="center"
                         android:hint="Select"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_6sdp"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/colorPrimary" />
                 </RelativeLayout>

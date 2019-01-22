@@ -43,7 +43,7 @@
                     android:text="Xuv GJ 27 V 8587"
                     android:textColor="@color/black"
                     android:fontFamily="@font/opensans_semibold"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_12sdp"
                     />
 
                 <TextView
@@ -53,7 +53,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="SUN,SEP 02, 01:30 PM"
                     android:fontFamily="@font/opensans_regular"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_11sdp"
                     />
             </LinearLayout>
 
@@ -64,6 +64,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:fontFamily="@font/opensans_bold"
+                android:layout_centerInParent="true"
                 android:text="120"
                 android:textColor="@color/black"
                 android:visibility="gone" />
@@ -77,6 +78,7 @@
                 android:drawableLeft="@drawable/rupee"
                 android:drawablePadding="@dimen/_2sdp"
                 android:fontFamily="@font/opensans_bold"
+                android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="10/km"
                 android:textColor="@color/black"

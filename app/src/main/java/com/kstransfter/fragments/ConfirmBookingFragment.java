@@ -128,9 +128,14 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtbaseFare.setText(responseDatum.getTotalPrice() + "");
                 txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
                 txtPrice.setText(responseDatum.getTotalPrice().toString());
-                txtFareRule.setText("");
+                txtFareRule.setText("Excludes toll costs, parking, permits and state tax\n" +
+                        "Rs.100/hr will be charge for additinal hours\n" +
+                        " Rs.11/km will be charged for extra km\n" +
+                        " Driver Allowance per 24 hours - Rs. 100/\n" +
+                        "Night time Allowance (11:00 Pm to 6:00 AM) - Rs. 150/\n" +
+                        "-Extra Fare may apply if you do any change in trip");
                 txtSheeter.setText(responseDatum.getISeater() + " - " + "Sheeters");
-                txtHrs.setText(sessionManager.getDuration() + " total Extra Fareround trip of about " + sessionManager.getDistanceString());
+                txtHrs.setText(sessionManager.getDuration() + " Total Extra Fare about " + sessionManager.getDistanceString());
                 if (Integer.parseInt(responseDatum.getTiIsAc() + "") == 1) {
                     txtAcAndNon.setText("Ac");
                 } else {

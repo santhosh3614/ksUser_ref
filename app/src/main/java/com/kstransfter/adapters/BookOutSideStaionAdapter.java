@@ -59,7 +59,7 @@ public class BookOutSideStaionAdapter extends RecyclerView.Adapter<BookOutSideSt
             rvListeners.onItemclick(holder.itemView, position);
         });
         if (responseDatum.getVDriverName() != null) {
-            holder.txtCar.setText(responseDatum.getVDriverName().toString());
+            holder.txtCar.setText(responseDatum.getVCar().toString());
         }
         if (responseDatum.getTotalPrice() != null) {
             holder.txtPrice.setText("Rs. " + responseDatum.getTotalPrice().toString());

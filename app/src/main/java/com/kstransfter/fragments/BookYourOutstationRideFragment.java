@@ -203,6 +203,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         sessionManager.setStartDate(StaticUtils.getDateAndTime());
         txtLeaveDate.setText(StaticUtils.converDateFormate(sessionManager.getStartDate()));
         txtLeaveDate.setTag(sessionManager.getStartDate());
+        txtReturn.setTag("Select");
         cardLeave.setOnClickListener(v -> {
             PoupUtils.showDatePicker(getContext(), txtLeaveDate, view -> {
                 sessionManager.setStartDate(txtLeaveDate.getText().toString().trim());

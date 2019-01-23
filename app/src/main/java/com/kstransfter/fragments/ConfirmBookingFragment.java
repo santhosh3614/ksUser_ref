@@ -50,6 +50,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private TextView txtHrs, txtDis, totalExtraFare, txtAcAndNon;
     private LinearLayout llHideAndShow, llTaxDetails;
     private TextView txtGstPrice, txtDriverCharge, txtNightAllownce;
+    private TextView txtFareRule1, txtFareRule2, txtFareRule3, txtFareRule4, txtFareRule5;
 
 
     @Nullable
@@ -88,6 +89,11 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtGstPrice = view.findViewById(R.id.txtGstPrice);
         txtDriverCharge = view.findViewById(R.id.txtDriverCharge);
         txtNightAllownce = view.findViewById(R.id.txtNightAllownce);
+        txtFareRule1 = view.findViewById(R.id.txtFareRule1);
+        txtFareRule2 = view.findViewById(R.id.txtFareRule2);
+        txtFareRule3 = view.findViewById(R.id.txtFareRule3);
+        txtFareRule4 = view.findViewById(R.id.txtFareRule4);
+        txtFareRule5 = view.findViewById(R.id.txtFareRule5);
         try {
             initital();
         } catch (Exception e) {
@@ -128,9 +134,14 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 txtbaseFare.setText(responseDatum.getTotalPrice() + "");
                 txtEstimatePrice.setText(responseDatum.getTotalPrice() + "");
                 txtPrice.setText(responseDatum.getTotalPrice().toString());
-                txtFareRule.setText("");
+                txtFareRule.setText("Excludes toll costs, parking, permits and state tax");
+                txtFareRule1.setText("Rs.100/hr will be charge for additinal hours");
+                txtFareRule2.setText("Rs.11/km will be charged for extra km");
+                txtFareRule3.setText("Driver Allowance per 24 hours - Rs. 100");
+                txtFareRule4.setText("Night time Allowance (11:00 Pm to 6:00 AM) - Rs. 150/");
+                txtFareRule5.setText("Extra Fare may apply if you do any change in trip");
                 txtSheeter.setText(responseDatum.getISeater() + " - " + "Sheeters");
-                txtHrs.setText(sessionManager.getDuration() + " total Extra Fareround trip of about " + sessionManager.getDistanceString());
+                txtHrs.setText(sessionManager.getDuration() + " Total Extra Fare about " + sessionManager.getDistanceString());
                 if (Integer.parseInt(responseDatum.getTiIsAc() + "") == 1) {
                     txtAcAndNon.setText("Ac");
                 } else {
@@ -181,6 +192,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         progressDialog.cancel();
         switch (code) {
             case StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING:
+                mainActivity.replaceFragmenr(PaymentReceiptFragment.getInatance(null), PaymentReceiptFragment.TAG, false);
                 BookedCarModel bookedCarModel = (BookedCarModel) response;
                 if (bookedCarModel != null) {
                     PoupUtils.showAlertDailog(mainActivity, "Booking confirm your car on the way.");

@@ -30,8 +30,7 @@ public class SessionManager {
     public static final String KEY_DURATION = "duration";
     public static final String KEY_DISTANCE_STRING = "distance_string";
     public static final String KEY_DISTANCE = "distance";
-    public static final String KEY_IS_ROUND = "distance";
-
+    public static final String KEY_IS_ROUND = "isRound";
 
 
     // Constructor
@@ -117,7 +116,7 @@ public class SessionManager {
 
 
     public String getUserId() {
-        return pref.getString(KEY_USER_ID, "-1");
+        return pref.getString(KEY_USER_ID, "8");
     }
 
     public void setUserId(String userId) {

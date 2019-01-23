@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KsTransfer</string>
+    <string name="app_name">KS Transfer</string>
     <string name="user_name">User name</string>
     <string name="password">Password</string>
     <string name="forgot_password"> forgot password ? </string>
@@ -66,6 +66,8 @@
     <string name="keep_car_till_return">Keep Car Till Return</string>
     <string name="night_time_allowance_n_taxes">Night time allowance \nTaxes</string>
     <string name="terms_and_condition">terms and condition</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="Qnty">
         <item>1</item>

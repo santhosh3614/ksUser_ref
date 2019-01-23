@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kstransfter.R;
@@ -42,7 +43,6 @@ public class PoupUtils {
     }
 
     public static void showAlertDailog(Activity activity, String message) {
-
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_30);
@@ -51,12 +51,31 @@ public class PoupUtils {
         TextView txtOK = dialog.findViewById(R.id.txtOK);
         TextView txtTitle = dialog.findViewById(R.id.txtTitle);
         txtTitle.setText(message);
-
         txtOK.setOnClickListener(v -> {
             dialog.cancel();
-
         });
 
+        dialog.show();
+    }
+
+    public static void ratingDialog(Activity activity, String message, View.OnClickListener onClickListener) {
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_30);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.layout_rating_bar);
+        RatingBar ratingBar = dialog.findViewById(R.id.ratingBar);
+        TextView txtSubmit = dialog.findViewById(R.id.txtSubmit);
+        TextView txtCancel = dialog.findViewById(R.id.txtCancel);
+        txtSubmit.setText(message);
+        txtCancel.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+        txtSubmit.setOnClickListener(v -> {
+            dialog.cancel();
+            txtSubmit.setTag(ratingBar.getRating());
+            onClickListener.onClick(txtSubmit);
+        });
         dialog.show();
     }
 

@@ -1,7 +1,6 @@
 package com.kstransfter.fragments;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
@@ -63,6 +60,7 @@ public class UpadateProfileFragment extends BaseFragment implements WsResponse {
         mainActivity = (MainActivity) getActivity();
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         sessionManager = new SessionManager(mainActivity);
+        setHeader(true, "Update Profile");
         txtUpdate.setOnClickListener(v -> {
             String userName = edtUserName.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
@@ -86,7 +84,6 @@ public class UpadateProfileFragment extends BaseFragment implements WsResponse {
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_SIGN_UP, this);
     }
 
-
     @Override
     public void successResponse(Object response, int code) {
         switch (code) {
@@ -94,9 +91,12 @@ public class UpadateProfileFragment extends BaseFragment implements WsResponse {
                 SignUpAndUpdate signUpModel = (SignUpAndUpdate) response;
                 if (signUpModel != null) {
                     PoupUtils.showAlertDailog(mainActivity, "Update success");
+                    sessionManager.setEmail(signUpModel.getResponseData().getVEmail());
+                    sessionManager.setName(signUpModel.getResponseData().getVUserName());
+                    mainActivity.txtName.setText(sessionManager.getName());
                  } else {
                     PoupUtils.showAlertDailog(mainActivity, "Something went wrong,Please try again.");
-                }
+                 }
                 break;
             default:
                 break;

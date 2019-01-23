@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public ImageView imgMenu;
     public TextView txtLocalRides, txtOutSideRide, txtCenterTitle;
     private RelativeLayout rlGoForUpdate;
-
+    public TextView txtName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         txtOutSideRide = findViewById(R.id.txtOutSideRide);
         rlGoForUpdate = findViewById(R.id.rlGoForUpdate);
         txtCenterTitle = findViewById(R.id.txtCenterTitle);
+        txtName = findViewById(R.id.txtName);
+
         txtDriver.setOnClickListener(this);
         txtBookingHistoy.setOnClickListener(this);
         txtSupport.setOnClickListener(this);

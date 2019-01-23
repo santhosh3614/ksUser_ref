@@ -57,6 +57,25 @@ public class SessionManager {
         return user;
     }
 
+    public String getName() {
+        return pref.getString(KEY_NAME, "");
+    }
+
+    public void setName(String name) {
+        editor.putString(KEY_NAME, name);
+        editor.commit();
+    }
+
+    public String getEmail() {
+        return pref.getString(KEY_EMAIL, "");
+    }
+
+    public void setEmail(String name) {
+        editor.putString(KEY_EMAIL, name);
+        editor.commit();
+    }
+
+
     public void logoutUser() {
         editor.clear();
         editor.commit();
@@ -193,9 +212,6 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
     }
-
-
-
 
 
 }

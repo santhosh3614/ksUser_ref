@@ -94,6 +94,18 @@ public class DriverListModel implements Parcelable {
         @Expose
         private String gSTPer;
 
+        @SerializedName("vCarExp")
+        @Expose
+        private String vCarExp;
+
+        public String getvCarExp() {
+            return vCarExp;
+        }
+
+        public void setvCarExp(String vCarExp) {
+            this.vCarExp = vCarExp;
+        }
+
         public String getIDriverId() {
             return iDriverId;
         }
@@ -227,7 +239,7 @@ public class DriverListModel implements Parcelable {
             dest.writeValue(this.extraKmcharge);
             dest.writeValue(this.driverNightCharge);
             dest.writeString(this.driverAllownace);
-            dest.writeString(this.gSTPer);
+            dest.writeString(this.vCarExp);
         }
 
         public ResponseDatum() {
@@ -248,7 +260,8 @@ public class DriverListModel implements Parcelable {
             this.driverNightCharge = (Integer) in.readValue(Integer.class.getClassLoader());
             this.driverAllownace = in.readString();
             this.gSTPer = in.readString();
-        }
+            this.vCarExp = in.readString();
+         }
 
         public static final Parcelable.Creator<ResponseDatum> CREATOR = new Parcelable.Creator<ResponseDatum>() {
             @Override

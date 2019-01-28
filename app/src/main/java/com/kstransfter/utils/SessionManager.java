@@ -225,7 +225,6 @@ public class SessionManager {
         editor.commit();
     }
 
-
     public void clearEndDate() {
         editor.remove(KEY_END_DATE);
         editor.commit();

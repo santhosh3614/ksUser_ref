@@ -313,6 +313,13 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/txtHideAndShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hide Fare Details"
+                    android:textColor="@color/colorPrimary" />
+
                 <ImageView
                     android:id="@+id/imgHide"
                     android:layout_width="wrap_content"
@@ -320,14 +327,6 @@
                     android:layout_gravity="center"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/arrow_hid" />
-
-                <TextView
-                    android:id="@+id/txtHideAndShow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_5sdp"
-                    android:text="Hide Fare Details"
-                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -335,7 +334,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -416,11 +415,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_bold"
                         android:text="RS 5470"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/opensans_bold"
-                        android:textSize="@dimen/_15sdp"
-                        />
+                        android:textSize="@dimen/_15sdp" />
 
                 </RelativeLayout>
 
@@ -518,11 +516,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:text="one"
                     android:drawableLeft="@drawable/circle_gray"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
-                    />
+                    android:text="one" />
 
                 <TextView
                     android:id="@+id/txtFareRule1"
@@ -530,11 +527,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:text="one"
                     android:drawableLeft="@drawable/circle_gray"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
-                    />
+                    android:text="one" />
 
                 <TextView
                     android:id="@+id/txtFareRule2"
@@ -542,11 +538,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:text="one"
                     android:drawableLeft="@drawable/circle_gray"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
-                    />
+                    android:text="one" />
 
 
                 <TextView
@@ -555,33 +550,33 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:text="one"
                     android:drawableLeft="@drawable/circle_gray"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
-                    />
+                    android:text="one" />
+
                 <TextView
                     android:id="@+id/txtFareRule4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:text="one"
                     android:drawableLeft="@drawable/circle_gray"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="left|top"
-                    />
+                    android:text="one" />
+
                 <TextView
                     android:id="@+id/txtFareRule5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    android:text="one"
                     android:drawableLeft="@drawable/circle_gray"
                     android:drawablePadding="@dimen/_2sdp"
                     android:gravity="center"
-                    />
+                    android:text="one" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"

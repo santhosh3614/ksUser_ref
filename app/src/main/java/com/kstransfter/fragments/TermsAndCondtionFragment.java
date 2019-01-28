@@ -50,9 +50,9 @@ public class TermsAndCondtionFragment extends BaseFragment implements WsResponse
             rvPages = view.findViewById(R.id.rvPages);
             try {
                 initital();
-            } catch (Exception e) {
+               } catch (Exception e) {
                 e.printStackTrace();
-            }
+             }
         }
         return view;
     }
@@ -79,7 +79,7 @@ public class TermsAndCondtionFragment extends BaseFragment implements WsResponse
             case StaticUtils.REQUEST_GET_PAGES:
                 GetPages getPages = (GetPages) response;
                 if (getPages != null) {
-                    TermsAndConditionAdapter termsAndConditionAdapter = new TermsAndConditionAdapter(mainActivity, getPages.getResponseData(), (view, pos) -> {
+                       TermsAndConditionAdapter termsAndConditionAdapter = new TermsAndConditionAdapter(mainActivity, getPages.getResponseData(), (view, pos) -> {
                         GetPages.ResponseDatum responseDatum = getPages.getResponseData().get(pos);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("responseData", responseDatum);
@@ -88,9 +88,9 @@ public class TermsAndCondtionFragment extends BaseFragment implements WsResponse
                         mainActivity.replaceFragmenr(termsConditionDetailsFragment, TermsConditionDetailsFragment.TAG, false);
                     });
                     rvPages.setAdapter(termsAndConditionAdapter);
-                } else {
+                 } else {
                     PoupUtils.showAlertDailog(mainActivity, "Somthing went wrong, please try again.");
-                }
+                 }
                 break;
             default:
                 break;

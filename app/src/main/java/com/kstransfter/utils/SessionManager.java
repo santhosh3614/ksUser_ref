@@ -214,4 +214,22 @@ public class SessionManager {
     }
 
 
+    public void clearPrefrences() {
+        editor.remove(KEY_DISTANCE);
+        editor.remove(KEY_DURATION);
+        editor.remove(KEY_START_DATE);
+        editor.remove(KEY_END_DATE);
+        editor.remove(KEY_DISTANCE_STRING);
+        editor.remove(KEY_PICKUP_LAT);
+        editor.remove(KEY_PICKUP_LONG);
+        editor.commit();
+    }
+
+
+    public void clearEndDate() {
+        editor.remove(KEY_END_DATE);
+        editor.commit();
+    }
+
+
 }

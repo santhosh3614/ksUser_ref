@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
     private LinearLayout llHideAndShow, llTaxDetails;
     private TextView txtGstPrice, txtDriverCharge, txtNightAllownce;
     private TextView txtFareRule1, txtFareRule2, txtFareRule3, txtFareRule4, txtFareRule5;
+    private ImageView imgHide;
 
 
     @Nullable
@@ -82,6 +84,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         imgCar = view.findViewById(R.id.imgCar);
         txtHrs = view.findViewById(R.id.txtHrs);
         txtDis = view.findViewById(R.id.txtDis);
+        imgHide = view.findViewById(R.id.imgHide);
         totalExtraFare = view.findViewById(R.id.totalExtraFare);
         llHideAndShow = view.findViewById(R.id.llHideAndShow);
         llTaxDetails = view.findViewById(R.id.llTaxDetails);
@@ -111,15 +114,28 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
             llTaxDetails.setVisibility(View.VISIBLE);
         });
 
-        llHideAndShow.setOnClickListener(v -> {
-            if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Hide Fare Details")) {
-                txtHideAndShow.setText("Show Fare Details");
-                llFairDetails.setVisibility(View.GONE);
-            } else {
+         llHideAndShow.setOnClickListener(v -> {
+            if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Show Fare Details")) {
                 txtHideAndShow.setText("Hide Fare Details");
+                llFairDetails.setVisibility(View.GONE);
+                final RotateAnimation rotateAnim = new RotateAnimation(0.0f, 180,
+                        RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                        RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnim.setDuration(100);
+                rotateAnim.setFillAfter(true);
+                imgHide.startAnimation(rotateAnim);
+            } else {
+                txtHideAndShow.setText("Show Fare Details");
                 llFairDetails.setVisibility(View.VISIBLE);
-            }
+                final RotateAnimation rotateAnim = new RotateAnimation(0.0f, 360,
+                        RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                        RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnim.setDuration(100);
+                rotateAnim.setFillAfter(true);
+                imgHide.startAnimation(rotateAnim);
+             }
         });
+
         cardApplyCoupn.setOnClickListener(v -> {
             Toast.makeText(mainActivity, "aaply card coupon", Toast.LENGTH_SHORT).show();
         });

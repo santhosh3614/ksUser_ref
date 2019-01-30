@@ -17,6 +17,7 @@ public class ApiClient {
 */
 
     private static Retrofit retrofit = null;
+
     public static Retrofit getClient() {
         //We can put logger here
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();

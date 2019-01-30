@@ -90,17 +90,18 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
         cardReturn.setVisibility(View.GONE);
         rvCarList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCarList.setNestedScrollingEnabled(false);
-
+//        sessionManager.clearEndDate();
         cardOneWay.setOnClickListener(v -> {
             imgOneWay.setSelected(true);
             imgRoundWay.setSelected(false);
             cardReturn.setVisibility(View.GONE);
             sessionManager.setRound(false);
+            sessionManager.clearEndDate();
             BookOutSideStaionAdapter bookOutSideStaionAdapter = new BookOutSideStaionAdapter(getContext(), responseDatumList, (view1, pos) -> {
                 if (imgRoundWay.isSelected()) {
                     if (TextUtils.isEmpty(txtReturn.getText().toString().trim())) {
                         PoupUtils.showAlertDailog(mainActivity, "Please select return date");
-                    } else {
+                     } else {
                         CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("carModel", responseDatum);
@@ -108,7 +109,7 @@ public class BookYourOutstationRideFragment extends BaseFragment implements WsRe
                         confirmBookingFragment.setArguments(bundle);
                         mainActivity.replaceFragmenr(confirmBookingFragment, "ConfirmBookingFragment", false);
                      }
-                } else {
+                  } else {
                     CarListtModel.ResponseDatum responseDatum = responseDatumList.get(pos);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("carModel", responseDatum);

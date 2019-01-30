@@ -156,13 +156,13 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(HomeFragment.this);
         dataAdapter = new GooglePlacesAutocompleteAdapter(getContext(), android.R.layout.simple_dropdown_item_1line);
         sessionManager = new SessionManager(getContext());
+        sessionManager.clearPrefrences();
         if (sessionManager.getSearchType().equalsIgnoreCase("Car")) {
             llPopupButtom.setVisibility(View.VISIBLE);
-        } else {
+          } else {
             llPopupButtom.setVisibility(View.GONE);
+         }
         }
-
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -268,7 +268,7 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
                                     @Override
                                     public void onSubscribe(Disposable d) {
 
-                                     }
+                                    }
 
                                     @Override
                                     public void onSuccess(Result result) {

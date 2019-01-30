@@ -7,15 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtConfirmBooking"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="12dp"
         android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -205,49 +208,55 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:fontFamily="@font/opensans_bold"
                 android:text="Contactat Driver"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone" />
 
 
             <EditText
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/bg_selected_gray"
                 android:fontFamily="@font/opensans_regular"
                 android:hint="@string/enter_your_emai_id"
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/_7sdp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/edtMobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/bg_selected_gray"
                 android:fontFamily="@font/opensans_regular"
                 android:hint="@string/enter_your_mobile_no"
                 android:inputType="number"
                 android:padding="@dimen/_7sdp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone"
+
+                />
 
 
             <EditText
                 android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/bg_selected_gray"
                 android:fontFamily="@font/opensans_regular"
                 android:gravity="top"
                 android:hint="@string/enter_your_home_address"
                 android:lines="3"
                 android:padding="@dimen/_7sdp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -290,8 +299,9 @@
                         android:text="3000" />
                 </LinearLayout>
             </RelativeLayout>
-           </LinearLayout>
-     </ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
     <TextView
         android:id="@+id/txtConfirmBooking"
         android:layout_width="match_parent"

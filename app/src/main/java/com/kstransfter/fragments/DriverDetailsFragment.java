@@ -60,7 +60,7 @@ public class DriverDetailsFragment extends BaseFragment {
         txtExpCar = view.findViewById(R.id.txtExpCar);
         try {
             initital();
-        } catch (Exception e) {
+         } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -76,6 +76,7 @@ public class DriverDetailsFragment extends BaseFragment {
             txtExprence.setText(driverListModel.getVDriverExp());
             txtStartDate.setText(sessionManager.getStartDate());
             txtEndDate.setText(sessionManager.getEndDate());
+            txtExpCar.setText(driverListModel.getvCarExp());
             Glide.with(mainActivity).load(driverListModel.getVDriverImage()).into(imgDriverProfile);
 
         }

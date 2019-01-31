@@ -1,5 +1,6 @@
 package com.kstransfter.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,10 +15,22 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.kstransfter.R;
 import com.kstransfter.activities.MainActivity;
+import com.kstransfter.models.app.BookedCarModel;
 import com.kstransfter.models.app.DriverListModel;
+import com.kstransfter.utils.PoupUtils;
 import com.kstransfter.utils.SessionManager;
+import com.kstransfter.utils.StaticUtils;
+import com.kstransfter.webservice.WsFactory;
+import com.kstransfter.webservice.WsResponse;
+import com.kstransfter.webservice.WsUtils;
 
-public class DriverDetailsFragment extends BaseFragment {
+import java.util.HashMap;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+
+public class DriverDetailsFragment extends BaseFragment implements WsResponse {
 
     private TextView txtConfirmBooking;
     public static String TAG = DriverDetailsFragment.class.getSimpleName();
@@ -27,6 +40,9 @@ public class DriverDetailsFragment extends BaseFragment {
     private EditText edtEmail, edtMobile, edtAddress;
     private SessionManager sessionManager;
     private MainActivity mainActivity;
+    private DriverListModel.ResponseDatum driverListModel;
+    private AlertDialog progressDialog;
+
 
     public static DriverDetailsFragment getInstance(Bundle bundle) {
         DriverDetailsFragment driverDetailsFragment = new DriverDetailsFragment();
@@ -60,7 +76,7 @@ public class DriverDetailsFragment extends BaseFragment {
         txtExpCar = view.findViewById(R.id.txtExpCar);
         try {
             initital();
-         } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -69,8 +85,9 @@ public class DriverDetailsFragment extends BaseFragment {
     public void initital() {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
+        progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         setHeader(true, "Driver Details");
-        DriverListModel.ResponseDatum driverListModel = getArguments().getParcelable("driverDetails");
+        driverListModel = getArguments().getParcelable("driverDetails");
         if (driverListModel != null) {
             txtPrice.setText(driverListModel.getTotalPrice().toString());
             txtExprence.setText(driverListModel.getVDriverExp());
@@ -78,7 +95,48 @@ public class DriverDetailsFragment extends BaseFragment {
             txtEndDate.setText(sessionManager.getEndDate());
             txtExpCar.setText(driverListModel.getvCarExp());
             Glide.with(mainActivity).load(driverListModel.getVDriverImage()).into(imgDriverProfile);
+         }
+        confirmBooking();
+    }
 
+    private void confirmBooking() {
+        progressDialog.show();
+        Map<String, String> map = new HashMap<>();
+        map.put("txPickUpAddress", "asdfasdfasdfsdf");
+        map.put("iDriverId", driverListModel.getIDriverId());
+        map.put("iUserId", sessionManager.getUserId());
+        map.put("dcPickUpLatitude", sessionManager.getPickUpLat());
+        map.put("dcPickUpLongitude", sessionManager.getPickUpLong());
+        map.put("vPickUpCity", "rajkot");
+        map.put("dtLeavingDateTime", "2018-11-28 11:11:00");
+        map.put("iWaitingHour", "2");
+        map.put("vDistance", "200");
+        Call signUpWsCall = WsFactory.carBooked(map);
+        WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
+    }
+
+    @Override
+    public void successResponse(Object response, int code) {
+        progressDialog.cancel();
+        switch (code) {
+            case StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING:
+//                mainActivity.replaceFragmenr(PaymentReceiptFragment.getInatance(null), PaymentReceiptFragment.TAG, false);
+                BookedCarModel bookedCarModel = (BookedCarModel) response;
+                if (bookedCarModel != null) {
+                    PoupUtils.showAlertDailog(mainActivity, "Booking confirm your car on the way.");
+                } else {
+                    PoupUtils.showAlertDailog(mainActivity, "Somthing went wrong,Please try again with some change");
+                }
+                break;
+            default:
+                break;
         }
     }
+
+    @Override
+    public void failureRespons(Throwable error, int code) {
+        progressDialog.cancel();
+    }
+
+
 }

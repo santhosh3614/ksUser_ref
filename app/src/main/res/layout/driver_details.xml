@@ -300,7 +300,7 @@
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+     </ScrollView>
 
     <TextView
         android:id="@+id/txtConfirmBooking"

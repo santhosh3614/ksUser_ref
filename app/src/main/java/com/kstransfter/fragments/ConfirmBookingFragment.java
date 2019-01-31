@@ -201,7 +201,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         map.put("vDistance", "200");
         Call signUpWsCall = WsFactory.carBooked(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
-    }
+     }
 
     @Override
     public void successResponse(Object response, int code) {

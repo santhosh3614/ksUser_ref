@@ -99,9 +99,9 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         txtFareRule5 = view.findViewById(R.id.txtFareRule5);
         try {
             initital();
-        } catch (Exception e) {
+         } catch (Exception e) {
             e.printStackTrace();
-        }
+         }
     }
 
     @Override
@@ -110,6 +110,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         setHeader(true, "Confirm Car Booking");
+        txtConfirmBooking.setOnClickListener(v -> {
+            confirmBooking();
+        });
+
         totalExtraFare.setOnClickListener(v -> {
             llTaxDetails.setVisibility(View.VISIBLE);
         });
@@ -182,9 +186,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }
-        txtConfirmBooking.setOnClickListener(v -> {
-            confirmBooking();
-        });
+
     }
 
     private void confirmBooking() {
@@ -201,17 +203,20 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         map.put("vDistance", "200");
         Call signUpWsCall = WsFactory.carBooked(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
-     }
+    }
 
     @Override
     public void successResponse(Object response, int code) {
         progressDialog.cancel();
         switch (code) {
             case StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING:
-                mainActivity.replaceFragmenr(PaymentReceiptFragment.getInatance(null), PaymentReceiptFragment.TAG, false);
                 BookedCarModel bookedCarModel = (BookedCarModel) response;
                 if (bookedCarModel != null) {
-                    PoupUtils.showAlertDailog(mainActivity, "Booking confirm your car on the way.");
+                    PoupUtils.showAlertDailog(mainActivity, "Driver Booking successfully.");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("iDriverId", responseDatum.getIDriverId());
+                    bundle.putString("iUserId", sessionManager.getUserId());
+                    mainActivity.replaceFragmenr(PaymentReceiptFragment.getInatance(bundle), PaymentReceiptFragment.TAG, false);
                 } else {
                     PoupUtils.showAlertDailog(mainActivity, "Somthing went wrong,Please try again with some change");
                 }

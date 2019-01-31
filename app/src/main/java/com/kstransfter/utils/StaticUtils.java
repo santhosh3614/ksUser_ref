@@ -39,6 +39,8 @@ public class StaticUtils {
     public static final int REQUEST_DRIVER_CONFIRM_BOOKING = 5006;
     public static final int REQUEST_GET_PAGES = 5007;
     public static final int REQUEST_BOOKING_HISTORY = 5008;
+    public static final int REQUEST_RATING_REVIEW = 5010;
+
 
 
 

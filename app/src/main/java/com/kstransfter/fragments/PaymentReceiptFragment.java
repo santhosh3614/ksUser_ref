@@ -1,20 +1,34 @@
 package com.kstransfter.fragments;
 
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kstransfter.R;
+import com.kstransfter.activities.MainActivity;
+import com.kstransfter.models.RatingAndReview;
 import com.kstransfter.utils.PoupUtils;
+import com.kstransfter.utils.StaticUtils;
+import com.kstransfter.webservice.WsFactory;
+import com.kstransfter.webservice.WsResponse;
+import com.kstransfter.webservice.WsUtils;
 
-public class PaymentReceiptFragment extends BaseFragment {
+import java.util.HashMap;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+
+public class PaymentReceiptFragment extends BaseFragment implements WsResponse {
+
+    private AlertDialog progressDialog;
+    private MainActivity mainActivity;
 
     public static String TAG = PaymentReceiptFragment.class.getSimpleName();
 
@@ -25,7 +39,7 @@ public class PaymentReceiptFragment extends BaseFragment {
     }
 
     private TextView txtReviewAndRate;
-    private FragmentActivity mainFragment;
+    private String iDriverId, iUserId;
 
     @Nullable
     @Override
@@ -47,12 +61,46 @@ public class PaymentReceiptFragment extends BaseFragment {
 
     @Override
     public void initital() {
-        mainFragment = getActivity();
+        mainActivity = (MainActivity) getActivity();
+        progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
+        iDriverId = getArguments().getString("iDriverId");
+        iUserId = getArguments().getString("iUserId");
+
         txtReviewAndRate.setOnClickListener(v -> {
-            PoupUtils.ratingDialog(mainFragment, "Rate Us", submit -> {
-                float rating = (float) submit.getTag();
-                Toast.makeText(mainFragment, "Rating: " + rating, Toast.LENGTH_SHORT).show();
+            PoupUtils.ratingDialog(mainActivity, "Rate Us", (rating, comment) -> {
+                progressDialog.show();
+                Map<String, String> map = new HashMap<>();
+                map.put("txPickUpAddress", "asdfasdfasdfsdf");
+                map.put("iDriverId", iDriverId);
+                map.put("iUserId", iUserId);
+                map.put("fRating", rating);
+                map.put("txComment", comment);
+                Call signUpWsCall = WsFactory.getRatingAndReview(map);
+                WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_RATING_REVIEW, this);
             });
         });
     }
+
+    @Override
+    public void successResponse(Object response, int code) {
+        switch (code) {
+            case StaticUtils.REQUEST_RATING_REVIEW:
+                RatingAndReview ratingAndReview = (RatingAndReview) response;
+                if (ratingAndReview != null) {
+                    PoupUtils.showAlertDailog(mainActivity, ratingAndReview.getResponseMessage());
+                } else {
+                    PoupUtils.showAlertDailog(mainActivity, "Somthing went Wrong");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void failureRespons(Throwable error, int code) {
+
+    }
+
+
 }

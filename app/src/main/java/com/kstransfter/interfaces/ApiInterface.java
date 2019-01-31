@@ -3,6 +3,7 @@ package com.kstransfter.interfaces;
 
 import com.google.gson.JsonObject;
 import com.kstransfter.models.AutocompleteAddrees;
+import com.kstransfter.models.RatingAndReview;
 import com.kstransfter.models.Result;
 import com.kstransfter.models.SignUpAndUpdate;
 import com.kstransfter.models.app.BookedCarModel;
@@ -119,13 +120,17 @@ public interface ApiInterface {
     @POST("oauth/resendotp")
     Call<ResendPasswordModel> resendPassword(@FieldMap Map<String, String> fields);
 
-
     @FormUrlEncoded
     @POST("oauth/getbookinghistory")
     Call<JsonObject> bookinghistory(@FieldMap Map<String, String> fields);
 
     @GET("site/getpage")
     Call<GetPages> termsAndCondition();
+
+
+    @FormUrlEncoded
+    @POST("oauth/resendotp")
+    Call<RatingAndReview> ratingAndReview(@FieldMap Map<String, String> fields);
 
 
 }

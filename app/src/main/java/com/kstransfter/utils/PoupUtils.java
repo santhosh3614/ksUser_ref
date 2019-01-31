@@ -10,10 +10,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kstransfter.R;
+import com.kstransfter.interfaces.RatingCallBack;
 
 import java.util.Calendar;
 
@@ -54,11 +56,10 @@ public class PoupUtils {
         txtOK.setOnClickListener(v -> {
             dialog.cancel();
         });
-
-        dialog.show();
+         dialog.show();
     }
 
-    public static void ratingDialog(Activity activity, String message, View.OnClickListener onClickListener) {
+    public static void ratingDialog(Activity activity, String message, RatingCallBack ratingCallBack) {
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_30);
@@ -67,6 +68,8 @@ public class PoupUtils {
         RatingBar ratingBar = dialog.findViewById(R.id.ratingBar);
         TextView txtSubmit = dialog.findViewById(R.id.txtSubmit);
         TextView txtCancel = dialog.findViewById(R.id.txtCancel);
+        EditText edtComment = dialog.findViewById(R.id.edtComment);
+
         txtSubmit.setText(message);
         txtCancel.setOnClickListener(v -> {
             dialog.cancel();
@@ -74,7 +77,7 @@ public class PoupUtils {
         txtSubmit.setOnClickListener(v -> {
             dialog.cancel();
             txtSubmit.setTag(ratingBar.getRating());
-            onClickListener.onClick(txtSubmit);
+            ratingCallBack.callBackRating("" + ratingBar.getRating(), edtComment.getText().toString().trim());
         });
         dialog.show();
     }

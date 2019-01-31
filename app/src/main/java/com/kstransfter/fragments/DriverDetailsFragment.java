@@ -95,8 +95,10 @@ public class DriverDetailsFragment extends BaseFragment implements WsResponse {
             txtEndDate.setText(sessionManager.getEndDate());
             txtExpCar.setText(driverListModel.getvCarExp());
             Glide.with(mainActivity).load(driverListModel.getVDriverImage()).into(imgDriverProfile);
-         }
-        confirmBooking();
+        }
+        txtConfirmBooking.setOnClickListener(v -> {
+            confirmBooking();
+        });
     }
 
     private void confirmBooking() {
@@ -120,10 +122,12 @@ public class DriverDetailsFragment extends BaseFragment implements WsResponse {
         progressDialog.cancel();
         switch (code) {
             case StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING:
-//                mainActivity.replaceFragmenr(PaymentReceiptFragment.getInatance(null), PaymentReceiptFragment.TAG, false);
                 BookedCarModel bookedCarModel = (BookedCarModel) response;
                 if (bookedCarModel != null) {
-                    PoupUtils.showAlertDailog(mainActivity, "Booking confirm your car on the way.");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("iDriverId", driverListModel.getIDriverId());
+                    bundle.putString("iUserId", sessionManager.getUserId());
+                    mainActivity.replaceFragmenr(PaymentReceiptFragment.getInatance(bundle), PaymentReceiptFragment.TAG, false);
                 } else {
                     PoupUtils.showAlertDailog(mainActivity, "Somthing went wrong,Please try again with some change");
                 }

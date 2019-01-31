@@ -762,9 +762,8 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
-          </LinearLayout>
-     </ScrollView>
-
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/txtConfirmBooking"
@@ -777,7 +776,6 @@
         android:padding="@dimen/_10sdp"
         android:text="Confirm Booking"
         android:textColor="@color/white" />
-
 
 </RelativeLayout>
 

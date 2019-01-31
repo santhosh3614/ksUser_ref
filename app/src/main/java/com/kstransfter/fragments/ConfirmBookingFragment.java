@@ -114,7 +114,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
             llTaxDetails.setVisibility(View.VISIBLE);
         });
 
-         llHideAndShow.setOnClickListener(v -> {
+        llHideAndShow.setOnClickListener(v -> {
             if (txtHideAndShow.getText().toString().trim().equalsIgnoreCase("Show Fare Details")) {
                 txtHideAndShow.setText("Hide Fare Details");
                 llFairDetails.setVisibility(View.GONE);
@@ -133,7 +133,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 rotateAnim.setDuration(100);
                 rotateAnim.setFillAfter(true);
                 imgHide.startAnimation(rotateAnim);
-             }
+            }
         });
 
         cardApplyCoupn.setOnClickListener(v -> {
@@ -191,10 +191,10 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         progressDialog.show();
         Map<String, String> map = new HashMap<>();
         map.put("txPickUpAddress", "asdfasdfasdfsdf");
-        map.put("iDriverId", "1");
-        map.put("iUserId", "1");
-        map.put("dcPickUpLatitude", "23.26565464");
-        map.put("dcPickUpLongitude", "23.665");
+        map.put("iDriverId", responseDatum.getIDriverId());
+        map.put("iUserId", sessionManager.getUserId());
+        map.put("dcPickUpLatitude", sessionManager.getPickUpLat());
+        map.put("dcPickUpLongitude", sessionManager.getPickUpLong());
         map.put("vPickUpCity", "rajkot");
         map.put("dtLeavingDateTime", "2018-11-28 11:11:00");
         map.put("iWaitingHour", "2");

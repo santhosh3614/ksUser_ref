@@ -135,7 +135,7 @@ public class SessionManager {
 
 
     public String getUserId() {
-        return pref.getString(KEY_USER_ID, "1");
+        return pref.getString(KEY_USER_ID, "5");
     }
 
     public void setUserId(String userId) {

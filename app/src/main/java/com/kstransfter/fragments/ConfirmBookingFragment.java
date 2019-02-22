@@ -186,7 +186,6 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
                 Glide.with(mainActivity).load(responseDatum.getVCarImage()).into(imgCar);
             }
         }
-
     }
 
     private void confirmBooking() {
@@ -200,7 +199,7 @@ public class ConfirmBookingFragment extends BaseFragment implements WsResponse {
         map.put("vPickUpCity", "rajkot");
         map.put("dtLeavingDateTime", "2018-11-28 11:11:00");
         map.put("iWaitingHour", "2");
-        map.put("vDistance", "200");
+        map.put("vDistance", sessionManager.getDistance());
         Call signUpWsCall = WsFactory.carBooked(map);
         WsUtils.getReponse(signUpWsCall, StaticUtils.REQUEST_DRIVER_CONFIRM_BOOKING, this);
     }

@@ -132,7 +132,6 @@ public class HomeFragment extends BaseFragment implements OnMapReadyCallback {
     private SessionManager sessionManager;
     private AlertDialog progressDialog;
 
-
     public static HomeFragment getInstance(Bundle bundle) {
         HomeFragment homeFragment = new HomeFragment();
         homeFragment.setArguments(bundle);

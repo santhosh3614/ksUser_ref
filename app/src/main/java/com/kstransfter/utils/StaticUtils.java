@@ -3,6 +3,7 @@ package com.kstransfter.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,6 @@ public class StaticUtils {
     public static final int REQUEST_GET_PAGES = 5007;
     public static final int REQUEST_BOOKING_HISTORY = 5008;
     public static final int REQUEST_RATING_REVIEW = 5010;
-
-
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {
@@ -90,19 +89,23 @@ public class StaticUtils {
     }
 
     public static String converDateFormate(String inputDate) {
-        String inputPattern = "dd-MM-yyyy HH:mm";
-        String outputPattern = "dd MMM, hh:mm a";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-        Date date = null;
-        String str = null;
-        try {
-            date = inputFormat.parse(inputDate);
-            str = outputFormat.format(date);
-         } catch (ParseException e) {
-            e.printStackTrace();
+        if (TextUtils.isEmpty(inputDate)) {
+            return "";
+        } else {
+            String inputPattern = "dd-MM-yyyy HH:mm";
+            String outputPattern = "dd MMM, hh:mm a";
+            SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+            SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+            Date date = null;
+            String str = null;
+            try {
+                date = inputFormat.parse(inputDate);
+                str = outputFormat.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+             return str;
          }
-        return str;
     }
 
 }

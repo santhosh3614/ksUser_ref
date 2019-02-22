@@ -43,7 +43,6 @@ public class DriverDetailsFragment extends BaseFragment implements WsResponse {
     private DriverListModel.ResponseDatum driverListModel;
     private AlertDialog progressDialog;
 
-
     public static DriverDetailsFragment getInstance(Bundle bundle) {
         DriverDetailsFragment driverDetailsFragment = new DriverDetailsFragment();
         driverDetailsFragment.setArguments(bundle);
@@ -91,8 +90,8 @@ public class DriverDetailsFragment extends BaseFragment implements WsResponse {
         if (driverListModel != null) {
             txtPrice.setText(driverListModel.getTotalPrice().toString());
             txtExprence.setText(driverListModel.getVDriverExp());
-            txtStartDate.setText(sessionManager.getStartDate());
-            txtEndDate.setText(sessionManager.getEndDate());
+            txtStartDate.setText(StaticUtils.converDateFormate(sessionManager.getStartDate()));
+            txtEndDate.setText(StaticUtils.converDateFormate(sessionManager.getEndDate()));
             txtExpCar.setText(driverListModel.getvCarExp());
             Glide.with(mainActivity).load(driverListModel.getVDriverImage()).into(imgDriverProfile);
         }
